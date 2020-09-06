@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "../common/utils.hpp"
+#include "../common/debug_messenger.hpp"
 
 namespace carbon {
 
@@ -17,6 +18,11 @@ namespace carbon {
 		 * @brief Handle to underlying Vulkan instance.
 		 */
 		VkInstance handle{ VK_NULL_HANDLE };
+
+		/*
+		 * @brief Debug messenger for validation layers.
+		 */
+		DebugUtilsMessenger debugMessenger;
 
 		/*
 		 * @brief The enabled extensions on the current instance.
@@ -48,6 +54,11 @@ namespace carbon {
 		 * @returns Underlying VkInstance object.
 		 */
 		VkInstance getHandle();
+
+		/*
+		 * @returns The handle on the debug messenger used in this instance.
+		 */
+		DebugUtilsMessenger getDebugMessenger();
 
 	};
 

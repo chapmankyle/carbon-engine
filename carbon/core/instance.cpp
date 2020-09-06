@@ -40,7 +40,8 @@ carbon::Instance::Instance(
 	instanceInfo.ppEnabledExtensionNames = required.data();
 
 	// check for errors during messenger creation and deletion
-	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo;
+	debugMessenger = carbon::DebugUtilsMessenger(handle, nullptr);
+	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{ debugMessenger.getCreateInfo() };
 
 	// enable validation layers if flag set
 	if (CARBON_ENABLE_VALIDATION_LAYERS) {
@@ -48,9 +49,16 @@ carbon::Instance::Instance(
 
 		instanceInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
 		instanceInfo.ppEnabledLayerNames = validationLayers.data();
+
+		instanceInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *) &debugCreateInfo;
 	} else {
 		instanceInfo.enabledLayerCount = 0;
 		instanceInfo.pNext = nullptr;
+	}
+
+	// attempt to create instance
+	if (vkCreateInstance(&instanceInfo, nullptr, &handle) != VK_SUCCESS) {
+		throw std::runtime_error("Failed to create instance!");
 	}
 }
 
@@ -63,3 +71,9 @@ carbon::Instance::~Instance() {
 VkInstance carbon::Instance::getHandle() {
 	return handle;
 }
+
+
+carbon::DebugUtilsMessenger carbon::Instance::getDebugMessenger() {
+	return debugMessenger;
+}
+
