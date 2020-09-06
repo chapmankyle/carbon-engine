@@ -62,9 +62,14 @@ namespace carbon {
 		/*
 		 * @brief Initializes a debug messenger.
 		 * @param inst The instance to link to the debug messenger.
-		 * @param
+		 * @param alloc The callback allocator.
 		 */
-		DebugUtilsMessenger(const VkInstance &inst, const VkAllocationCallbacks &alloc);
+		DebugUtilsMessenger(const VkInstance &inst, const VkAllocationCallbacks *alloc);
+
+		/*
+		 * @brief Default constructor for debug messenger.
+		 */
+		DebugUtilsMessenger();
 
 		/*
 		 * @brief Destroys debug messenger.
@@ -79,12 +84,12 @@ namespace carbon {
 		/*
 		 * @returns A handle on the VkDebugUtilsMessengerEXT.
 		 */
-		VkDebugUtilsMessengerEXT getDebugMessengerHandle();
+		VkDebugUtilsMessengerEXT getHandle();
 
 		/*
 		 * @returns A handle on the VkDebugUtilsMessengerCreateInfoEXT.
 		 */
-		VkDebugUtilsMessengerCreateInfoEXT getDebugMessengerCreateInfo();
+		VkDebugUtilsMessengerCreateInfoEXT getCreateInfo();
 
 		/*
 		 * @returns A handle on the VkAllocationCallbacks.

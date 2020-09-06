@@ -17,29 +17,29 @@ VKAPI_ATTR VkBool32 VKAPI_CALL carbon::DebugUtilsMessenger::debugCallback(
 	return VK_FALSE;
 }
 
-void carbon::DebugUtilsMessenger::fillDebugUtilsMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo) {
-	createInfo = {};
-	createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+void carbon::DebugUtilsMessenger::fillDebugUtilsMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &cInfo) {
+	cInfo = {};
+	cInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 
-	createInfo.messageSeverity =
+	cInfo.messageSeverity =
 		VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
 		VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
 		VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 
-	createInfo.messageType =
+	cInfo.messageType =
 		VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
 		VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
 		VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 
-	createInfo.pfnUserCallback = debugCallback;
-	createInfo.pUserData = nullptr;
+	cInfo.pfnUserCallback = debugCallback;
+	cInfo.pUserData = nullptr;
 }
 
 
-carbon::DebugUtilsMessenger::DebugUtilsMessenger(const VkInstance &inst, const VkAllocationCallbacks &alloc) {
+carbon::DebugUtilsMessenger::DebugUtilsMessenger(const VkInstance &inst, const VkAllocationCallbacks *alloc) {
 	// set instance and allocator
 	this->instance = inst;
-	this->allocator = alloc;
+	this->allocator = *alloc;
 
 	VkDebugUtilsMessengerCreateInfoEXT messengerInfo{};
 	fillDebugUtilsMessengerCreateInfo(messengerInfo);
@@ -61,6 +61,11 @@ carbon::DebugUtilsMessenger::DebugUtilsMessenger(const VkInstance &inst, const V
 }
 
 
+carbon::DebugUtilsMessenger::DebugUtilsMessenger()
+	: DebugUtilsMessenger(nullptr, nullptr)
+{}
+
+
 carbon::DebugUtilsMessenger::~DebugUtilsMessenger() {
 	// get function to destroy debug messenger
 	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
@@ -76,12 +81,12 @@ VkInstance carbon::DebugUtilsMessenger::getInstance() {
 }
 
 
-VkDebugUtilsMessengerEXT carbon::DebugUtilsMessenger::getDebugMessengerHandle() {
+VkDebugUtilsMessengerEXT carbon::DebugUtilsMessenger::getHandle() {
 	return debugMessenger;
 }
 
 
-VkDebugUtilsMessengerCreateInfoEXT carbon::DebugUtilsMessenger::getDebugMessengerCreateInfo() {
+VkDebugUtilsMessengerCreateInfoEXT carbon::DebugUtilsMessenger::getCreateInfo() {
 	return createInfo;
 }
 
