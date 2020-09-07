@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vulkan/vulkan.h>
 
+#include "carbon/setup.hpp"
+
 namespace carbon {
 
 	class DebugMessenger {

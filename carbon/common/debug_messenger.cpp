@@ -19,8 +19,7 @@ VKAPI_ATTR VkBool32 VKAPI_CALL carbon::DebugMessenger::debugCallback(
 
 
 void carbon::DebugMessenger::fillDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &cInfo) {
-	cInfo = {};
-	cInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+	carbon::initStruct(cInfo, VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT);
 
 	cInfo.messageSeverity =
 		VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
