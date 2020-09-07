@@ -27,15 +27,19 @@ namespace carbon {
 		/*
 		 * @returns The validation layers that are required by the engine.
 		 */
-		static CARBON_INLINE const std::vector<const char *> getRequiredValidationLayers() {
-			return std::vector<const char *>{ "VK_LAYER_KHRONOS_validation" };
+		CARBON_INLINE const std::vector<const char *> getRequiredValidationLayers() {
+			return std::vector<const char *>{
+				"VK_LAYER_KHRONOS_validation"
+			};
 		}
 
 		/*
 		 * @returns The device extensions that are required by the engine.
 		 */
-		static CARBON_INLINE const std::vector<const char *> getRequiredDeviceExtensions() {
-			return std::vector<const char *>{ VK_KHR_SWAPCHAIN_EXTENSION_NAME };
+		CARBON_INLINE const std::vector<const char *> getRequiredDeviceExtensions() {
+			return std::vector<const char *>{
+				VK_KHR_SWAPCHAIN_EXTENSION_NAME
+			};
 		}
 
 		/*
