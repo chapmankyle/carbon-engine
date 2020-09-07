@@ -6,7 +6,7 @@ int main() {
 
 	carbon::utils::version ver{ 1, 1, 0 };
 
-	std::cout << "Version " << ver.major << '.' << ver.minor << '.' << ver.patch << '\n';
+	carbon::Instance inst{ "Work In Progress: Game", ver };
 
 	std::string hi{};
 	std::cin >> hi;
