@@ -3,26 +3,10 @@
 #ifndef COMMON_UTILS_HPP
 #define COMMON_UTILS_HPP
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-
 #include <cstring>
 #include <vector>
 
-#ifndef NDEBUG
-#include <iostream>
-#endif // !NDEBUG
-
-#ifdef NDEBUG
-	inline constexpr bool CARBON_ENABLE_VALIDATION_LAYERS = false;
-#else
-	inline constexpr bool CARBON_ENABLE_VALIDATION_LAYERS = true;
-#endif // NDEBUG
-
-/*
- * @brief Current version of Carbon Engine.
- */
-inline constexpr int32_t CARBON_VERSION = VK_MAKE_VERSION(1, 0, 0);
+#include "carbon/setup.hpp"
 
 namespace carbon {
 
