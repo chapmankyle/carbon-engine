@@ -13,22 +13,32 @@ void carbon::Instance::checkSupport() {
 }
 
 
-carbon::Instance::Instance(const char *appName, const carbon::utils::version &version) {
-	checkSupport();
+void carbon::Instance::fillApplicationInfo(
+	VkApplicationInfo &appInfo,
+	const char *appName,
+	const carbon::utils::version &version
+) {
+	// zero-initialize struct
+	initStruct(appInfo, VK_STRUCTURE_TYPE_APPLICATION_INFO);
 
-	// get required extensions
-	const auto required{ carbon::utils::getRequiredExtensions() };
-
-	// inform driver of how best to optimize application
-	VkApplicationInfo appInfo{};
-
-	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	appInfo.pApplicationName = appName;
 	appInfo.applicationVersion = VK_MAKE_VERSION(version.major, version.minor, version.patch);
 
 	appInfo.pEngineName = CARBON_ENGINE_NAME;
 	appInfo.engineVersion = CARBON_VERSION;
 	appInfo.apiVersion = VK_MAKE_VERSION(1, 0, 0);
+}
+
+
+carbon::Instance::Instance(const char *appName, const carbon::utils::version &version) {
+	checkSupport();
+
+	// inform driver of how best to optimize application
+	VkApplicationInfo appInfo;
+	fillApplicationInfo(appInfo, appName, version);
+
+	// get required extensions
+	const auto required{ carbon::utils::getRequiredExtensions() };
 
 	// tells driver which extensions and validation layers to use
 	VkInstanceCreateInfo instanceInfo{};

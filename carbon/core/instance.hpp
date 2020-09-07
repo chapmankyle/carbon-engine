@@ -34,6 +34,15 @@ namespace carbon {
 		 */
 		void checkSupport();
 
+		/*
+		 * @brief Populates the application info struct.
+		 */
+		void fillApplicationInfo(
+			VkApplicationInfo &appInfo,
+			const char *appName,
+			const carbon::utils::version &version
+		);
+
 	public:
 
 		/*
