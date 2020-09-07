@@ -30,6 +30,36 @@ void carbon::Instance::fillApplicationInfo(
 }
 
 
+void carbon::Instance::fillInstanceCreateInfo(
+	VkInstanceCreateInfo &instInfo,
+	const VkApplicationInfo &appInfo,
+	const std::vector<const char *> &extensions,
+	const std::vector<const char *> &validationLayers
+) {
+	// zero-initialize struct
+	initStruct(instInfo, VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO);
+
+	instInfo.pApplicationInfo = &appInfo;
+
+	instInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
+	instInfo.ppEnabledExtensionNames = extensions.data();
+
+	// check for errors during messenger creation and deletion
+	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{ carbon::DebugMessenger().getCreateInfo() };
+
+	// enable validation layers if flag set
+	if (CARBON_ENABLE_VALIDATION_LAYERS) {
+		instInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+		instInfo.ppEnabledLayerNames = validationLayers.data();
+
+		instInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *) &debugCreateInfo;
+	} else {
+		instInfo.enabledLayerCount = 0;
+		instInfo.pNext = nullptr;
+	}
+}
+
+
 carbon::Instance::Instance(const char *appName, const carbon::utils::version &version) {
 	checkSupport();
 
@@ -37,38 +67,22 @@ carbon::Instance::Instance(const char *appName, const carbon::utils::version &ve
 	VkApplicationInfo appInfo;
 	fillApplicationInfo(appInfo, appName, version);
 
-	// get required extensions
-	const auto required{ carbon::utils::getRequiredExtensions() };
+	// get required extensions and validation layers
+	const auto extensions{ carbon::utils::getRequiredExtensions() };
+	const auto validationLayers{ carbon::utils::getRequiredValidationLayers() };
 
 	// tells driver which extensions and validation layers to use
-	VkInstanceCreateInfo instanceInfo{};
-
-	instanceInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-	instanceInfo.pApplicationInfo = &appInfo;
-
-	instanceInfo.enabledExtensionCount = static_cast<uint32_t>(required.size());
-	instanceInfo.ppEnabledExtensionNames = required.data();
-
-	// check for errors during messenger creation and deletion
-	m_debug_messenger = carbon::DebugMessenger(m_handle, nullptr);
-	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{ m_debug_messenger.getCreateInfo() };
-
-	// enable validation layers if flag set
-	if (CARBON_ENABLE_VALIDATION_LAYERS) {
-		const auto validationLayers{ carbon::utils::getRequiredValidationLayers() };
-
-		instanceInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-		instanceInfo.ppEnabledLayerNames = validationLayers.data();
-
-		instanceInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *) &debugCreateInfo;
-	} else {
-		instanceInfo.enabledLayerCount = 0;
-		instanceInfo.pNext = nullptr;
-	}
+	VkInstanceCreateInfo instanceInfo;
+	fillInstanceCreateInfo(instanceInfo, appInfo, extensions, validationLayers);
 
 	// attempt to create instance
 	if (vkCreateInstance(&instanceInfo, nullptr, &m_handle) != VK_SUCCESS) {
 		throw std::runtime_error("Failed to create instance!");
+	}
+
+	// create debug messenger
+	if (CARBON_ENABLE_VALIDATION_LAYERS) {
+		m_debug_messenger = carbon::DebugMessenger(m_handle);
 	}
 }
 

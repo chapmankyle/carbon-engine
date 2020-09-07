@@ -22,7 +22,7 @@ namespace carbon {
 		/*
 		 * @brief Debug messenger for validation layers.
 		 */
-		DebugMessenger m_debug_messenger;
+		DebugMessenger m_debug_messenger{ VK_NULL_HANDLE };
 
 		/*
 		 * @brief The enabled extensions on the current instance.
@@ -41,6 +41,16 @@ namespace carbon {
 			VkApplicationInfo &appInfo,
 			const char *appName,
 			const carbon::utils::version &version
+		);
+
+		/*
+		 * @brief Populates the instance info struct.
+		 */
+		void fillInstanceCreateInfo(
+			VkInstanceCreateInfo &instInfo,
+			const VkApplicationInfo &appInfo,
+			const std::vector<const char *> &extensions,
+			const std::vector<const char *> &validationLayers
 		);
 
 	public:
