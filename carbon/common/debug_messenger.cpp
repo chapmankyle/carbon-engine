@@ -67,6 +67,18 @@ carbon::DebugMessenger::DebugMessenger()
 
 
 carbon::DebugMessenger::~DebugMessenger() {
+	destroy();
+}
+
+
+void carbon::DebugMessenger::destroy() {
+	if (m_instance == nullptr || m_instance == VK_NULL_HANDLE) {
+		return;
+	}
+	if (m_debug_messenger == nullptr || m_debug_messenger == VK_NULL_HANDLE) {
+		return;
+	}
+
 	// get function to destroy debug messenger
 	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(m_instance, "vkDestroyDebugUtilsMessengerEXT");
 

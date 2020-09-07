@@ -74,9 +74,14 @@ namespace carbon {
 		DebugMessenger();
 
 		/*
-		 * @brief Destroys debug messenger.
+		 * @brief Destructor for the debug messenger.
 		 */
 		~DebugMessenger();
+
+		/*
+		 * @brief Destroys the debug messenger.
+		 */
+		void destroy();
 
 		/*
 		 * @returns The underlying VkInstance.
