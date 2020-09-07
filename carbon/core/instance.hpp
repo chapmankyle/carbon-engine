@@ -5,8 +5,8 @@
 
 #include <vector>
 
-#include "../common/utils.hpp"
-#include "../common/debug_messenger.hpp"
+#include "carbon/common/utils.hpp"
+#include "carbon/common/debug_messenger.hpp"
 
 namespace carbon {
 
@@ -17,38 +17,42 @@ namespace carbon {
 		/*
 		 * @brief Handle to underlying Vulkan instance.
 		 */
-		VkInstance handle{ VK_NULL_HANDLE };
+		VkInstance m_handle{ VK_NULL_HANDLE };
 
 		/*
 		 * @brief Debug messenger for validation layers.
 		 */
-		DebugUtilsMessenger debugMessenger;
+		DebugMessenger m_debug_messenger;
 
 		/*
 		 * @brief The enabled extensions on the current instance.
 		 */
-		std::vector<const char *> enabledExtensions;
+		std::vector<const char *> m_enabled_extensions;
+
+		/*
+		 * @brief Checks for default support of layers and extensions.
+		 */
+		void checkSupport();
 
 	public:
 
 		/*
-		 * @brief Initializes a Vulkan instance.
+		 * @brief Initializes a Vulkan instance, using the default required
+		 * extensions and validation layers.
 		 * @param appName The name of the application.
-		 * @param version The version of the application.
-		 * @param requiredValidationLayers The validation layers required by the application.
-		 * @param requiredExtensions The extensions required by the application.
+		 * @param version The version of your application.
 		 */
-		Instance(
-			const char* appName,
-			const carbon::utils::version &version,
-			const std::vector<const char *> &requiredValidationLayers,
-			const std::vector<const char *> &requiredExtensions
-		);
+		Instance(const char *appName, const carbon::utils::version &version);
 
 		/*
-		 * @brief Destorys the Vulkan instance.
+		 * @brief Destructor for the Vulkan instance.
 		 */
 		~Instance();
+
+		/*
+		 * @brief Destroys the Vulkan instance.
+		 */
+		void destroy();
 
 		/*
 		 * @returns Underlying VkInstance object.
@@ -58,7 +62,12 @@ namespace carbon {
 		/*
 		 * @returns The handle on the debug messenger used in this instance.
 		 */
-		DebugUtilsMessenger getDebugMessenger();
+		DebugMessenger getDebugMessenger();
+
+		/*
+		 * @returns The currently enabled extensions on the instance.
+		 */
+		std::vector<const char *> getExtensions();
 
 	};
 
