@@ -44,6 +44,54 @@ const std::vector<VkExtensionProperties> carbon::utils::requestSupportedExtensio
 }
 
 
+template<class T>
+const bool carbon::utils::isSupportedPropertiesStruct(const T &propStruct) {
+	return propStruct == VkLayerProperties || propStruct == VkExtensionProperties;
+}
+
+
+template<class T>
+int32_t carbon::utils::compare(const char *str, const T &propStruct) {
+	static_assert(isSupportedPropertiesStruct(propStruct), "Vulkan properties structure not supported, yet!");
+
+	if (propStruct == VkExtensionProperties) {
+		return strcmp(str, propStruct.extensionName);
+	}
+	if (propStruct == VkLayerProperties) {
+		return strcmp(str, propStruct.layerName);
+	}
+
+	return -1;
+}
+
+
+template<class T>
+bool carbon::utils::containsRequired(
+	const std::vector<const char *> &required,
+	const std::vector<T> &available
+) {
+	static_assert(isSupportedPropertiesStruct(available), "Vulkan properties structure not supported, yet!");
+	bool found;
+
+	for (const auto &req : required) {
+		found = false;
+
+		for (const auto &a : available) {
+			if (carbon::utils::compare(req, a) == 0) {
+				found = true;
+				break;
+			}
+		}
+
+		if (!found) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
 bool carbon::utils::containsRequired(
 	const std::vector<const char*> &required,
 	const std::vector<VkLayerProperties> &available
