@@ -45,10 +45,19 @@
 
 namespace carbon {
 
+	/*
+	 * @brief Zero-initializes a Vulkan structure.
+	 * @tparam T The type of the Vulkan structure.
+	 * @param vulkanStruct The Vulkan structure.
+	 * @param structType The VkStructureType of the structure.
+	 */
 	template<class T>
 	static inline void initStruct(T &vulkanStruct, const VkStructureType &structType) {
+		// zero-initialize
+		vulkanStruct = {};
+
+		// set structure type
 		vulkanStruct.sType = structType;
-		memset(((unsigned char*)&vulkanStruct) + sizeof(VkStructureType), 0, sizeof(T) - sizeof(VkStructureType));
 	}
 
 } // namespace carbon
