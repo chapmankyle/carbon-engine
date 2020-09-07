@@ -8,29 +8,29 @@
 
 namespace carbon {
 
-	class DebugUtilsMessenger {
+	class DebugMessenger {
 
 	private:
 
 		/*
 		 * @brief Handle on VkInstance associated with debug utils messenger.
 		 */
-		VkInstance instance;
+		VkInstance m_instance;
 
 		/*
 		 * @brief Handle on debug messenger.
 		 */
-		VkDebugUtilsMessengerEXT debugMessenger;
+		VkDebugUtilsMessengerEXT m_debug_messenger;
 
 		/*
 		 * @brief Handle on create info struct.
 		 */
-		VkDebugUtilsMessengerCreateInfoEXT createInfo;
+		VkDebugUtilsMessengerCreateInfoEXT m_create_info;
 
 		/*
 		 * @brief Handle on the allocator.
 		 */
-		VkAllocationCallbacks allocator;
+		VkAllocationCallbacks m_allocator;
 
 		/*
 		 * @brief Callback function to display debug messages when validation layers
@@ -55,7 +55,7 @@ namespace carbon {
 		 * @brief Populates the debug messenger struct.
 		 * @param createInfo The struct to fill with default data.
 		 */
-		void fillDebugUtilsMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
+		void fillDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 
 	public:
 
@@ -64,17 +64,17 @@ namespace carbon {
 		 * @param inst The instance to link to the debug messenger.
 		 * @param alloc The callback allocator.
 		 */
-		DebugUtilsMessenger(const VkInstance &inst, const VkAllocationCallbacks *alloc);
+		DebugMessenger(const VkInstance &instance, const VkAllocationCallbacks *allocator);
 
 		/*
 		 * @brief Default constructor for debug messenger.
 		 */
-		DebugUtilsMessenger();
+		DebugMessenger();
 
 		/*
 		 * @brief Destroys debug messenger.
 		 */
-		~DebugUtilsMessenger();
+		~DebugMessenger();
 
 		/*
 		 * @returns The underlying VkInstance.
@@ -95,6 +95,12 @@ namespace carbon {
 		 * @returns A handle on the VkAllocationCallbacks.
 		 */
 		VkAllocationCallbacks getAllocationCallbacks();
+
+		/*
+		 * @brief Sets the create info struct for the debug messenger.
+		 * @param createInfo The new createInfo struct.
+		 */
+		void setCreateInfo(const VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 
 	};
 

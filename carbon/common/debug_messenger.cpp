@@ -1,6 +1,6 @@
 #include "debug_messenger.hpp"
 
-VKAPI_ATTR VkBool32 VKAPI_CALL carbon::DebugUtilsMessenger::debugCallback(
+VKAPI_ATTR VkBool32 VKAPI_CALL carbon::DebugMessenger::debugCallback(
 	VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 	VkDebugUtilsMessageTypeFlagsEXT messageTypes,
 	const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
@@ -17,7 +17,8 @@ VKAPI_ATTR VkBool32 VKAPI_CALL carbon::DebugUtilsMessenger::debugCallback(
 	return VK_FALSE;
 }
 
-void carbon::DebugUtilsMessenger::fillDebugUtilsMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &cInfo) {
+
+void carbon::DebugMessenger::fillDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &cInfo) {
 	cInfo = {};
 	cInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 
@@ -36,62 +37,67 @@ void carbon::DebugUtilsMessenger::fillDebugUtilsMessengerCreateInfo(VkDebugUtils
 }
 
 
-carbon::DebugUtilsMessenger::DebugUtilsMessenger(const VkInstance &inst, const VkAllocationCallbacks *alloc) {
+carbon::DebugMessenger::DebugMessenger(const VkInstance &instance, const VkAllocationCallbacks *allocator) {
 	// set instance and allocator
-	this->instance = inst;
-	this->allocator = *alloc;
+	m_instance = instance;
+	m_allocator = *allocator;
 
 	VkDebugUtilsMessengerCreateInfoEXT messengerInfo{};
-	fillDebugUtilsMessengerCreateInfo(messengerInfo);
+	fillDebugMessengerCreateInfo(messengerInfo);
 
 	// set create info
-	this->createInfo = messengerInfo;
+	m_create_info = messengerInfo;
 
 	// get function since it is external (not loaded in Vulkan initially)
-	auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+	auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(m_instance, "vkCreateDebugUtilsMessengerEXT");
 
 	if (func == nullptr) {
 		throw std::runtime_error("Failed to setup debug messenger!");
 	}
 
 	// attempt to create debug messenger
-	if (func(instance, &createInfo, &allocator, &debugMessenger) != VK_SUCCESS) {
+	if (func(m_instance, &m_create_info, &m_allocator, &m_debug_messenger) != VK_SUCCESS) {
 		throw std::runtime_error("Failed to create debug messenger!");
 	}
 }
 
 
-carbon::DebugUtilsMessenger::DebugUtilsMessenger()
-	: DebugUtilsMessenger(nullptr, nullptr)
+carbon::DebugMessenger::DebugMessenger()
+	: DebugMessenger(nullptr, nullptr)
 {}
 
 
-carbon::DebugUtilsMessenger::~DebugUtilsMessenger() {
+carbon::DebugMessenger::~DebugMessenger() {
 	// get function to destroy debug messenger
-	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(m_instance, "vkDestroyDebugUtilsMessengerEXT");
 
 	if (func != nullptr) {
-		func(instance, debugMessenger, &allocator);
+		func(m_instance, m_debug_messenger, &m_allocator);
 	}
 }
 
 
-VkInstance carbon::DebugUtilsMessenger::getInstance() {
-	return instance;
+VkInstance carbon::DebugMessenger::getInstance() {
+	return m_instance;
 }
 
 
-VkDebugUtilsMessengerEXT carbon::DebugUtilsMessenger::getHandle() {
-	return debugMessenger;
+VkDebugUtilsMessengerEXT carbon::DebugMessenger::getHandle() {
+	return m_debug_messenger;
 }
 
 
-VkDebugUtilsMessengerCreateInfoEXT carbon::DebugUtilsMessenger::getCreateInfo() {
-	return createInfo;
+VkDebugUtilsMessengerCreateInfoEXT carbon::DebugMessenger::getCreateInfo() {
+	return m_create_info;
 }
 
 
-VkAllocationCallbacks carbon::DebugUtilsMessenger::getAllocationCallbacks() {
-	return allocator;
+VkAllocationCallbacks carbon::DebugMessenger::getAllocationCallbacks() {
+	return m_allocator;
+}
+
+
+void carbon::DebugMessenger::setCreateInfo(const VkDebugUtilsMessengerCreateInfoEXT &createInfo) {
+	m_create_info = createInfo;
 }
 
