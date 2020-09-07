@@ -4,9 +4,12 @@
 #define COMMON_UTILS_HPP
 
 #include <cstring>
+#include <cassert>
+#include <type_traits>
 #include <vector>
 
 #include "carbon/setup.hpp"
+#include "template_types.hpp"
 
 namespace carbon {
 
@@ -53,23 +56,20 @@ namespace carbon {
 		CARBON_INLINE const std::vector<VkExtensionProperties> requestSupportedExtensions();
 
 		/*
-		 * @brief Checks if the given Vulkan properties structure is currently supported.
-		 * @tparam T The type of Vulkan properties structure (e.g. VkLayerProperties)
-		 * @param propStruct The Vulkan properties structure.
-		 * @returns `true` if the Vulkan properties structure is currently supported, `false` otherwise.
+		 * @brief Compares a string to a Vulkan extension properties structure.
+		 * @param str The string to compare.
+		 * @param propStruct The Vulkan extension properties structure to compare.
+		 * @returns 0 if equal, < 0 if `str` comes alphabetically before `propStruct` and > 0 otherwise.
 		 */
-		template<class T>
-		CARBON_CONSTEXPR bool isSupportedPropertiesStruct(const T &propStruct);
+		int32_t compare(const char *str, const VkExtensionProperties &propStruct);
 
 		/*
-		 * @brief Compares a string to a Vulkan properties structure of arbitrary type.
-		 * @tparam T The type of the Vulkan properties structure.
+		 * @brief Compares a string to a Vulkan layer properties structure.
 		 * @param str The string to compare.
-		 * @param propStruct The Vulkan properties structure to compare.
-		 * @returns 0 if equal, < 0 if `str` comes alphabetically before `vkStruct` and > 0 otherwise.
+		 * @param propStruct The Vulkan layer properties structure to compare.
+		 * @returns 0 if equal, < 0 if `str` comes alphabetically before `propStruct` and > 0 otherwise.
 		 */
-		template<class T>
-		int32_t compare(const char *str, const T &propStruct);
+		int32_t compare(const char *str, const VkLayerProperties &propStruct);
 
 		/*
 		 * @brief Checks if the required strings are available.
