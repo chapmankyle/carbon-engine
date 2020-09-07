@@ -17,22 +17,17 @@ namespace carbon {
 		/*
 		 * @brief Handle on VkInstance associated with debug utils messenger.
 		 */
-		VkInstance m_instance;
+		VkInstance m_instance{ VK_NULL_HANDLE };
 
 		/*
 		 * @brief Handle on debug messenger.
 		 */
-		VkDebugUtilsMessengerEXT m_debug_messenger;
+		VkDebugUtilsMessengerEXT m_debug_messenger{ VK_NULL_HANDLE };
 
 		/*
 		 * @brief Handle on create info struct.
 		 */
 		VkDebugUtilsMessengerCreateInfoEXT m_create_info;
-
-		/*
-		 * @brief Handle on the allocator.
-		 */
-		VkAllocationCallbacks m_allocator;
 
 		/*
 		 * @brief Callback function to display debug messages when validation layers
@@ -64,9 +59,8 @@ namespace carbon {
 		/*
 		 * @brief Initializes a debug messenger.
 		 * @param inst The instance to link to the debug messenger.
-		 * @param alloc The callback allocator.
 		 */
-		DebugMessenger(const VkInstance &instance, const VkAllocationCallbacks *allocator);
+		DebugMessenger(const VkInstance &instance);
 
 		/*
 		 * @brief Default constructor for debug messenger.
@@ -97,11 +91,6 @@ namespace carbon {
 		 * @returns A handle on the VkDebugUtilsMessengerCreateInfoEXT.
 		 */
 		VkDebugUtilsMessengerCreateInfoEXT getCreateInfo();
-
-		/*
-		 * @returns A handle on the VkAllocationCallbacks.
-		 */
-		VkAllocationCallbacks getAllocationCallbacks();
 
 		/*
 		 * @brief Sets the create info struct for the debug messenger.

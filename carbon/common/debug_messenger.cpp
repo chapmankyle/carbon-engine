@@ -36,10 +36,9 @@ void carbon::DebugMessenger::fillDebugMessengerCreateInfo(VkDebugUtilsMessengerC
 }
 
 
-carbon::DebugMessenger::DebugMessenger(const VkInstance &instance, const VkAllocationCallbacks *allocator) {
-	// set instance and allocator
+carbon::DebugMessenger::DebugMessenger(const VkInstance &instance) {
+	// set instance
 	m_instance = instance;
-	m_allocator = *allocator;
 
 	VkDebugUtilsMessengerCreateInfoEXT messengerInfo{};
 	fillDebugMessengerCreateInfo(messengerInfo);
@@ -55,15 +54,18 @@ carbon::DebugMessenger::DebugMessenger(const VkInstance &instance, const VkAlloc
 	}
 
 	// attempt to create debug messenger
-	if (func(m_instance, &m_create_info, &m_allocator, &m_debug_messenger) != VK_SUCCESS) {
+	if (func(m_instance, &m_create_info, nullptr, &m_debug_messenger) != VK_SUCCESS) {
 		throw std::runtime_error("Failed to create debug messenger!");
 	}
 }
 
 
-carbon::DebugMessenger::DebugMessenger()
-	: DebugMessenger(nullptr, nullptr)
-{}
+carbon::DebugMessenger::DebugMessenger() {
+	// set up only the create info struct
+	VkDebugUtilsMessengerCreateInfoEXT msgInfo{};
+	fillDebugMessengerCreateInfo(msgInfo);
+	m_create_info = msgInfo;
+}
 
 
 carbon::DebugMessenger::~DebugMessenger() {
@@ -83,7 +85,7 @@ void carbon::DebugMessenger::destroy() {
 	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(m_instance, "vkDestroyDebugUtilsMessengerEXT");
 
 	if (func != nullptr) {
-		func(m_instance, m_debug_messenger, &m_allocator);
+		func(m_instance, m_debug_messenger, nullptr);
 	}
 }
 
@@ -100,11 +102,6 @@ VkDebugUtilsMessengerEXT carbon::DebugMessenger::getHandle() {
 
 VkDebugUtilsMessengerCreateInfoEXT carbon::DebugMessenger::getCreateInfo() {
 	return m_create_info;
-}
-
-
-VkAllocationCallbacks carbon::DebugMessenger::getAllocationCallbacks() {
-	return m_allocator;
 }
 
 
