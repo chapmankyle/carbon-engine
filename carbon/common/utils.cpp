@@ -1,6 +1,6 @@
 #include "utils.hpp"
 
-inline const std::vector<const char*> carbon::utils::getRequiredExtensions() {
+CARBON_INLINE const std::vector<const char*> carbon::utils::getRequiredExtensions() {
 	uint32_t numExtensions{ 0 };
 
 	// get required extensions and convert to std::vector<string>
@@ -16,7 +16,7 @@ inline const std::vector<const char*> carbon::utils::getRequiredExtensions() {
 }
 
 
-inline const std::vector<VkLayerProperties> carbon::utils::requestSupportedValidationLayers() {
+CARBON_INLINE const std::vector<VkLayerProperties> carbon::utils::requestSupportedValidationLayers() {
 	uint32_t numLayers{ 0 };
 
 	// request number of layers
@@ -30,7 +30,7 @@ inline const std::vector<VkLayerProperties> carbon::utils::requestSupportedValid
 }
 
 
-const std::vector<VkExtensionProperties> carbon::utils::requestSupportedExtensions() {
+CARBON_INLINE const std::vector<VkExtensionProperties> carbon::utils::requestSupportedExtensions() {
 	uint32_t numExtensions{ 0 };
 
 	// request number of extensions available
@@ -45,14 +45,14 @@ const std::vector<VkExtensionProperties> carbon::utils::requestSupportedExtensio
 
 
 template<class T>
-const bool carbon::utils::isSupportedPropertiesStruct(const T &propStruct) {
+CARBON_CONSTEXPR bool carbon::utils::isSupportedPropertiesStruct(const T &propStruct) {
 	return propStruct == VkLayerProperties || propStruct == VkExtensionProperties;
 }
 
 
 template<class T>
 int32_t carbon::utils::compare(const char *str, const T &propStruct) {
-	static_assert(isSupportedPropertiesStruct(propStruct), "Vulkan properties structure not supported, yet!");
+	CARBON_STATIC_ASSERT(carbon::utils::isSupportedPropertiesStruct(propStruct), "Vulkan properties structure not supported, yet!");
 
 	if (propStruct == VkExtensionProperties) {
 		return strcmp(str, propStruct.extensionName);
@@ -70,7 +70,7 @@ bool carbon::utils::containsRequired(
 	const std::vector<const char *> &required,
 	const std::vector<T> &available
 ) {
-	static_assert(isSupportedPropertiesStruct(available), "Vulkan properties structure not supported, yet!");
+	CARBON_STATIC_ASSERT(carbon::utils::isSupportedPropertiesStruct(available), "Vulkan properties structure not supported, yet!");
 	bool found;
 
 	for (const auto &req : required) {
@@ -83,62 +83,6 @@ bool carbon::utils::containsRequired(
 			}
 		}
 
-		if (!found) {
-			return false;
-		}
-	}
-
-	return true;
-}
-
-
-bool carbon::utils::containsRequired(
-	const std::vector<const char*> &required,
-	const std::vector<VkLayerProperties> &available
-) {
-	// keep track of if an layer was found
-	bool found;
-
-	// check each layer in `required` to see if it is available
-	for (const auto &req : required) {
-		found = false;
-
-		for (const auto &layer : available) {
-			if (strcmp(req, layer.layerName) == 0) {
-				found = true;
-				break;
-			}
-		}
-
-		// could not find required layer
-		if (!found) {
-			return false;
-		}
-	}
-
-	return true;
-}
-
-
-bool carbon::utils::containsRequired(
-	const std::vector<const char*> &required,
-	const std::vector<VkExtensionProperties> &available
-) {
-	// keep track of if an extension was found
-	bool found;
-
-	// check each extension in `required` to see if it is available
-	for (const auto &req : required) {
-		found = false;
-
-		for (const auto &ext : available) {
-			if (strcmp(req, ext.extensionName) == 0) {
-				found = true;
-				break;
-			}
-		}
-
-		// could not find required extension
 		if (!found) {
 			return false;
 		}

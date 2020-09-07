@@ -24,33 +24,33 @@ namespace carbon {
 		/*
 		 * @returns The validation layers that are required by the engine.
 		 */
-		static inline const std::vector<const char *> getRequiredValidationLayers() {
+		static CARBON_INLINE const std::vector<const char *> getRequiredValidationLayers() {
 			return std::vector<const char *>{ "VK_LAYER_KHRONOS_validation" };
 		}
 
 		/*
 		 * @returns The device extensions that are required by the engine.
 		 */
-		static inline const std::vector<const char *> getRequiredDeviceExtensions() {
+		static CARBON_INLINE const std::vector<const char *> getRequiredDeviceExtensions() {
 			return std::vector<const char *>{ VK_KHR_SWAPCHAIN_EXTENSION_NAME };
 		}
 
 		/*
 		 * @returns The extensions that are required by the engine.
 		 */
-		inline const std::vector<const char *> getRequiredExtensions();
+		CARBON_INLINE const std::vector<const char *> getRequiredExtensions();
 
 		/*
 		 * @brief Requests the validation layers that are supported on the current machine.
 		 * @returns The validation layer properties for each supported validation layer.
 		 */
-		inline const std::vector<VkLayerProperties> requestSupportedValidationLayers();
+		CARBON_INLINE const std::vector<VkLayerProperties> requestSupportedValidationLayers();
 
 		/*
 		 * @brief Requests the extensions that are supported on the current machine.
 		 * @returns The extension properties for each supported extension.
 		 */
-		inline const std::vector<VkExtensionProperties> requestSupportedExtensions();
+		CARBON_INLINE const std::vector<VkExtensionProperties> requestSupportedExtensions();
 
 		/*
 		 * @brief Checks if the given Vulkan properties structure is currently supported.
@@ -59,7 +59,7 @@ namespace carbon {
 		 * @returns `true` if the Vulkan properties structure is currently supported, `false` otherwise.
 		 */
 		template<class T>
-		const bool isSupportedPropertiesStruct(const T &propStruct);
+		CARBON_CONSTEXPR bool isSupportedPropertiesStruct(const T &propStruct);
 
 		/*
 		 * @brief Compares a string to a Vulkan properties structure of arbitrary type.
@@ -71,20 +71,13 @@ namespace carbon {
 		template<class T>
 		int32_t compare(const char *str, const T &propStruct);
 
+		/*
+		 * @brief Checks if the required strings are available.
+		 * @tparam T The type of the Vulkan properties structure (e.g. VkExtensionProperties).
+		 * @returns `true` if all required strings are present in the available struct, `false` otherwise.
+		 */
 		template<class T>
 		bool containsRequired(const std::vector<const char *> &required, const std::vector<T> &available);
-
-		/*
-		 * @brief Checks if the required layers are available.
-		 * @returns `true` if all required layers are available, `false` otherwise.
-		 */
-		bool containsRequired(const std::vector<const char *> &required, const std::vector<VkLayerProperties> &available);
-
-		/*
-		 * @brief Checks if the required extensions are available.
-		 * @returns `true` if all required extensions are available, `false` otherwise.
-		 */
-		bool containsRequired(const std::vector<const char *> &required, const std::vector<VkExtensionProperties> &available);
 
 		/*
 		 * @brief Checks if all the required layers are available.
