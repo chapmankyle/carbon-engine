@@ -93,7 +93,7 @@ carbon::Instance::~Instance() {
 
 
 void carbon::Instance::destroy() {
-	if (m_handle == nullptr || m_handle == VK_NULL_HANDLE) {
+	if (m_handle == nullptr) {
 		return;
 	}
 

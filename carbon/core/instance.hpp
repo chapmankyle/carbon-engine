@@ -17,12 +17,12 @@ namespace carbon {
 		/*
 		 * @brief Handle to underlying Vulkan instance.
 		 */
-		VkInstance m_handle{ VK_NULL_HANDLE };
+		VkInstance m_handle;
 
 		/*
 		 * @brief Debug messenger for validation layers.
 		 */
-		DebugMessenger m_debug_messenger{ VK_NULL_HANDLE };
+		DebugMessenger m_debug_messenger;
 
 		/*
 		 * @brief The enabled extensions on the current instance.
