@@ -7,6 +7,9 @@
 
 namespace carbon {
 
+	/*
+	 * @brief Class to allow on-screen rendering using GLFW.
+	 */
 	class Window {
 
 	private:
@@ -76,6 +79,17 @@ namespace carbon {
 		 * @brief Destroys the window object.
 		 */
 		void destroy();
+
+		/*
+		 * @brief Checks if the window has not been closed.
+		 * @return `true` if the window should be open, `false` otherwise.
+		 */
+		bool isOpen();
+
+		/*
+		 * @brief Polls the event queue to find if anything happened.
+		 */
+		void pollEvents();
 
 		/*
 		 * @returns The title of the window.

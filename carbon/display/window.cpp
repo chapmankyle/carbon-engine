@@ -52,6 +52,16 @@ void carbon::Window::destroy() {
 }
 
 
+bool carbon::Window::isOpen() {
+	return static_cast<bool>(!glfwWindowShouldClose(m_window));
+}
+
+
+void carbon::Window::pollEvents() {
+	glfwPollEvents();
+}
+
+
 const char *carbon::Window::getTitle() {
 	return m_title;
 }
