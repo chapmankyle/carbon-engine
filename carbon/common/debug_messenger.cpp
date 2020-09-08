@@ -74,10 +74,10 @@ carbon::DebugMessenger::~DebugMessenger() {
 
 
 void carbon::DebugMessenger::destroy() {
-	if (m_instance == nullptr || m_instance == VK_NULL_HANDLE) {
+	if (m_instance == nullptr) {
 		return;
 	}
-	if (m_debug_messenger == nullptr || m_debug_messenger == VK_NULL_HANDLE) {
+	if (m_debug_messenger == nullptr) {
 		return;
 	}
 
