@@ -10,4 +10,6 @@
 
 #include "core/instance.hpp"
 
+#include "display/window.hpp"
+
 #endif // CARBON_HPP
