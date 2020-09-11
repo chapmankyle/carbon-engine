@@ -4,6 +4,11 @@
 
 int main() {
 
+	// to disable debug messages and validation layers, add
+	// #define CARBON_DISABLE_DEBUG
+	// before the
+	// #include "carbon/carbon.hpp"
+
 	const char *title{ "Work In Progress: Game " };
 	carbon::utils::version ver{ 1, 1, 0 };
 
