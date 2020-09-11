@@ -59,9 +59,14 @@ namespace carbon {
 		 * @brief Initializes a Vulkan instance, using the default required
 		 * extensions and validation layers.
 		 * @param appName The name of the application.
-		 * @param version The version of your application.
+		 * @param version Optional. The version of your application.
 		 */
-		Instance(const char *appName, const carbon::utils::version &version);
+		Instance(const char *appName, const carbon::utils::version &version = { 1, 0, 0 });
+
+		/*
+		 * @brief Creates empty instance.
+		 */
+		Instance();
 
 		/*
 		 * @brief Destructor for the Vulkan instance.
@@ -74,9 +79,15 @@ namespace carbon {
 		void destroy();
 
 		/*
+		 * @brief Sets the handle on the instance.
+		 * @param instance The handle to set.
+		 */
+		void setHandle(const VkInstance &instance);
+
+		/*
 		 * @returns Underlying VkInstance object.
 		 */
-		VkInstance getHandle();
+		VkInstance& getHandle();
 
 		/*
 		 * @returns The handle on the debug messenger used in this instance.

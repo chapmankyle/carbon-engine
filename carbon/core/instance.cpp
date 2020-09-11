@@ -2,7 +2,7 @@
 
 void carbon::Instance::checkSupport() {
 	// check validation layers support
-	if (CARBON_ENABLE_VALIDATION_LAYERS && !carbon::utils::hasValidationLayerSupport()) {
+	if (CARBON_USE_VALIDATION_LAYERS && !carbon::utils::hasValidationLayerSupport()) {
 		throw std::runtime_error("No support for validation layers!");
 	}
 
@@ -48,7 +48,7 @@ void carbon::Instance::fillInstanceCreateInfo(
 	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{ carbon::DebugMessenger().getCreateInfo() };
 
 	// enable validation layers if flag set
-	if (CARBON_ENABLE_VALIDATION_LAYERS) {
+	if (CARBON_USE_VALIDATION_LAYERS) {
 		instInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
 		instInfo.ppEnabledLayerNames = validationLayers.data();
 
@@ -81,9 +81,15 @@ carbon::Instance::Instance(const char *appName, const carbon::utils::version &ve
 	}
 
 	// create debug messenger
-	if (CARBON_ENABLE_VALIDATION_LAYERS) {
+	if (CARBON_USE_VALIDATION_LAYERS) {
 		m_debug_messenger = carbon::DebugMessenger(m_handle);
 	}
+}
+
+
+carbon::Instance::Instance() {
+	m_handle = nullptr;
+	m_debug_messenger = DebugMessenger();
 }
 
 
@@ -101,7 +107,12 @@ void carbon::Instance::destroy() {
 }
 
 
-VkInstance carbon::Instance::getHandle() {
+void carbon::Instance::setHandle(const VkInstance &instance) {
+	m_handle = instance;
+}
+
+
+VkInstance& carbon::Instance::getHandle() {
 	return m_handle;
 }
 
