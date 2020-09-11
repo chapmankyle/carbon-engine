@@ -27,7 +27,7 @@ namespace carbon {
 		/*
 		 * @returns The validation layers that are required by the engine.
 		 */
-		CARBON_INLINE const std::vector<const char *> getRequiredValidationLayers() {
+		static CARBON_INLINE const std::vector<const char *> getRequiredValidationLayers() {
 			return std::vector<const char *>{
 				"VK_LAYER_KHRONOS_validation"
 			};
@@ -36,7 +36,7 @@ namespace carbon {
 		/*
 		 * @returns The device extensions that are required by the engine.
 		 */
-		CARBON_INLINE const std::vector<const char *> getRequiredDeviceExtensions() {
+		static CARBON_INLINE const std::vector<const char *> getRequiredDeviceExtensions() {
 			return std::vector<const char *>{
 				VK_KHR_SWAPCHAIN_EXTENSION_NAME
 			};

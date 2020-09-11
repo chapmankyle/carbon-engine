@@ -8,7 +8,7 @@ CARBON_INLINE const std::vector<const char*> carbon::utils::getRequiredExtension
 	std::vector<const char *> required(reqExts, reqExts + numExtensions);
 
 	// additional extension if validation layers are included
-	if (CARBON_ENABLE_VALIDATION_LAYERS) {
+	if (CARBON_USE_VALIDATION_LAYERS) {
 		required.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 	}
 
@@ -84,9 +84,9 @@ bool carbon::utils::hasValidationLayerSupport() {
 	std::vector<const char *> requiredLayers{ getRequiredValidationLayers() };
 	std::vector<VkLayerProperties> supportedLayers{ requestSupportedValidationLayers() };
 
-#ifndef NDEBUG
+#ifndef CARBON_DISABLE_DEBUG
 	std::cout << "[INFO] " << supportedLayers.size() << " supported layers.\n";
-#endif // !NDEBUG
+#endif // !CARBON_DISABLE_DEBUG
 
 	return utils::containsRequired(requiredLayers, supportedLayers);
 }
@@ -96,9 +96,9 @@ bool carbon::utils::hasExtensionSupport() {
 	std::vector<const char *> requiredExtensions{ getRequiredExtensions() };
 	std::vector<VkExtensionProperties> supportedExtensions{ requestSupportedExtensions() };
 
-#ifndef NDEBUG
+#ifndef CARBON_DISABLE_DEBUG
 	std::cout << "[INFO] " << supportedExtensions.size() << " supported layers.\n";
-#endif // !NDEBUG
+#endif // !CARBON_DISABLE_DEBUG
 
 	return utils::containsRequired(requiredExtensions, supportedExtensions);
 }
