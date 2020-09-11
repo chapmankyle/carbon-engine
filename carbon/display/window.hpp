@@ -4,6 +4,8 @@
 #define DISPLAY_WINDOW_HPP
 
 #include "carbon/setup.hpp"
+#include "carbon/common/utils.hpp"
+#include "carbon/core/instance.hpp"
 
 namespace carbon {
 
@@ -18,6 +20,21 @@ namespace carbon {
 		 * @brief Handle to the GLFW window object.
 		 */
 		GLFWwindow *m_window;
+
+		/*
+		 * @brief Handle to the instance from which to render.
+		 */
+		Instance m_instance;
+
+		/*
+		 * @brief Handle to actual Vulkan instance.
+		 */
+		VkInstance m_instance_handle;
+
+		/*
+		 * @brief Version number.
+		 */
+		carbon::utils::version m_version;
 
 		/*
 		 * @brief Title of the window.
@@ -50,6 +67,11 @@ namespace carbon {
 		const int m_default_height = 600;
 
 		/*
+		 * @brief Creates a Vulkan instance for use in the window.
+		 */
+		void createInstance();
+
+		/*
 		 * @brief Initializes the window.
 		 */
 		void init();
@@ -61,8 +83,9 @@ namespace carbon {
 		 * @param title The title of the window.
 		 * @param width The width of the window.
 		 * @param height The height of the window.
+		 * @param version Optional. The version of the application.
 		 */
-		Window(const char *title, const int width, const int height);
+		Window(const char *title, const int width, const int height, carbon::utils::version version = { 1, 0, 0 });
 
 		/*
 		 * @brief Initializes a GLFW window with default title, width
@@ -105,6 +128,11 @@ namespace carbon {
 		 * @returns The height of the window.
 		 */
 		const int getHeight();
+
+		/*
+		 * @returns The instance that is by the current window.
+		 */
+		const Instance& getInstance();
 
 	};
 
