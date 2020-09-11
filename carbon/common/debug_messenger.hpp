@@ -98,6 +98,13 @@ namespace carbon {
 		 */
 		void setCreateInfo(const VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 
+		/*
+		 * @brief Allows user to define what is displayed when a validation layer
+		 * catches an error.
+		 * @param callback The debug callback function.
+		 */
+		void setDebugCallback(PFN_vkDebugUtilsMessengerCallbackEXT callback);
+
 	};
 
 } // namespace carbon

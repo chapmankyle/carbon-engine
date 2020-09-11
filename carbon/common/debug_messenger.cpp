@@ -109,3 +109,8 @@ void carbon::DebugMessenger::setCreateInfo(const VkDebugUtilsMessengerCreateInfo
 	m_create_info = createInfo;
 }
 
+
+void carbon::DebugMessenger::setDebugCallback(PFN_vkDebugUtilsMessengerCallbackEXT callback) {
+	m_create_info.pfnUserCallback = callback;
+}
+
