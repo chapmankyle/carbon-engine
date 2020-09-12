@@ -60,7 +60,7 @@ namespace carbon {
 		 * @brief Initializes a debug messenger.
 		 * @param inst The instance to link to the debug messenger.
 		 */
-		DebugMessenger(const VkInstance &instance);
+		DebugMessenger(VkInstance &instance);
 
 		/*
 		 * @brief Default constructor for debug messenger.
@@ -105,8 +105,11 @@ namespace carbon {
 		 */
 		void setDebugCallback(PFN_vkDebugUtilsMessengerCallbackEXT callback);
 
+		DebugMessenger& operator=(const DebugMessenger& msg);
+
 	};
 
 } // namespace carbon
 
 #endif // COMMON_DEBUG_MESSENGER_HPP
+

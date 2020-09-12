@@ -36,7 +36,7 @@ void carbon::DebugMessenger::fillDebugMessengerCreateInfo(VkDebugUtilsMessengerC
 }
 
 
-carbon::DebugMessenger::DebugMessenger(const VkInstance &instance) {
+carbon::DebugMessenger::DebugMessenger(VkInstance &instance) {
 	// set instance
 	m_instance = instance;
 
@@ -47,7 +47,7 @@ carbon::DebugMessenger::DebugMessenger(const VkInstance &instance) {
 	m_create_info = messengerInfo;
 
 	// get function since it is external (not loaded in Vulkan initially)
-	auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(m_instance, "vkCreateDebugUtilsMessengerEXT");
+	auto func = reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(m_instance, "vkCreateDebugUtilsMessengerEXT"));
 
 	if (func == nullptr) {
 		throw std::runtime_error("Failed to setup debug messenger!");
@@ -74,18 +74,19 @@ carbon::DebugMessenger::~DebugMessenger() {
 
 
 void carbon::DebugMessenger::destroy() {
-	if (m_instance == nullptr) {
+	if (m_instance == VK_NULL_HANDLE) {
 		return;
 	}
-	if (m_debug_messenger == nullptr) {
+	if (m_debug_messenger == VK_NULL_HANDLE) {
 		return;
 	}
 
 	// get function to destroy debug messenger
-	auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(m_instance, "vkDestroyDebugUtilsMessengerEXT");
+	auto func = reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(m_instance, "vkDestroyDebugUtilsMessengerEXT"));
 
 	if (func != nullptr) {
 		func(m_instance, m_debug_messenger, nullptr);
+		m_debug_messenger = VK_NULL_HANDLE;
 	}
 }
 
@@ -112,5 +113,13 @@ void carbon::DebugMessenger::setCreateInfo(const VkDebugUtilsMessengerCreateInfo
 
 void carbon::DebugMessenger::setDebugCallback(PFN_vkDebugUtilsMessengerCallbackEXT callback) {
 	m_create_info.pfnUserCallback = callback;
+}
+
+
+carbon::DebugMessenger& carbon::DebugMessenger::operator=(const carbon::DebugMessenger &msg) {
+	this->m_instance = msg.m_instance;
+	this->m_debug_messenger = msg.m_debug_messenger;
+	this->m_create_info = msg.m_create_info;
+	return *this;
 }
 
