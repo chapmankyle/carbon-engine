@@ -20,11 +20,6 @@ namespace carbon {
 		VkInstance m_handle;
 
 		/*
-		 * @brief Debug messenger for validation layers.
-		 */
-		DebugMessenger m_debug_messenger;
-
-		/*
 		 * @brief The enabled extensions on the current instance.
 		 */
 		std::vector<const char *> m_enabled_extensions;
@@ -64,11 +59,6 @@ namespace carbon {
 		Instance(const char *appName, const carbon::utils::version &version = { 1, 0, 0 });
 
 		/*
-		 * @brief Creates empty instance.
-		 */
-		Instance();
-
-		/*
 		 * @brief Destructor for the Vulkan instance.
 		 */
 		~Instance();
@@ -82,17 +72,12 @@ namespace carbon {
 		 * @brief Sets the handle on the instance.
 		 * @param instance The handle to set.
 		 */
-		void setHandle(const VkInstance &instance);
+		void setHandle(VkInstance &instance);
 
 		/*
 		 * @returns Underlying VkInstance object.
 		 */
 		VkInstance& getHandle();
-
-		/*
-		 * @returns The handle on the debug messenger used in this instance.
-		 */
-		DebugMessenger getDebugMessenger();
 
 		/*
 		 * @returns The currently enabled extensions on the instance.

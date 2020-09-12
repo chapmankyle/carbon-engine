@@ -44,6 +44,9 @@ void carbon::Instance::fillInstanceCreateInfo(
 	instInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
 	instInfo.ppEnabledExtensionNames = extensions.data();
 
+	// set enabled extensions
+	m_enabled_extensions = extensions;
+
 	// check for errors during messenger creation and deletion
 	VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{ carbon::DebugMessenger().getCreateInfo() };
 
@@ -79,17 +82,6 @@ carbon::Instance::Instance(const char *appName, const carbon::utils::version &ve
 	if (vkCreateInstance(&instanceInfo, nullptr, &m_handle) != VK_SUCCESS) {
 		throw std::runtime_error("Failed to create instance!");
 	}
-
-	// create debug messenger
-	if (CARBON_USE_VALIDATION_LAYERS) {
-		m_debug_messenger = carbon::DebugMessenger(m_handle);
-	}
-}
-
-
-carbon::Instance::Instance() {
-	m_handle = nullptr;
-	m_debug_messenger = DebugMessenger();
 }
 
 
@@ -99,26 +91,22 @@ carbon::Instance::~Instance() {
 
 
 void carbon::Instance::destroy() {
-	if (m_handle == nullptr) {
+	if (m_handle == VK_NULL_HANDLE) {
 		return;
 	}
 
 	vkDestroyInstance(m_handle, nullptr);
+	m_handle = VK_NULL_HANDLE;
 }
 
 
-void carbon::Instance::setHandle(const VkInstance &instance) {
+void carbon::Instance::setHandle(VkInstance &instance) {
 	m_handle = instance;
 }
 
 
 VkInstance& carbon::Instance::getHandle() {
 	return m_handle;
-}
-
-
-carbon::DebugMessenger carbon::Instance::getDebugMessenger() {
-	return m_debug_messenger;
 }
 
 
