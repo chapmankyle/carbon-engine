@@ -17,24 +17,19 @@ namespace carbon {
 	private:
 
 		/*
-		 * @brief Handle to the GLFW window object.
+		 * @brief Title to use when no title is supplied.
 		 */
-		GLFWwindow *m_window;
+		inline static constexpr char *m_default_title{ "Game" };
 
 		/*
-		 * @brief Handle to the instance from which to render.
+		 * @brief Width to use when no width is supplied.
 		 */
-		Instance m_instance;
+		inline static constexpr int m_default_width{ 800 };
 
 		/*
-		 * @brief Handle to actual Vulkan instance.
+		 * @brief Height to use when no height is supplied.
 		 */
-		VkInstance m_instance_handle;
-
-		/*
-		 * @brief Version number.
-		 */
-		carbon::utils::version m_version;
+		inline static constexpr int m_default_height{ 600 };
 
 		/*
 		 * @brief Title of the window.
@@ -52,29 +47,24 @@ namespace carbon {
 		int m_height;
 
 		/*
-		 * @brief Title to use when no title is supplied.
+		 * @brief Version number.
 		 */
-		const char *m_default_title = "Game";
+		carbon::utils::version m_version;
 
 		/*
-		 * @brief Width to use when no width is supplied.
+		 * @brief Handle to the GLFW window object.
 		 */
-		const int m_default_width = 800;
+		GLFWwindow *m_window;
 
 		/*
-		 * @brief Height to use when no height is supplied.
+		 * @brief Handle to the instance from which to render.
 		 */
-		const int m_default_height = 600;
+		Instance m_instance;
 
 		/*
-		 * @brief Creates a Vulkan instance for use in the window.
+		 * @brief Creates the GLFW window.
 		 */
-		void createInstance();
-
-		/*
-		 * @brief Initializes the window.
-		 */
-		void init();
+		GLFWwindow* createWindow();
 
 	public:
 
@@ -133,6 +123,11 @@ namespace carbon {
 		 * @returns The instance that is by the current window.
 		 */
 		const Instance& getInstance();
+
+		/*
+		 * @returns The version of the application.
+		 */
+		const carbon::utils::version& getVersion();
 
 	};
 
