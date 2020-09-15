@@ -9,7 +9,6 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL carbon::debug::messengerCallback(
 	// ensure proper logging
 	switch (msgSeverity) {
 		case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
-		case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
 			if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT) {
 				std::cerr << "[INFO | General] " << pCallbackData->pMessage << '\n';
 			} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT) {
