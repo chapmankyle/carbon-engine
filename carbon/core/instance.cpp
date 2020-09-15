@@ -90,6 +90,9 @@ void carbon::Instance::fillInstanceCreateInfo(
 	if (CARBON_USE_VALIDATION_LAYERS) {
 		instInfo.enabledLayerCount = static_cast<uint32_t>(m_req_validation_layers.size());
 		instInfo.ppEnabledLayerNames = m_req_validation_layers.data();
+
+		carbon::debug::fillMessengerCreateInfo(m_debug_create_info);
+		instInfo.pNext = reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT *>(&m_debug_create_info);
 	} else {
 		instInfo.enabledLayerCount = 0;
 		instInfo.pNext = nullptr;
@@ -112,6 +115,15 @@ carbon::Instance::Instance(const char *appName, const carbon::utils::version &ve
 	if (vkCreateInstance(&instanceInfo, nullptr, &m_handle) != VK_SUCCESS) {
 		throw std::runtime_error("Failed to create instance!");
 	}
+
+	// do not create debug messenger if validation layers are off
+	if (!CARBON_USE_VALIDATION_LAYERS) {
+		return;
+	}
+
+	if (carbon::debug::createMessenger(m_handle, &m_debug_create_info, nullptr, &m_debug_messenger) != VK_SUCCESS) {
+		throw std::runtime_error("Failed to create debug messenger!");
+	}
 }
 
 
@@ -121,10 +133,17 @@ carbon::Instance::~Instance() {
 
 
 void carbon::Instance::destroy() {
+	// destroy debug messenger if applicable
+	if (CARBON_USE_VALIDATION_LAYERS && m_debug_messenger != VK_NULL_HANDLE) {
+		carbon::debug::destroyMessenger(m_handle, m_debug_messenger, nullptr);
+		m_debug_messenger = VK_NULL_HANDLE;
+	}
+
 	if (m_handle == VK_NULL_HANDLE) {
 		return;
 	}
 
+	// destroy instance
 	vkDestroyInstance(m_handle, nullptr);
 	m_handle = VK_NULL_HANDLE;
 }

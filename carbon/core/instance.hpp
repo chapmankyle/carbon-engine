@@ -5,6 +5,7 @@
 
 #include <vector>
 
+#include "carbon/common/debug.hpp"
 #include "carbon/common/utils.hpp"
 
 namespace carbon {
@@ -40,7 +41,12 @@ namespace carbon {
 		/**
 		 * @brief The debug messenger to use if validation layers are enabled.
 		 */
-		//VkDebugUtilsMessengerEXT m_debug_messenger;
+		VkDebugUtilsMessengerEXT m_debug_messenger{ VK_NULL_HANDLE };
+
+		/**
+		 * @brief The CreateInfo struct for the debug messenger.
+		 */
+		VkDebugUtilsMessengerCreateInfoEXT m_debug_create_info;
 
 		/**
 		 * @brief The enabled validation layers on the current instance.
