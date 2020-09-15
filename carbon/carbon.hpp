@@ -5,7 +5,6 @@
 
 #include "setup.hpp"
 
-#include "common/debug_messenger.hpp"
 #include "common/template_types.hpp"
 #include "common/utils.hpp"
 
