@@ -5,6 +5,7 @@
 
 #include "setup.hpp"
 
+#include "common/debug.hpp"
 #include "common/template_types.hpp"
 #include "common/utils.hpp"
 
