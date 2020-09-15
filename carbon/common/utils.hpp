@@ -5,7 +5,6 @@
 
 #include <cstring>
 #include <cassert>
-#include <type_traits>
 #include <vector>
 
 #include "carbon/setup.hpp"
@@ -15,7 +14,7 @@ namespace carbon {
 
 	namespace utils {
 
-		/*
+		/**
 		 * @brief Stores application version information.
 		 */
 		struct version {
@@ -25,39 +24,25 @@ namespace carbon {
 		};
 
 		/*
-		 * @returns The validation layers that are required by the engine.
-		 */
-		static CARBON_INLINE const std::vector<const char *> getRequiredValidationLayers() {
-			return std::vector<const char *>{
-				"VK_LAYER_KHRONOS_validation"
-			};
-		}
-
-		/*
 		 * @returns The device extensions that are required by the engine.
 		 */
-		static CARBON_INLINE const std::vector<const char *> getRequiredDeviceExtensions() {
+		static const std::vector<const char *> getRequiredDeviceExtensions() {
 			return std::vector<const char *>{
 				VK_KHR_SWAPCHAIN_EXTENSION_NAME
 			};
 		}
 
-		/*
-		 * @returns The extensions that are required by the engine.
-		 */
-		CARBON_INLINE const std::vector<const char *> getRequiredExtensions();
-
-		/*
+		/**
 		 * @brief Requests the validation layers that are supported on the current machine.
 		 * @returns The validation layer properties for each supported validation layer.
 		 */
-		CARBON_INLINE const std::vector<VkLayerProperties> requestSupportedValidationLayers();
+		const std::vector<VkLayerProperties> getSupportedValidationLayers();
 
-		/*
+		/**
 		 * @brief Requests the extensions that are supported on the current machine.
 		 * @returns The extension properties for each supported extension.
 		 */
-		CARBON_INLINE const std::vector<VkExtensionProperties> requestSupportedExtensions();
+		const std::vector<VkExtensionProperties> getSupportedExtensions();
 
 		/*
 		 * @brief Compares a string to a Vulkan extension properties structure.
@@ -81,19 +66,31 @@ namespace carbon {
 		 * @returns `true` if all required strings are present in the available struct, `false` otherwise.
 		 */
 		template<class T>
-		bool containsRequired(const std::vector<const char *> &required, const std::vector<T> &available);
+		bool containsRequired(
+			const std::vector<const char *> required,
+			const std::vector<T> available
+		) {
+			// ensure type is correct
+			assert(carbon::types::is_supported_properties_struct<T>::value);
+			bool found;
 
-		/*
-		 * @brief Checks if all the required layers are available.
-		 * @returns `true` if the required validation layers are supported, `false` otherwise.
-		 */
-		bool hasValidationLayerSupport();
+			for (const auto &req : required) {
+				found = false;
 
-		/*
-		 * @brief Checks if all the required extensions are available.
-		 * @returns `true` if the required extensions are supported, `false` otherwise.
-		 */
-		bool hasExtensionSupport();
+				for (const auto &a : available) {
+					if (compare(req, a) == 0) {
+						found = true;
+						break;
+					}
+				}
+
+				if (!found) {
+					return false;
+				}
+			}
+
+			return true;
+		}
 
 	} // namespace utils
 
