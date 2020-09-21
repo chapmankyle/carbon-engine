@@ -3,8 +3,6 @@
 #ifndef CORE_INSTANCE_HPP
 #define CORE_INSTANCE_HPP
 
-#include <vector>
-
 #include "carbon/common/debug.hpp"
 #include "carbon/common/utils.hpp"
 

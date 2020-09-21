@@ -4,7 +4,6 @@
 #define COMMON_UTILS_HPP
 
 #include <cstring>
-#include <cassert>
 #include <vector>
 
 #include "carbon/setup.hpp"

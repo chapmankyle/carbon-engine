@@ -3,8 +3,6 @@
 #ifndef COMMON_TEMPLATE_TYPES_HPP
 #define COMMON_TEMPLATE_TYPES_HPP
 
-#include <type_traits>
-
 #include "carbon/setup.hpp"
 
 namespace carbon {
