@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "carbon/carbon.hpp"
 
 int main() {
