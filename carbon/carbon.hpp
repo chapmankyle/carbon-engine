@@ -10,6 +10,7 @@
 #include "common/utils.hpp"
 
 #include "core/instance.hpp"
+#include "core/physical_device.hpp"
 
 #include "display/window.hpp"
 
