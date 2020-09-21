@@ -3,6 +3,7 @@
 #ifndef COMMON_UTILS_HPP
 #define COMMON_UTILS_HPP
 
+#include <cassert>
 #include <cstring>
 #include <vector>
 
@@ -21,15 +22,6 @@ namespace carbon {
 			uint32_t minor{ 0 };
 			uint32_t patch{ 0 };
 		};
-
-		/*
-		 * @returns The device extensions that are required by the engine.
-		 */
-		static const std::vector<const char *> getRequiredDeviceExtensions() {
-			return std::vector<const char *>{
-				VK_KHR_SWAPCHAIN_EXTENSION_NAME
-			};
-		}
 
 		/**
 		 * @brief Requests the validation layers that are supported on the current machine.
