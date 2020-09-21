@@ -104,6 +104,11 @@ namespace carbon {
 		Instance(const char *appName, const carbon::utils::version &version = { 1, 0, 0 });
 
 		/**
+		 * @brief Default constructor for initializing a Vulkan instance.
+		 */
+		explicit Instance();
+
+		/**
 		 * @brief Destructor for the Vulkan instance.
 		 */
 		~Instance();
@@ -114,7 +119,7 @@ namespace carbon {
 		void destroy();
 
 		/**
-		 * @returns Underlying VkInstance object.
+		 * @returns The underlying `VkInstance`.
 		 */
 		const VkInstance& getHandle() const;
 

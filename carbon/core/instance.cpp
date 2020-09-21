@@ -130,6 +130,11 @@ carbon::Instance::Instance(const char *appName, const carbon::utils::version &ve
 }
 
 
+carbon::Instance::Instance()
+	: Instance("Application")
+{}
+
+
 carbon::Instance::~Instance() {
 	destroy();
 }
