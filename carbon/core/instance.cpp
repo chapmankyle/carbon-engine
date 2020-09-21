@@ -101,6 +101,9 @@ void carbon::Instance::fillInstanceCreateInfo(
 
 
 carbon::Instance::Instance(const char *appName, const carbon::utils::version &version) {
+	// set status of validation layers
+	m_validation_enabled = static_cast<bool>(CARBON_USE_VALIDATION_LAYERS);
+
 	checkSupport();
 
 	// inform driver of how best to optimize application
@@ -149,8 +152,13 @@ void carbon::Instance::destroy() {
 }
 
 
-const VkInstance carbon::Instance::getHandle() const {
+const VkInstance& carbon::Instance::getHandle() const {
 	return m_handle;
+}
+
+
+bool carbon::Instance::isValidationEnabled() const {
+	return m_validation_enabled;
 }
 
 

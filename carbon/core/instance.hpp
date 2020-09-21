@@ -59,6 +59,11 @@ namespace carbon {
 		std::vector<const char *> m_enabled_extensions;
 
 		/**
+		 * @brief `true` if validation layers are enabled, `false` otherwise.
+		 */
+		bool m_validation_enabled;
+
+		/**
 		 * @returns `true` if validation layers are supported, `false` otherwise.
 		 */
 		bool hasValidationLayerSupport();
@@ -113,7 +118,12 @@ namespace carbon {
 		/**
 		 * @returns Underlying VkInstance object.
 		 */
-		const VkInstance getHandle() const;
+		const VkInstance& getHandle() const;
+
+		/**
+		 * @returns `true` if the validation layers are enabled, `false` otherwise.
+		 */
+		bool isValidationEnabled() const;
 
 		/**
 		 * @returns The enabled validation layers that will be used if
