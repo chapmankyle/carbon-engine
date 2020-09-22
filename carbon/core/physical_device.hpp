@@ -3,10 +3,11 @@
 #ifndef CORE_PHYSICAL_DEVICE_HPP
 #define CORE_PHYSICAL_DEVICE_HPP
 
+#include "carbon/setup.hpp"
+
 #include <map>
 #include <set>
-
-#include "carbon/common/utils.hpp"
+#include <vector>
 
 namespace carbon {
 
