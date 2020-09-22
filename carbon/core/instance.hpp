@@ -8,6 +8,10 @@
 
 namespace carbon {
 
+	/**
+	 * @brief A wrapper for the Vulkan instance that represents the base
+	 * graphics object.
+	 */
 	class Instance {
 
 	private:
