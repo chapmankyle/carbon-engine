@@ -6,10 +6,17 @@
 #include <map>
 #include <set>
 
-#include "instance.hpp"
+#include "carbon/common/utils.hpp"
 
 namespace carbon {
 
+	// forward-declare classes that would result in circular dependency
+	class Instance;
+
+	/**
+	 * @brief A wrapper for the Vulkan physical device (GPU) that is used
+	 * for rendering.
+	 */
 	class PhysicalDevice {
 
 	private:
@@ -17,7 +24,7 @@ namespace carbon {
 		/**
 		 * @brief Owning instance for physical device.
 		 */
-		const Instance *m_instance;
+		const class Instance *m_instance;
 
 		/**
 		 * @brief The required device extensions.
@@ -72,13 +79,23 @@ namespace carbon {
 		 * @brief Initialize a physical device that is owned by the instance.
 		 * @param instance The owning instance for the physical device.
 		 */
-		explicit PhysicalDevice(Instance *instance);
+		explicit PhysicalDevice(class Instance *instance);
 
 		/**
 		 * @brief Physical device will be cleaned up automatically when
 		 * Instance is destroyed.
 		 */
 		~PhysicalDevice() = default;
+
+		/**
+		 * @brief Prints the properties of the physical device.
+		 */
+		void showProperties();
+
+		/**
+		 * @returns The type of the device, as a string.
+		 */
+		const char *getDeviceType();
 
 		/**
 		 * @returns The underlying `VkPhysicalDevice`.

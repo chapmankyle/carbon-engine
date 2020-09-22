@@ -1,4 +1,5 @@
 #include "physical_device.hpp"
+#include "instance.hpp"
 
 bool carbon::PhysicalDevice::hasDeviceExtensionSupport(const VkPhysicalDevice &device) {
 	// query device extension properties
@@ -9,15 +10,7 @@ bool carbon::PhysicalDevice::hasDeviceExtensionSupport(const VkPhysicalDevice &d
 	std::vector<VkExtensionProperties> available(numExtensions);
 	vkEnumerateDeviceExtensionProperties(device, nullptr, &numExtensions, available.data());
 
-	std::set<const char *> required(m_device_extensions.begin(), m_device_extensions.end());
-
-	// remove each found extension
-	for (const auto& ext : available) {
-		required.erase(ext.extensionName);
-	}
-
-	// empty if all extensions were found and removed
-	return required.empty();
+	return carbon::utils::containsRequired(m_device_extensions, available);
 }
 
 
@@ -96,6 +89,35 @@ carbon::PhysicalDevice::PhysicalDevice(carbon::Instance *instance)
 	vkGetPhysicalDeviceProperties(m_device, &m_device_props);
 	vkGetPhysicalDeviceFeatures(m_device, &m_device_feats);
 	vkGetPhysicalDeviceMemoryProperties(m_device, &m_device_memory_props);
+}
+
+
+void carbon::PhysicalDevice::showProperties() {
+	std::cout << "\n[Physical Device] " << m_device_props.deviceName << '\n';
+	std::cout << "    Type:                        " << getDeviceType() << '\n';
+	std::cout << "    Vendor ID:                   " << m_device_props.vendorID << '\n';
+	std::cout << "    Memory heap count:           " << m_device_memory_props.memoryHeapCount << '\n';
+	std::cout << "    Maximum clip distances:      " << m_device_props.limits.maxClipDistances << '\n';
+	std::cout << "    Maximum cull distances:      " << m_device_props.limits.maxCullDistances << '\n';
+	std::cout << "    Maximum number of viewports: " << m_device_props.limits.maxViewports << '\n';
+	std::cout << "    Maximum size of 2D textures: " << m_device_props.limits.maxImageDimension2D << '\n';
+	std::cout << "    Maximum size of 3D textures: " << m_device_props.limits.maxImageDimension3D << '\n';
+}
+
+
+const char *carbon::PhysicalDevice::getDeviceType() {
+	switch (m_device_props.deviceType) {
+		case VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU:
+			return "Integrated GPU";
+		case VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU:
+			return "Discrete GPU";
+		case VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU:
+			return "Virtual GPU";
+		case VK_PHYSICAL_DEVICE_TYPE_CPU:
+			return "CPU";
+		default:
+			return "Other";
+	}
 }
 
 
