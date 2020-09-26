@@ -4,6 +4,8 @@
 #define DISPLAY_WINDOW_HPP
 
 #include "carbon/setup.hpp"
+#include "carbon/common/utils.hpp"
+#include "carbon/core/instance.hpp"
 
 namespace carbon {
 
@@ -15,9 +17,19 @@ namespace carbon {
 	private:
 
 		/*
-		 * @brief Handle to the GLFW window object.
+		 * @brief Title to use when no title is supplied.
 		 */
-		GLFWwindow *m_window;
+		inline static constexpr char *m_default_title{ "Game" };
+
+		/*
+		 * @brief Width to use when no width is supplied.
+		 */
+		inline static constexpr int m_default_width{ 800 };
+
+		/*
+		 * @brief Height to use when no height is supplied.
+		 */
+		inline static constexpr int m_default_height{ 600 };
 
 		/*
 		 * @brief Title of the window.
@@ -35,24 +47,24 @@ namespace carbon {
 		int m_height;
 
 		/*
-		 * @brief Title to use when no title is supplied.
+		 * @brief Version number.
 		 */
-		const char *m_default_title = "Game";
+		carbon::utils::version m_version;
 
 		/*
-		 * @brief Width to use when no width is supplied.
+		 * @brief Handle to the GLFW window object.
 		 */
-		const int m_default_width = 800;
+		GLFWwindow *m_window;
 
 		/*
-		 * @brief Height to use when no height is supplied.
+		 * @brief Handle to the instance from which to render.
 		 */
-		const int m_default_height = 600;
+		Instance m_instance;
 
 		/*
-		 * @brief Initializes the window.
+		 * @brief Creates the GLFW window.
 		 */
-		void init();
+		GLFWwindow* createWindow();
 
 	public:
 
@@ -61,8 +73,9 @@ namespace carbon {
 		 * @param title The title of the window.
 		 * @param width The width of the window.
 		 * @param height The height of the window.
+		 * @param version Optional. The version of the application.
 		 */
-		Window(const char *title, const int width, const int height);
+		Window(const char *title, const int width, const int height, carbon::utils::version version = { 1, 0, 0 });
 
 		/*
 		 * @brief Initializes a GLFW window with default title, width
@@ -105,6 +118,16 @@ namespace carbon {
 		 * @returns The height of the window.
 		 */
 		const int getHeight();
+
+		/*
+		 * @returns The instance that is by the current window.
+		 */
+		const Instance& getInstance();
+
+		/*
+		 * @returns The version of the application.
+		 */
+		const carbon::utils::version& getVersion();
 
 	};
 

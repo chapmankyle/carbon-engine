@@ -19,6 +19,9 @@
 #define CARBON_ENABLE  1
 #define CARBON_DISABLE 0
 
+#define CARBON_TRUE  1
+#define CARBON_FALSE 0
+
 #define CARBON_VERSION_MAJOR 1
 #define CARBON_VERSION_MINOR 0
 #define CARBON_VERSION_PATCH 0
@@ -34,13 +37,13 @@
 
 #ifndef CARBON_DISABLE_DEBUG
 #	include <iostream>
-#	define CARBON_ENABLE_VALIDATION_LAYERS CARBON_ENABLE
+#	define CARBON_USE_VALIDATION_LAYERS CARBON_TRUE
 #else
-#	define CARBON_ENABLE_VALIDATION_LAYERS CARBON_DISABLE
+#	define CARBON_USE_VALIDATION_LAYERS CARBON_FALSE
 #endif // CARBON_DISABLE_DEBUG
 
 // ------------------
-// -- C++ Standard --
+// -- C++ STANDARD --
 // ------------------
 
 #define CARBON_LANG_CXX0X_FLAG  (1 << 1)
@@ -89,7 +92,7 @@
 #endif
 
 // ------------------
-// -- C++ Features --
+// -- C++ FEATURES --
 // ------------------
 
 // -- constexpr

@@ -1,8 +1,12 @@
 #include "window.hpp"
 
-void carbon::Window::init() {
+GLFWwindow* carbon::Window::createWindow() {
 	if (!glfwInit()) {
 		throw std::runtime_error("Failed to initialize GLFW!");
+	}
+
+	if (!glfwVulkanSupported()) {
+		throw std::runtime_error("Vulkan not supported!");
 	}
 
 	// specify not to use OpenGL context
@@ -11,27 +15,28 @@ void carbon::Window::init() {
 	// no resize support, yet!
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	// create window
-	m_window = glfwCreateWindow(m_width, m_height, m_title, nullptr, nullptr);
+	return glfwCreateWindow(m_width, m_height, m_title, nullptr, nullptr);
 }
 
 
-carbon::Window::Window(const char *title, const int width, const int height) {
-	m_title = title;
-	m_width = width;
-	m_height = height;
+carbon::Window::Window(const char *title, const int width, const int height, carbon::utils::version version)
+	: m_title(title)
+	, m_width(width)
+	, m_height(height)
+	, m_version(version)
+	, m_window(createWindow())
+	, m_instance(m_title, m_version)
+{ }
 
-	init();
-}
 
-
-carbon::Window::Window() {
-	m_title = m_default_title;
-	m_width = m_default_width;
-	m_height = m_default_height;
-
-	init();
-}
+carbon::Window::Window()
+	: m_title(m_default_title)
+	, m_width(m_default_width)
+	, m_height(m_default_height)
+	, m_version(carbon::utils::version{ 1, 0, 0 })
+	, m_window(createWindow())
+	, m_instance(m_title, m_version)
+{ }
 
 
 carbon::Window::~Window() {
@@ -40,9 +45,8 @@ carbon::Window::~Window() {
 
 
 void carbon::Window::destroy() {
-	if (m_window == nullptr) {
-		return;
-	}
+	// destroy instance
+	m_instance.destroy();
 
 	// destroy and free window
 	glfwDestroyWindow(m_window);
@@ -75,3 +79,14 @@ const int carbon::Window::getWidth() {
 const int carbon::Window::getHeight() {
 	return m_height;
 }
+
+
+const carbon::Instance& carbon::Window::getInstance() {
+	return m_instance;
+}
+
+
+const carbon::utils::version& carbon::Window::getVersion() {
+	return m_version;
+}
+
