@@ -19,7 +19,13 @@ carbon::Surface::~Surface() {
 
 
 void carbon::Surface::destroy() {
+	if (m_surface == VK_NULL_HANDLE) {
+		return;
+	}
+
+	// destroy and reset
 	vkDestroySurfaceKHR(m_instance->getHandle(), m_surface, nullptr);
+	m_surface = VK_NULL_HANDLE;
 }
 
 
