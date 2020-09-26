@@ -123,6 +123,11 @@ namespace carbon {
 		 */
 		const std::multimap<int, VkPhysicalDevice> getCandidates() const;
 
+		/**
+		 * @returns The device extensions.
+		 */
+		const std::vector<const char *> getDeviceExtensions() const;
+
 	};
 
 } // namespace carbon

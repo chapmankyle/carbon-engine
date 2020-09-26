@@ -144,3 +144,8 @@ const VkPhysicalDeviceMemoryProperties& carbon::PhysicalDevice::getMemoryPropert
 const std::multimap<int, VkPhysicalDevice> carbon::PhysicalDevice::getCandidates() const {
 	return m_candidates;
 }
+
+
+const std::vector<const char*> carbon::PhysicalDevice::getDeviceExtensions() const {
+	return m_device_extensions;
+}
