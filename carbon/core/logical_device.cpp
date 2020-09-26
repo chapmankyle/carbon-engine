@@ -100,7 +100,7 @@ void carbon::LogicalDevice::createDevice() {
     createInfo.ppEnabledExtensionNames = deviceExtensions.data();
 
     if (m_instance->isValidationEnabled()) {
-        createInfo.enabledLayerCount = validationLayers.size();
+        createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
         createInfo.ppEnabledLayerNames = validationLayers.data();
     } else {
         createInfo.enabledLayerCount = 0;
