@@ -114,17 +114,51 @@ namespace carbon {
 		/**
 		 * @returns The handle of the underlying device.
 		 */
-		const VkDevice& getHandle() const;
+		const VkDevice& getHandle() const {
+			return m_device;
+		}
 
 		/**
 		 * @returns The graphics queue.
 		 */
-		const VkQueue& getGraphicsQueue() const;
+		const VkQueue& getGraphicsQueue() const {
+			return m_graphics_queue;
+		}
 
 		/**
 		 * @returns The presentation queue.
 		 */
-		const VkQueue& getPresentQueue() const;
+		const VkQueue& getPresentQueue() const {
+			return m_present_queue;
+		}
+
+		/**
+		 * @returns The graphics family.
+		 */
+		const uint32_t getGraphicsFamily() const {
+			return m_queue_family_indices.graphicsFamily;
+		}
+
+		/**
+		 * @returns The presentation family.
+		 */
+		const uint32_t getPresentFamily() const {
+			return m_queue_family_indices.presentFamily;
+		}
+
+		/**
+		 * @returns The compute family.
+		 */
+		const uint32_t getComputeFamily() const {
+			return m_queue_family_indices.computeFamily;
+		}
+
+		/**
+		 * @returns The transfer family.
+		 */
+		const uint32_t getTransferFamily() const {
+			return m_queue_family_indices.transferFamily;
+		}
 
 	};
 
