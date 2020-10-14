@@ -1,7 +1,4 @@
-
 ## Misc ##
-*.sln
-*.vcxproj*
 .vs
 
 ## C++ ##
