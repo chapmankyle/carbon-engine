@@ -64,29 +64,3 @@ bool carbon::Window::isOpen() {
 void carbon::Window::pollEvents() {
 	glfwPollEvents();
 }
-
-
-const char *carbon::Window::getTitle() {
-	return m_title;
-}
-
-
-const int carbon::Window::getWidth() {
-	return m_width;
-}
-
-
-const int carbon::Window::getHeight() {
-	return m_height;
-}
-
-
-const carbon::Instance& carbon::Window::getInstance() {
-	return m_instance;
-}
-
-
-const carbon::utils::version& carbon::Window::getVersion() {
-	return m_version;
-}
-
