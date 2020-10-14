@@ -71,14 +71,20 @@ void carbon::Swapchain::chooseSwapExtent() {
 		return;
 	}
 
+	// stores width and height of framebuffer
+	int width{ 0 };
+	int height{ 0 };
+
+	glfwGetFramebufferSize(m_window, &width, &height);
+
 	// create extent based on current extent
-	VkExtent2D ext = m_extent;
+	VkExtent2D extent = { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
 
 	// clamp extent within window bounds
-	ext.width = std::max(cap.minImageExtent.width, std::min(cap.maxImageExtent.width, ext.width));
-	ext.height = std::max(cap.minImageExtent.height, std::min(cap.maxImageExtent.height, ext.height));
+	extent.width = std::max(cap.minImageExtent.width, std::min(cap.maxImageExtent.width, extent.width));
+	extent.height = std::max(cap.minImageExtent.height, std::min(cap.maxImageExtent.height, extent.height));
 
-	m_extent = ext;
+	m_extent = extent;
 }
 
 
@@ -121,7 +127,7 @@ void carbon::Swapchain::setup() {
 	uint32_t graphicsFamily = m_logical_device->getGraphicsFamily();
 	uint32_t presentFamily = m_logical_device->getPresentFamily();
 
-	uint32_t queueIndices[]{ graphicsFamily, presentFamily };
+	uint32_t queueIndices[] = { graphicsFamily, presentFamily };
 
 	// ways to handle images accessed from multiple queues
 	// - VK_SHARING_MODE_EXCLUSIVE : image is owned by one queue family at a time and ownership
@@ -202,35 +208,18 @@ void carbon::Swapchain::createImageViews() {
 
 
 carbon::Swapchain::Swapchain(
-	uint32_t width,
-	uint32_t height,
+	GLFWwindow *window,
 	LogicalDevice *logiDevice,
 	PhysicalDevice *physDevice,
 	Surface *surface
 )
-	: m_extent({ width, height })
+	: m_window(window)
 	, m_logical_device(logiDevice)
 	, m_physical_device(physDevice)
 	, m_surface(surface)
 {
 	assert(m_logical_device && m_physical_device && m_surface && "Logical device, physical device and surface must not be null.");
-	recreate(m_extent);
-}
-
-
-carbon::Swapchain::Swapchain(
-	const VkExtent2D &extent,
-	LogicalDevice *logiDevice,
-	PhysicalDevice *physDevice,
-	Surface *surface
-)
-	: m_extent(extent)
-	, m_logical_device(logiDevice)
-	, m_physical_device(physDevice)
-	, m_surface(surface)
-{
-	assert(m_logical_device && m_physical_device && m_surface && "Logical device, physical device and surface must not be null.");
-	recreate(m_extent);
+	recreate();
 }
 
 
@@ -259,19 +248,9 @@ void carbon::Swapchain::destroy() {
 }
 
 
-void carbon::Swapchain::recreate(const VkExtent2D &extent) {
-	// check if extent has changed
-	if (m_extent.width != extent.width || m_extent.height != extent.height) {
-		m_extent = extent;
-	}
-
+void carbon::Swapchain::recreate() {
 	setup();
 	createImageViews();
-}
-
-
-void carbon::Swapchain::recreate() {
-	recreate(m_extent);
 }
 
 

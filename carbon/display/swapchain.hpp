@@ -32,6 +32,11 @@ namespace carbon {
 		};
 
 		/**
+		 * @brief The window to use when creating the swapchain.
+		 */
+		GLFWwindow *m_window;
+
+		/**
 		 * @brief The physical device to use in the swapchain.
 		 */
 		const class PhysicalDevice *m_physical_device;
@@ -135,7 +140,7 @@ namespace carbon {
 	public:
 
 		/**
-		 * @brief Initializes the swapchain.
+		 * @brief Initializes the swapchain using the current window.
 		 * @param width The width of the swapchain images.
 		 * @param height The height of the swapchain images.
 		 * @param logiDevice The logical device to use.
@@ -143,22 +148,7 @@ namespace carbon {
 		 * @param surface The device surface.
 		 */
 		explicit Swapchain(
-			uint32_t width,
-			uint32_t height,
-			class LogicalDevice *logiDevice,
-			class PhysicalDevice *physDevice,
-			class Surface *surface
-		);
-
-		/**
-		 * @brief Initializes the swapchain.
-		 * @param extent The swapchain image extent.
-		 * @param logiDevice The logical device to use.
-		 * @param physDevice The physical device (GPU) to use.
-		 * @param surface The device surface.
-		 */
-		explicit Swapchain(
-			const VkExtent2D &extent,
+			GLFWwindow *window,
 			class LogicalDevice *logiDevice,
 			class PhysicalDevice *physDevice,
 			class Surface *surface
@@ -175,14 +165,7 @@ namespace carbon {
 		void destroy();
 
 		/**
-		 * @brief Recreates the swapchain using a different extent.
-		 * @param extent The extent to use for the swapchain images.
-		 */
-		void recreate(const VkExtent2D &extent);
-
-		/**
-		 * @brief Recreates the swapchain using the same extent used by previous
-		 * swapchain.
+		 * @brief Recreates the swapchain by checking the size of the framebuffer.
 		 */
 		void recreate();
 
@@ -206,6 +189,13 @@ namespace carbon {
 		 */
 		const VkSwapchainKHR& getHandle() const {
 			return m_swapchain;
+		}
+
+		/**
+		 * @returns The window used when creating the swapchain.
+		 */
+		GLFWwindow* getWindow() const {
+			return m_window;
 		}
 
 		/**
