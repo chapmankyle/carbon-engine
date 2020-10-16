@@ -32,11 +32,6 @@ namespace carbon {
 		};
 
 		/**
-		 * @brief The window to use when creating the swapchain.
-		 */
-		GLFWwindow *m_window;
-
-		/**
 		 * @brief The physical device to use in the swapchain.
 		 */
 		const class PhysicalDevice *m_physical_device;
@@ -50,6 +45,11 @@ namespace carbon {
 		 * @brief The surface to use in the swapchain.
 		 */
 		const class Surface *m_surface;
+
+		/**
+		 * @brief The window to use when creating the swapchain.
+		 */
+		GLFWwindow *m_window;
 
 		/**
 		 * @brief Handle on the underlying swapchain.
