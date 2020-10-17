@@ -27,8 +27,3 @@ void carbon::Surface::destroy() {
 	vkDestroySurfaceKHR(m_instance->getHandle(), m_surface, nullptr);
 	m_surface = VK_NULL_HANDLE;
 }
-
-
-const VkSurfaceKHR& carbon::Surface::getHandle() const {
-	return m_surface;
-}

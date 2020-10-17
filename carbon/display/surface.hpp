@@ -56,10 +56,12 @@ namespace carbon {
 		/**
 		 * @returns The handle of the underlying surface.
 		 */
-		const VkSurfaceKHR& getHandle() const;
+		const VkSurfaceKHR& getHandle() const {
+			return m_surface;
+		}
 
 	};
 
 } // namespace carbon
 
-#endif // !DISPLAY_SURFACE_HPP
+#endif // DISPLAY_SURFACE_HPP
