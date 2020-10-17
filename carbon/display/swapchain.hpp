@@ -279,4 +279,4 @@ namespace carbon {
 
 } // namespace carbon
 
-#endif // !DISPLAY_SWAPCHAIN_HPP
+#endif // DISPLAY_SWAPCHAIN_HPP
