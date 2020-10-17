@@ -125,23 +125,31 @@ namespace carbon {
 		/**
 		 * @returns The underlying `VkInstance`.
 		 */
-		const VkInstance& getHandle() const;
+		const VkInstance& getHandle() const {
+			return m_handle;
+		}
 
 		/**
 		 * @returns `true` if the validation layers are enabled, `false` otherwise.
 		 */
-		bool isValidationEnabled() const;
+		bool isValidationEnabled() const {
+			return m_validation_enabled;
+		}
 
 		/**
 		 * @returns The enabled validation layers that will be used if
 		 * `CARBON_DISABLE_DEBUG` is not defined.
 		 */
-		const std::vector<const char *> getEnabledValidationLayers() const;
+		const std::vector<const char *> getEnabledValidationLayers() const {
+			return m_enabled_validation_layers;
+		}
 
 		/**
 		 * @returns The currently enabled extensions on the instance.
 		 */
-		const std::vector<const char *> getEnabledExtensions() const;
+		const std::vector<const char *> getEnabledExtensions() const {
+			return m_enabled_extensions;
+		}
 
 	};
 

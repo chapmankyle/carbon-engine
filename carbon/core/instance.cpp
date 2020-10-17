@@ -155,23 +155,3 @@ void carbon::Instance::destroy() {
 	vkDestroyInstance(m_handle, nullptr);
 	m_handle = VK_NULL_HANDLE;
 }
-
-
-const VkInstance& carbon::Instance::getHandle() const {
-	return m_handle;
-}
-
-
-bool carbon::Instance::isValidationEnabled() const {
-	return m_validation_enabled;
-}
-
-
-const std::vector<const char *> carbon::Instance::getEnabledValidationLayers() const {
-	return m_enabled_validation_layers;
-}
-
-
-const std::vector<const char*> carbon::Instance::getEnabledExtensions() const {
-	return m_enabled_extensions;
-}
