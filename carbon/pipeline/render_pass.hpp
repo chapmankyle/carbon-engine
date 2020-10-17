@@ -174,4 +174,4 @@ namespace carbon {
 
 } // namespace carbon
 
-#endif
+#endif // PIPELINE_RENDER_PASS_HPP
