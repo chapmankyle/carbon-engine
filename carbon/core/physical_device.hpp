@@ -101,32 +101,44 @@ namespace carbon {
 		/**
 		 * @returns The underlying `VkPhysicalDevice`.
 		 */
-		const VkPhysicalDevice& getHandle() const;
+		const VkPhysicalDevice& getHandle() const {
+			return m_device;
+		}
 
 		/**
 		 * @returns The device properties of the selected physical devices.
 		 */
-		const VkPhysicalDeviceProperties& getProperties() const;
+		const VkPhysicalDeviceProperties& getProperties() const {
+			return m_device_props;
+		}
 
 		/**
 		 * @returns The device features of the selected physical device.
 		 */
-		const VkPhysicalDeviceFeatures& getFeatures() const;
+		const VkPhysicalDeviceFeatures& getFeatures() const {
+			return m_device_feats;
+		}
 
 		/**
 		 * @returns The device memory properties of the selected physical device.
 		 */
-		const VkPhysicalDeviceMemoryProperties& getMemoryProperties() const;
+		const VkPhysicalDeviceMemoryProperties& getMemoryProperties() const {
+			return m_device_memory_props;
+		}
 
 		/**
 		 * @returns The found physical devices and their scores.
 		 */
-		const std::multimap<int, VkPhysicalDevice> getCandidates() const;
+		const std::multimap<int, VkPhysicalDevice> getCandidates() const {
+			return m_candidates;
+		}
 
 		/**
 		 * @returns The device extensions.
 		 */
-		const std::vector<const char *> getDeviceExtensions() const;
+		const std::vector<const char*> getDeviceExtensions() const {
+			return m_device_extensions;
+		}
 
 	};
 

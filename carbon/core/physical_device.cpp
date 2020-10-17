@@ -119,33 +119,3 @@ const char *carbon::PhysicalDevice::getDeviceType() {
 			return "Other";
 	}
 }
-
-
-const VkPhysicalDevice& carbon::PhysicalDevice::getHandle() const {
-	return m_device;
-}
-
-
-const VkPhysicalDeviceProperties& carbon::PhysicalDevice::getProperties() const {
-	return m_device_props;
-}
-
-
-const VkPhysicalDeviceFeatures& carbon::PhysicalDevice::getFeatures() const {
-	return m_device_feats;
-}
-
-
-const VkPhysicalDeviceMemoryProperties& carbon::PhysicalDevice::getMemoryProperties() const {
-	return m_device_memory_props;
-}
-
-
-const std::multimap<int, VkPhysicalDevice> carbon::PhysicalDevice::getCandidates() const {
-	return m_candidates;
-}
-
-
-const std::vector<const char*> carbon::PhysicalDevice::getDeviceExtensions() const {
-	return m_device_extensions;
-}
