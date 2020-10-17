@@ -148,6 +148,7 @@
     <ClCompile Include="carbon\display\surface.cpp" />
     <ClCompile Include="carbon\display\swapchain.cpp" />
     <ClCompile Include="carbon\display\window.cpp" />
+    <ClCompile Include="carbon\pipeline\render_pass.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="carbon\display\surface.hpp" />
     <ClInclude Include="carbon\display\swapchain.hpp" />
     <ClInclude Include="carbon\display\window.hpp" />
+    <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
   </ItemGroup>
