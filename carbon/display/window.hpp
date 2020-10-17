@@ -47,6 +47,12 @@ namespace carbon {
 		int m_height;
 
 		/**
+		 * @brief Keep track of when the framebuffer has been
+		 * resized (when resizing or minimizing window).
+		 */
+		bool framebufferResized{ false };
+
+		/**
 		 * @brief Version number.
 		 */
 		carbon::utils::version m_version;
@@ -64,7 +70,16 @@ namespace carbon {
 		/**
 		 * @brief Creates the GLFW window.
 		 */
-		GLFWwindow* createWindow();
+		void createWindow();
+
+		/**
+		 * @brief Callback for when GLFW detects that the framebuffer
+		 * has been resized.
+		 * @param window The GLFWwindow object to detect resize on.
+		 * @param width The new width of the framebuffer.
+		 * @param height The new height of the framebuffer.
+		 */
+		static void framebufferResizeCallback(GLFWwindow *window, int width, int height);
 
 	public:
 
@@ -151,4 +166,3 @@ namespace carbon {
 } // namespace carbon
 
 #endif // DISPLAY_WINDOW_HPP
-
