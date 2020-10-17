@@ -5,6 +5,7 @@
 
 #include "carbon/setup.hpp"
 #include <cassert>
+#include <vector>
 
 namespace carbon {
 
@@ -35,45 +36,44 @@ namespace carbon {
 		VkRenderPass m_render_pass{ VK_NULL_HANDLE };
 
 		/**
-		 * @brief The attachment description to determine what to do
-		 * with data before and after rendering.
+		 * @brief Determines what to do with data before and after rendering.
 		 */
-		VkAttachmentDescription m_attachment_desc{};
+		std::vector<VkAttachmentDescription> m_attachment_descriptions;
 
 		/**
-		 * @brief Attachment reference for the colours.
+		 * @brief Attachment references for the colours.
 		 */
-		VkAttachmentReference m_attachment_ref{};
+		std::vector<VkAttachmentReference> m_attachment_references;
 
 		/**
-		 * @brief The description of the subpass to use.
+		 * @brief The description of the subpasses to use.
 		 */
-		VkSubpassDescription m_subpass_desc{};
+		std::vector<VkSubpassDescription> m_subpass_descriptions;
 
 		/**
-		 * @brief Dependencies of the subpass.
+		 * @brief Dependencies of each subpass.
 		 */
-		VkSubpassDependency m_subpass_dep{};
+		std::vector<VkSubpassDependency> m_subpass_dependencies;
 
 		/**
-		 * @brief Sets up defaults for the attachment description.
+		 * @brief Sets up defaults for the attachment descriptions.
 		 */
-		void setupAttachmentDescription();
+		void setupAttachmentDescriptions();
 
 		/**
-		 * @brief Sets up defaults for the attachment reference.
+		 * @brief Sets up defaults for the attachment references.
 		 */
-		void setupAttachmentReference();
+		void setupAttachmentReferences();
 
 		/**
-		 * @brief Sets up defaults for the subpass description.
+		 * @brief Sets up defaults for the subpass descriptions.
 		 */
-		void setupSubpassDescription();
+		void setupSubpassDescriptions();
 
 		/**
-		 * @brief Sets up defaults for the subpass dependency.
+		 * @brief Sets up defaults for the subpass dependencies.
 		 */
-		void setupSubpassDependency();
+		void setupSubpassDependencies();
 
 		/**
 		 * @brief Sets up the render pass with default parameters.
@@ -113,31 +113,31 @@ namespace carbon {
 		}
 
 		/**
-		 * @returns The colour attachment description.
+		 * @returns The colour attachment descriptions.
 		 */
-		const VkAttachmentDescription& getAttachmentDescription() const {
-			return m_attachment_desc;
+		const std::vector<VkAttachmentDescription>& getAttachmentDescriptions() const {
+			return m_attachment_descriptions;
 		}
 
 		/**
-		 * @returns The colour attachment reference.
+		 * @returns The colour attachment references.
 		 */
-		const VkAttachmentReference& getAttachmentReference() const {
-			return m_attachment_ref;
+		const std::vector<VkAttachmentReference>& getAttachmentReferences() const {
+			return m_attachment_references;
 		}
 
 		/**
-		 * @returns The description of the subpass.
+		 * @returns The description of the subpasses.
 		 */
-		const VkSubpassDescription& getSubpassDescription() const {
-			return m_subpass_desc;
+		const std::vector<VkSubpassDescription>& getSubpassDescriptions() const {
+			return m_subpass_descriptions;
 		}
 
 		/**
-		 * @returns The dependency of the subpass.
+		 * @returns The dependencies of each subpass.
 		 */
-		const VkSubpassDependency& getSubpassDependency() const {
-			return m_subpass_dep;
+		const std::vector<VkSubpassDependency>& getSubpassDependencies() const {
+			return m_subpass_dependencies;
 		}
 
 		/**
@@ -147,28 +147,28 @@ namespace carbon {
 		void setImageFormat(const VkFormat imageFormat);
 
 		/**
-		 * @brief Sets the attachment description to use in the render pass.
-		 * @param desc The attachment description to use.
+		 * @brief Sets the attachment descriptions to use in the render pass.
+		 * @param descs The attachment descriptions to use.
 		 */
-		void setAttachmentDescription(const VkAttachmentDescription desc);
+		void setAttachmentDescriptions(const std::vector<VkAttachmentDescription> descs);
 
 		/**
-		 * @brief Sets the attachment reference to use in the render pass.
-		 * @param ref The attachment reference to use.
+		 * @brief Sets the attachment references to use in the render pass.
+		 * @param refs The attachment references to use.
 		 */
-		void setAttachmentReference(const VkAttachmentReference ref);
+		void setAttachmentReferences(const std::vector<VkAttachmentReference> refs);
 
 		/**
-		 * @brief Sets the subpass description to use in the render pass.
-		 * @param desc The subpass description to use.
+		 * @brief Sets the subpass descriptions to use in the render pass.
+		 * @param descs The subpass descriptions to use.
 		 */
-		void setSubpassDescription(const VkSubpassDescription desc);
+		void setSubpassDescriptions(const std::vector<VkSubpassDescription> descs);
 
 		/**
-		 * @brief Sets the subpass dependency to use in the render pass.
-		 * @param dependency The subpass dependency to use.
+		 * @brief Sets the subpass dependencies to use in the render pass.
+		 * @param deps The subpass dependencies to use.
 		 */
-		void setSubpassDependency(const VkSubpassDependency dependency);
+		void setSubpassDependencies(const std::vector<VkSubpassDependency> deps);
 
 	};
 

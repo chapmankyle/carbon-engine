@@ -2,61 +2,87 @@
 
 #include "carbon/core/logical_device.hpp"
 
-void carbon::RenderPass::setupAttachmentDescription() {
+void carbon::RenderPass::setupAttachmentDescriptions() {
 	// single colour buffer attachment
-	m_attachment_desc.format = m_image_format;
-	m_attachment_desc.samples = VK_SAMPLE_COUNT_1_BIT;
+	VkAttachmentDescription desc{};
+	desc.format = m_image_format;
+	desc.samples = VK_SAMPLE_COUNT_1_BIT;
 
 	// determine what to do with data in attachment before and after rendering
-	m_attachment_desc.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR; // clear values at start
-	m_attachment_desc.storeOp = VK_ATTACHMENT_STORE_OP_STORE; // rendered constants will be stored in memory
+	desc.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR; // clear values at start
+	desc.storeOp = VK_ATTACHMENT_STORE_OP_STORE; // rendered constants will be stored in memory
 
 	// apply colour and depth data
-	m_attachment_desc.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-	m_attachment_desc.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+	desc.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+	desc.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 
 	// decide on layout of images being rendered
-	m_attachment_desc.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-	m_attachment_desc.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR; // images to be presented in swap chain
+	desc.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+	desc.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR; // images to be presented in swap chain
+
+	// put into vector
+	m_attachment_descriptions.clear();
+	m_attachment_descriptions.push_back(desc);
 }
 
 
-void carbon::RenderPass::setupAttachmentReference() {
-	// attachment reference for colours
-	m_attachment_ref.attachment = 0;
-	m_attachment_ref.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+void carbon::RenderPass::setupAttachmentReferences() {
+	m_attachment_references.clear();
+
+	// attachment references for each attachment description
+	for (int i{ 0 }; i < m_attachment_descriptions.size(); i++) {
+		VkAttachmentReference ref{};
+		ref.attachment = 0;
+		ref.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+		// add to vector
+		m_attachment_references.push_back(ref);
+	}
 }
 
 
-void carbon::RenderPass::setupSubpassDescription() {
+void carbon::RenderPass::setupSubpassDescriptions() {
 	// create the subpass
-	m_subpass_desc.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+	VkSubpassDescription desc{};
+	desc.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
 
 	// add colour attachment to subpass
-	m_subpass_desc.colorAttachmentCount = 1;
-	m_subpass_desc.pColorAttachments = &m_attachment_ref;
+	desc.colorAttachmentCount = static_cast<uint32_t>(m_attachment_references.size());
+	desc.pColorAttachments = m_attachment_references.data();
+
+	// put into vector
+	m_subpass_descriptions.clear();
+	m_subpass_descriptions.push_back(desc);
 }
 
 
-void carbon::RenderPass::setupSubpassDependency() {
-	// specify dependency for subpass
-	m_subpass_dep.srcSubpass = VK_SUBPASS_EXTERNAL;
-	m_subpass_dep.dstSubpass = 0;
+void carbon::RenderPass::setupSubpassDependencies() {
+	m_subpass_dependencies.clear();
 
-	m_subpass_dep.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-	m_subpass_dep.srcAccessMask = 0;
+	// specify dependencies for each subpass
+	for (int i{ 0 }; i < m_subpass_descriptions.size(); i++) {
+		VkSubpassDependency dep{};
+		dep.srcSubpass = VK_SUBPASS_EXTERNAL;
+		dep.dstSubpass = 0;
 
-	m_subpass_dep.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-	m_subpass_dep.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+		dep.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dep.srcAccessMask = 0;
+
+		dep.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dep.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
+		// add to vector
+		m_subpass_dependencies.push_back(dep);
+	}
 }
 
 
 void carbon::RenderPass::setup() {
 	// setup individual components
-	setupAttachmentDescription();
-	setupAttachmentReference();
-	setupSubpassDescription();
-	setupSubpassDependency();
+	setupAttachmentDescriptions();
+	setupAttachmentReferences();
+	setupSubpassDescriptions();
+	setupSubpassDependencies();
 }
 
 
@@ -65,12 +91,14 @@ void carbon::RenderPass::create() {
 	VkRenderPassCreateInfo renderPassInfo;
 	carbon::initStruct(renderPassInfo, VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO);
 
-	renderPassInfo.attachmentCount = 1;
-	renderPassInfo.pAttachments = &m_attachment_desc;
-	renderPassInfo.subpassCount = 1;
-	renderPassInfo.pSubpasses = &m_subpass_desc;
-	renderPassInfo.dependencyCount = 1;
-	renderPassInfo.pDependencies = &m_subpass_dep;
+	renderPassInfo.attachmentCount = static_cast<uint32_t>(m_attachment_descriptions.size());
+	renderPassInfo.pAttachments = m_attachment_descriptions.data();
+
+	renderPassInfo.subpassCount = static_cast<uint32_t>(m_subpass_descriptions.size());
+	renderPassInfo.pSubpasses = m_subpass_descriptions.data();
+
+	renderPassInfo.dependencyCount = static_cast<uint32_t>(m_subpass_dependencies.size());
+	renderPassInfo.pDependencies = m_subpass_dependencies.data();
 
 	// create render pass
 	if (vkCreateRenderPass(m_logical_device->getHandle(), &renderPassInfo, nullptr, &m_render_pass) != VK_SUCCESS) {
@@ -109,32 +137,34 @@ void carbon::RenderPass::destroy() {
 void carbon::RenderPass::setImageFormat(const VkFormat imageFormat) {
 	m_image_format = imageFormat;
 
-	setupAttachmentDescription();
+	setupAttachmentDescriptions();
 	create();
 }
 
 
-void carbon::RenderPass::setAttachmentDescription(const VkAttachmentDescription desc) {
-	m_attachment_desc = desc;
+void carbon::RenderPass::setAttachmentDescriptions(const std::vector<VkAttachmentDescription> descs) {
+	m_attachment_descriptions = descs;
 	create();
 }
 
 
-void carbon::RenderPass::setAttachmentReference(const VkAttachmentReference ref) {
-	m_attachment_ref = ref;
+void carbon::RenderPass::setAttachmentReferences(const std::vector<VkAttachmentReference> refs) {
+	m_attachment_references = refs;
 
-	setupSubpassDescription();
+	setupSubpassDescriptions();
 	create();
 }
 
 
-void carbon::RenderPass::setSubpassDescription(const VkSubpassDescription desc) {
-	m_subpass_desc = desc;
+void carbon::RenderPass::setSubpassDescriptions(const std::vector<VkSubpassDescription> descs) {
+	m_subpass_descriptions = descs;
+
+	setupSubpassDependencies();
 	create();
 }
 
 
-void carbon::RenderPass::setSubpassDependency(const VkSubpassDependency dependency) {
-	m_subpass_dep = dependency;
+void carbon::RenderPass::setSubpassDependencies(const std::vector<VkSubpassDependency> deps) {
+	m_subpass_dependencies = deps;
 	create();
 }
