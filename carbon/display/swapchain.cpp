@@ -256,18 +256,14 @@ void carbon::Swapchain::recreate() {
 
 VkResult carbon::Swapchain::acquireNextImage(const VkSemaphore &semaphore) {
 	assert(m_logical_device && "Logical device must not be null.");
-
-	VkDevice device = m_logical_device->getHandle();
-	VkResult result = vkAcquireNextImageKHR(
-		device,
+	return vkAcquireNextImageKHR(
+		m_logical_device->getHandle(),
 		m_swapchain,
 		UINT64_MAX,
 		semaphore,
 		VK_NULL_HANDLE,
 		&m_curr_image_idx
 	);
-
-	return result;
 }
 
 
