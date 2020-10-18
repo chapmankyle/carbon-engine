@@ -106,6 +106,36 @@ namespace carbon {
 		void destroy();
 
 		/**
+		 * @brief Sets the image format to use in the render pass.
+		 * @param imageFormat The swapchain image format.
+		 */
+		void setImageFormat(const VkFormat imageFormat);
+
+		/**
+		 * @brief Sets the attachment descriptions to use in the render pass.
+		 * @param descs The attachment descriptions to use.
+		 */
+		void setAttachmentDescriptions(const std::vector<VkAttachmentDescription> descs);
+
+		/**
+		 * @brief Sets the attachment references to use in the render pass.
+		 * @param refs The attachment references to use.
+		 */
+		void setAttachmentReferences(const std::vector<VkAttachmentReference> refs);
+
+		/**
+		 * @brief Sets the subpass descriptions to use in the render pass.
+		 * @param descs The subpass descriptions to use.
+		 */
+		void setSubpassDescriptions(const std::vector<VkSubpassDescription> descs);
+
+		/**
+		 * @brief Sets the subpass dependencies to use in the render pass.
+		 * @param deps The subpass dependencies to use.
+		 */
+		void setSubpassDependencies(const std::vector<VkSubpassDependency> deps);
+
+		/**
 		 * @returns The handle on the underlying render pass.
 		 */
 		const VkRenderPass& getHandle() const {
@@ -139,36 +169,6 @@ namespace carbon {
 		const std::vector<VkSubpassDependency>& getSubpassDependencies() const {
 			return m_subpass_dependencies;
 		}
-
-		/**
-		 * @brief Sets the image format to use in the render pass.
-		 * @param imageFormat The swapchain image format.
-		 */
-		void setImageFormat(const VkFormat imageFormat);
-
-		/**
-		 * @brief Sets the attachment descriptions to use in the render pass.
-		 * @param descs The attachment descriptions to use.
-		 */
-		void setAttachmentDescriptions(const std::vector<VkAttachmentDescription> descs);
-
-		/**
-		 * @brief Sets the attachment references to use in the render pass.
-		 * @param refs The attachment references to use.
-		 */
-		void setAttachmentReferences(const std::vector<VkAttachmentReference> refs);
-
-		/**
-		 * @brief Sets the subpass descriptions to use in the render pass.
-		 * @param descs The subpass descriptions to use.
-		 */
-		void setSubpassDescriptions(const std::vector<VkSubpassDescription> descs);
-
-		/**
-		 * @brief Sets the subpass dependencies to use in the render pass.
-		 * @param deps The subpass dependencies to use.
-		 */
-		void setSubpassDependencies(const std::vector<VkSubpassDependency> deps);
 
 	};
 
