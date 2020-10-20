@@ -1,0 +1,4 @@
+[submodule "deps/glfw"]
+	path = deps/glfw
+	url = https://github.com/chapmankyle/glfw.git
+	branch = 3.3-stable
