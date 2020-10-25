@@ -152,18 +152,3 @@ void carbon::LogicalDevice::destroy() {
     // m_surface is member class and thus will be destroyed
     // after this class destructor
 }
-
-
-const VkDevice& carbon::LogicalDevice::getHandle() const {
-    return m_device;
-}
-
-
-const VkQueue& carbon::LogicalDevice::getGraphicsQueue() const {
-    return m_graphics_queue;
-}
-
-
-const VkQueue& carbon::LogicalDevice::getPresentQueue() const {
-    return m_present_queue;
-}

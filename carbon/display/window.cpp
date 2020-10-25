@@ -1,6 +1,6 @@
 #include "window.hpp"
 
-GLFWwindow* carbon::Window::createWindow() {
+void carbon::Window::createWindow() {
 	if (!glfwInit()) {
 		throw std::runtime_error("Failed to initialize GLFW!");
 	}
@@ -12,10 +12,18 @@ GLFWwindow* carbon::Window::createWindow() {
 	// specify not to use OpenGL context
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-	// no resize support, yet!
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	// create window
+	m_window = glfwCreateWindow(m_width, m_height, m_title, nullptr, nullptr);
 
-	return glfwCreateWindow(m_width, m_height, m_title, nullptr, nullptr);
+	// set callback for framebuffer resize
+	glfwSetWindowUserPointer(m_window, this);
+	glfwSetFramebufferSizeCallback(m_window, framebufferResizeCallback);
+}
+
+
+void carbon::Window::framebufferResizeCallback(GLFWwindow *window, int width, int height) {
+	auto app = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+	app->framebufferResized = true;
 }
 
 
@@ -24,9 +32,10 @@ carbon::Window::Window(const char *title, const int width, const int height, car
 	, m_width(width)
 	, m_height(height)
 	, m_version(version)
-	, m_window(createWindow())
 	, m_instance(m_title, m_version)
-{ }
+{
+	createWindow();
+}
 
 
 carbon::Window::Window()
@@ -34,9 +43,10 @@ carbon::Window::Window()
 	, m_width(m_default_width)
 	, m_height(m_default_height)
 	, m_version(carbon::utils::version{ 1, 0, 0 })
-	, m_window(createWindow())
 	, m_instance(m_title, m_version)
-{ }
+{
+	createWindow();
+}
 
 
 carbon::Window::~Window() {
@@ -64,29 +74,3 @@ bool carbon::Window::isOpen() {
 void carbon::Window::pollEvents() {
 	glfwPollEvents();
 }
-
-
-const char *carbon::Window::getTitle() {
-	return m_title;
-}
-
-
-const int carbon::Window::getWidth() {
-	return m_width;
-}
-
-
-const int carbon::Window::getHeight() {
-	return m_height;
-}
-
-
-const carbon::Instance& carbon::Window::getInstance() {
-	return m_instance;
-}
-
-
-const carbon::utils::version& carbon::Window::getVersion() {
-	return m_version;
-}
-

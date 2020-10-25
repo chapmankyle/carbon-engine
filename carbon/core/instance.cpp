@@ -4,7 +4,7 @@ const std::vector<const char*> carbon::Instance::getRequiredInstanceExtensions()
 	uint32_t numExtensions{ 0 };
 
 	// get required extensions and convert to std::vector<string>
-	const char** reqExts{ glfwGetRequiredInstanceExtensions(&numExtensions) };
+	const char** reqExts = glfwGetRequiredInstanceExtensions(&numExtensions);
 	std::vector<const char *> required(reqExts, reqExts + numExtensions);
 
 	// additional extension if validation layers are included
@@ -17,7 +17,7 @@ const std::vector<const char*> carbon::Instance::getRequiredInstanceExtensions()
 
 
 bool carbon::Instance::hasValidationLayerSupport() {
-	const std::vector<VkLayerProperties> supportedLayers{ carbon::utils::getSupportedValidationLayers() };
+	const std::vector<VkLayerProperties> supportedLayers = carbon::utils::getSupportedValidationLayers();
 
 #ifndef CARBON_DISABLE_DEBUG
 	std::cout << "[INFO] " << supportedLayers.size() << " supported layers.\n";
@@ -28,7 +28,7 @@ bool carbon::Instance::hasValidationLayerSupport() {
 
 
 bool carbon::Instance::hasExtensionSupport() {
-	const std::vector<VkExtensionProperties> supportedExtensions{ carbon::utils::getSupportedExtensions() };
+	const std::vector<VkExtensionProperties> supportedExtensions = carbon::utils::getSupportedExtensions();
 
 #ifndef CARBON_DISABLE_DEBUG
 	std::cout << "[INFO] " << supportedExtensions.size() << " supported extensions.\n";
@@ -154,24 +154,4 @@ void carbon::Instance::destroy() {
 	// destroy instance
 	vkDestroyInstance(m_handle, nullptr);
 	m_handle = VK_NULL_HANDLE;
-}
-
-
-const VkInstance& carbon::Instance::getHandle() const {
-	return m_handle;
-}
-
-
-bool carbon::Instance::isValidationEnabled() const {
-	return m_validation_enabled;
-}
-
-
-const std::vector<const char *> carbon::Instance::getEnabledValidationLayers() const {
-	return m_enabled_validation_layers;
-}
-
-
-const std::vector<const char*> carbon::Instance::getEnabledExtensions() const {
-	return m_enabled_extensions;
 }
