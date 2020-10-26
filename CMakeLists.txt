@@ -3,7 +3,7 @@ set( CMAKE_SUPPRESS_REGENERATION ON )
 set( CMAKE_INSTALL_MESSAGE LAZY )
 
 # set project name and root dir
-project( "Carbon Engine" )
+project( "CarbonEngine" )
 
 set( CARBON_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}" )
 
