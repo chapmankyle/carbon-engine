@@ -162,9 +162,20 @@
     <ClInclude Include="carbon\display\surface.hpp" />
     <ClInclude Include="carbon\display\swapchain.hpp" />
     <ClInclude Include="carbon\display\window.hpp" />
+    <ClInclude Include="carbon\engine\config.hpp" />
+    <ClInclude Include="carbon\engine\engine.hpp" />
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build-debug.bat" />
+    <None Include="build-debug.sh" />
+    <None Include="build-release.bat" />
+    <None Include="build-release.sh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

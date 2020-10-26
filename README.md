@@ -1,7 +1,9 @@
 <h1 align="center">Carbon Engine</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/chapmankyle/carbon-engine.svg?" alt="license: GPL-3.0"></img>
+  <img src="https://travis-ci.com/chapmankyle/carbon-engine.svg?branch=master" alt="Travis CI"></img>
+  <img src="https://ci.appveyor.com/api/projects/status/ja6b1h34y79t2hqk?svg=true" alt="Appveyor CI"></img>
+  <img src="https://img.shields.io/github/license/chapmankyle/carbon-engine.svg?" alt="License: GPL-3.0"></img>
   <img src="https://img.shields.io/github/v/release/chapmankyle/carbon-engine.svg?" alt="Release"></img>
 </p>
 
@@ -29,12 +31,12 @@ the following:
 git pull
 
 # update submodules
-git submodule update --recursive
+git submodule update --init --recursive
 ```
 
-# Dependencies
+# Dependencies :gift:
 
-The following dependencies are included as submodules in the `deps` folder:
+The following dependencies are included as submodules in the `deps` directory:
 - :tv: [GLFW](https://www.glfw.org/) - Used for handling window interaction
 
 # Contributing :tada:

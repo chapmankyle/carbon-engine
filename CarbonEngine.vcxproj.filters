@@ -86,5 +86,24 @@
     <ClInclude Include="carbon\pipeline\render_pass.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="carbon\engine\engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carbon\engine\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build-debug.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="build-debug.sh" />
+    <None Include="build-release.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="build-release.sh" />
   </ItemGroup>
 </Project>

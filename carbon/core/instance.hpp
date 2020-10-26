@@ -6,6 +6,8 @@
 #include "carbon/common/debug.hpp"
 #include "carbon/common/utils.hpp"
 
+#include <string>
+
 namespace carbon {
 
 	/**
@@ -105,7 +107,7 @@ namespace carbon {
 		 * @param appName The name of the application.
 		 * @param version Optional. The version of your application.
 		 */
-		Instance(const char *appName, const carbon::utils::version &version = { 1, 0, 0 });
+		Instance(const std::string appName, const carbon::utils::version &version = { 1, 0, 0 });
 
 		/**
 		 * @brief Default constructor for initializing a Vulkan instance.

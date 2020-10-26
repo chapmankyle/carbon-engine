@@ -14,8 +14,8 @@ int main() {
 	carbon::Window win = carbon::Window(title, 1280, 720, ver);
 
 	// main loop when window is open
-	while (win.isOpen()) {
-		win.pollEvents();
+	while (!win.shouldClose()) {
+		win.update();
 	}
 
 	// destroy window

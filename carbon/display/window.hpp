@@ -5,9 +5,24 @@
 
 #include "carbon/setup.hpp"
 #include "carbon/common/utils.hpp"
-#include "carbon/core/instance.hpp"
+
+#include <string>
 
 namespace carbon {
+
+	// forward-declare classes that would result in circular dependency
+	class Instance;
+	class Surface;
+
+	/**
+	 * @brief Mode for the window to be presented.
+	 */
+	enum class WindowMode {
+		Fullscreen,
+		Windowed,
+		BorderlessWindowed,
+		SIZE
+	};
 
 	/**
 	 * @brief Class to allow on-screen rendering using GLFW.
@@ -17,45 +32,56 @@ namespace carbon {
 	private:
 
 		/**
-		 * @brief Title to use when no title is supplied.
-		 */
-		inline static constexpr char *m_default_title{ "Game" };
-
-		/**
-		 * @brief Width to use when no width is supplied.
-		 */
-		inline static constexpr int m_default_width{ 800 };
-
-		/**
-		 * @brief Height to use when no height is supplied.
-		 */
-		inline static constexpr int m_default_height{ 600 };
-
-		/**
 		 * @brief Title of the window.
 		 */
-		const char *m_title;
+		std::string m_title = "Game";
+
+		/**
+		 * @brief Initial width of the window, upon creation.
+		 */
+		int m_initial_width = 800;
+
+		/**
+		 * @brief Initial height of the window, upon creation.
+		 */
+		int m_initial_height = 600;
 
 		/**
 		 * @brief Width of the window.
 		 */
-		int m_width;
+		int m_width = 800;
 
 		/**
 		 * @brief Height of the window.
 		 */
-		int m_height;
+		int m_height = 600;
 
 		/**
 		 * @brief Keep track of when the framebuffer has been
 		 * resized (when resizing or minimizing window).
 		 */
-		bool framebufferResized{ false };
+		bool m_resized = false;
+
+		/**
+		 * @brief Keep track of if the window is minimized or not.
+		 */
+		bool m_minimized = false;
+
+		/**
+		 * @brief Keep track of whether or not to show the mouse in
+		 * the window.
+		 */
+		bool m_mouse_visible = true;
+
+		/**
+		 * @brief Keep track of current window mode.
+		 */
+		WindowMode m_mode = WindowMode::Windowed;
 
 		/**
 		 * @brief Version number.
 		 */
-		carbon::utils::version m_version;
+		carbon::utils::version m_version = { 1, 0, 0 };
 
 		/**
 		 * @brief Handle to the GLFW window object.
@@ -63,9 +89,9 @@ namespace carbon {
 		GLFWwindow *m_window;
 
 		/**
-		 * @brief Handle to the instance from which to render.
+		 * @brief Monitor to use for fullscreen mode.
 		 */
-		Instance m_instance;
+		GLFWmonitor *m_monitor;
 
 		/**
 		 * @brief Creates the GLFW window.
@@ -96,7 +122,7 @@ namespace carbon {
 		 * @brief Initializes a GLFW window with default title, width
 		 * and height.
 		 */
-		Window();
+		explicit Window();
 
 		/**
 		 * @brief Destructor for the GLFW window.
@@ -112,12 +138,38 @@ namespace carbon {
 		 * @brief Checks if the window has not been closed.
 		 * @return `true` if the window should be open, `false` otherwise.
 		 */
-		bool isOpen();
+		bool shouldClose();
 
 		/**
 		 * @brief Polls the event queue to find if anything happened.
 		 */
-		void pollEvents();
+		void update();
+
+		/**
+		 * @brief Waits until the window has is not minimized.
+		 */
+		void waitForFocus();
+
+		/**
+		 * @brief Sets the mouse to be visible or not.
+		 * @param visible `true` if the mouse should be shown,
+		 * otherwise `false` to hide mouse.
+		 */
+		void setMouseVisible(bool visible);
+
+		/**
+		 * @brief Sets the mode of the window.
+		 * @param mode The new mode to set the window to.
+		 */
+		void setWindowMode(WindowMode mode);
+
+		/**
+		 * @brief Creates a surface for the window.
+		 * @param instance The instance to create the surface from.
+		 * @param surface The surface that is returned.
+		 * @returns The created surface.
+		 */
+		class Surface createSurface(class Instance *instance);
 
 		/**
 		 * @returns The handle on the underlying GLFWwindow object.
@@ -129,7 +181,7 @@ namespace carbon {
 		/**
 		 * @returns The title of the window.
 		 */
-		const char *getTitle() const {
+		const std::string getTitle() const {
 			return m_title;
 		}
 
@@ -148,10 +200,31 @@ namespace carbon {
 		}
 
 		/**
-		 * @returns The instance that is by the current window.
+		 * @returns The aspect ratio of the window.
 		 */
-		const Instance& getInstance() const {
-			return m_instance;
+		const float getAspectRatio() const {
+			return static_cast<float>(m_width) / static_cast<float>(m_height);
+		}
+
+		/**
+		 * @returns `true` if the window is minimized, `false` otherwise.
+		 */
+		const bool isMinimized() const {
+			return m_minimized;
+		}
+
+		/**
+		 * @returns `true` if the mouse is visible, `false` otherwise.
+		 */
+		const bool isMouseVisible() const {
+			return m_mouse_visible;
+		}
+
+		/**
+		 * @returns The current mode of the window.
+		 */
+		const WindowMode getWindowMode() const {
+			return m_mode;
 		}
 
 		/**
