@@ -86,6 +86,12 @@
     <ClInclude Include="carbon\pipeline\render_pass.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="carbon\engine\engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carbon\engine\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
