@@ -1,0 +1,43 @@
+version: '{build}'
+max_jobs: 4
+
+image:
+- Visual Studio 2019
+- Visual Studio 2017
+
+configuration:
+- Debug
+- Release
+
+# test with debug and release versions
+environment:
+  matrix:
+  - DIS_RELEASE: 0
+  - DIS_RELEASE: 1
+
+cache:
+  - VulkanSDK.exe
+
+# target only 64-bit for now
+platform:
+- x64
+
+# setup Vulkan and build project
+install:
+  - echo Downloading Vulkan ...
+  - echo Platform [%PLATFORM%]  |  Configuration [%CONFIGURATION%]
+  - if not exist VulkanSDK.exe curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.2.141.2/windows/VulkanSDK-1.2.141.2-Installer.exe?Human=true
+  - VulkanSDK.exe /S
+  - cmake --version
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - git submodule update --init --recursive
+  - mkdir -p build && cd build
+  - cmake .. -A %PLATFORM% -DENABLE_MULTICORE=OFF
+
+before_build:
+  - ps: $env:VULKAN_SDK="C:/VulkanSDK/1.2.141.2"
+
+build:
+  parallel: true
+  project: CarbonEngine.sln
+  verbosity: normal
