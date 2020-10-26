@@ -1,7 +1,7 @@
 <h1 align="center">Carbon Engine</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/chapmankyle/carbon-engine.svg?" alt="license: GPL-3.0"></img>
+  <img src="https://img.shields.io/github/license/chapmankyle/carbon-engine.svg?" alt="License: GPL-3.0"></img>
   <img src="https://img.shields.io/github/v/release/chapmankyle/carbon-engine.svg?" alt="Release"></img>
 </p>
 
@@ -32,9 +32,9 @@ git pull
 git submodule update --recursive
 ```
 
-# Dependencies
+# Dependencies :gift:
 
-The following dependencies are included as submodules in the `deps` folder:
+The following dependencies are included as submodules in the `deps` directory:
 - :tv: [GLFW](https://www.glfw.org/) - Used for handling window interaction
 
 # Contributing :tada:
