@@ -29,7 +29,7 @@ the following:
 git pull
 
 # update submodules
-git submodule update --recursive
+git submodule update --init --recursive
 ```
 
 # Dependencies :gift:
