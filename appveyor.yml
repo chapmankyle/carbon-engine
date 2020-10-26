@@ -25,7 +25,7 @@ platform:
 # setup Vulkan and build project
 install:
   - echo Downloading Vulkan ...
-  - echo Platform [%PLATFORM%]  |  Configuration [%CONFIGURATION%]
+  - echo -e "Platform [%PLATFORM%]  |  Configuration [%CONFIGURATION%]"
   - if not exist VulkanSDK.exe curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.2.141.2/windows/VulkanSDK-1.2.141.2-Installer.exe?Human=true
   - VulkanSDK.exe /S
   - cmake --version
@@ -39,5 +39,5 @@ before_build:
 
 build:
   parallel: true
-  project: CarbonEngine.sln
+  project: build/CarbonEngine.sln
   verbosity: normal
