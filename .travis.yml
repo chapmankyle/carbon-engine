@@ -70,7 +70,6 @@ jobs:
 # build from CMake
 script:
 - git submodule update --init --recursive
-- mkdir build
-- cmake . -B build -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DIS_RELEASE=$SET_RELEASE
-- cd build
+- mkdir -p build && cd build
+- cmake .. -GNinja -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DIS_RELEASE=$SET_RELEASE
 - ninja
