@@ -166,6 +166,15 @@
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build-debug.bat" />
+    <None Include="build-debug.sh" />
+    <None Include="build-release.bat" />
+    <None Include="build-release.sh" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
