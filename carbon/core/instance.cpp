@@ -100,7 +100,7 @@ void carbon::Instance::fillInstanceCreateInfo(
 }
 
 
-carbon::Instance::Instance(const char *appName, const carbon::utils::version &version) {
+carbon::Instance::Instance(const std::string appName, const carbon::utils::version &version) {
 	// set status of validation layers
 	m_validation_enabled = static_cast<bool>(CARBON_USE_VALIDATION_LAYERS);
 
@@ -108,7 +108,7 @@ carbon::Instance::Instance(const char *appName, const carbon::utils::version &ve
 
 	// inform driver of how best to optimize application
 	VkApplicationInfo appInfo;
-	fillApplicationInfo(appInfo, appName, version);
+	fillApplicationInfo(appInfo, appName.c_str(), version);
 
 	// tells driver which extensions and validation layers to use
 	VkInstanceCreateInfo instanceInfo;
