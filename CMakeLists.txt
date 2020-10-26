@@ -31,3 +31,33 @@ message( STATUS "--------------------------" )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
+
+# add generated files to directory
+set( GENERATED_INC_DIR ${CMAKE_BINARY_DIR}/gen )
+message( STATUS "Generated directory : ${GENERATED_INC_DIR}" )
+
+# add CMake directory to module path
+list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMake" )
+message( STATUS "CMake module path : ${CMAKE_MODULE_PATH}" )
+
+# Visual Studio
+if( MSVC )
+	add_definitions( -D_CRT_SECURE_NO_WARNINGS )
+
+	if( ENABLE_MULTICORE )
+		set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP" )
+		set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP" )
+	endif()
+
+# GCC
+elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+	add_definitions( -fPIC )
+
+# Clang
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+	add_definitions( -fPIC )
+endif()
+
+# include submodules
+add_subdirectory( deps/glfw )
+include_directories( deps/glfw/include )
