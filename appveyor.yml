@@ -6,13 +6,11 @@ image:
 - Visual Studio 2017
 
 configuration:
-- Debug
 - Release
 
-# test with debug and release versions
+# test with only release version
 environment:
   matrix:
-  - DIS_RELEASE: 0
   - DIS_RELEASE: 1
 
 cache:
@@ -25,7 +23,7 @@ platform:
 # setup Vulkan and build project
 install:
   - echo Downloading Vulkan ...
-  - echo -e "Platform [%PLATFORM%]  |  Configuration [%CONFIGURATION%]"
+  - echo Running on %PLATFORM% as %CONFIGURATION%
   - if not exist VulkanSDK.exe curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.2.141.2/windows/VulkanSDK-1.2.141.2-Installer.exe?Human=true
   - VulkanSDK.exe /S
   - cmake --version
