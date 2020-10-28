@@ -11,6 +11,7 @@
 #include <GLFW/glfw3.h>
 
 #include "platform.hpp"
+#include "types.hpp"
 
 // ----------------------
 // -- USEFUL CONSTANTS --
