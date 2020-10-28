@@ -28,16 +28,16 @@ namespace carbon {
 		 * logical device.
 		 */
 		struct QueueFamilyIndices {
-			uint32_t graphicsFamily{ UINT32_MAX };
-			uint32_t presentFamily{ UINT32_MAX };
-			uint32_t computeFamily{ UINT32_MAX };
-			uint32_t transferFamily{ UINT32_MAX };
+			u32 graphicsFamily{ u32_max };
+			u32 presentFamily{ u32_max };
+			u32 computeFamily{ u32_max };
+			u32 transferFamily{ u32_max };
 
 			/**
 			 * @returns `true` if all graphics families are present, `false` otherwise.
 			 */
 			bool hasFamilies() {
-				return graphicsFamily != UINT32_MAX && presentFamily != UINT32_MAX && computeFamily != UINT32_MAX && transferFamily != UINT32_MAX;
+				return graphicsFamily != u32_max && presentFamily != u32_max && computeFamily != u32_max && transferFamily != u32_max;
 			}
 		};
 
@@ -135,28 +135,28 @@ namespace carbon {
 		/**
 		 * @returns The graphics family.
 		 */
-		const uint32_t getGraphicsFamily() const {
+		const u32 getGraphicsFamily() const {
 			return m_queue_family_indices.graphicsFamily;
 		}
 
 		/**
 		 * @returns The presentation family.
 		 */
-		const uint32_t getPresentFamily() const {
+		const u32 getPresentFamily() const {
 			return m_queue_family_indices.presentFamily;
 		}
 
 		/**
 		 * @returns The compute family.
 		 */
-		const uint32_t getComputeFamily() const {
+		const u32 getComputeFamily() const {
 			return m_queue_family_indices.computeFamily;
 		}
 
 		/**
 		 * @returns The transfer family.
 		 */
-		const uint32_t getTransferFamily() const {
+		const u32 getTransferFamily() const {
 			return m_queue_family_indices.transferFamily;
 		}
 
