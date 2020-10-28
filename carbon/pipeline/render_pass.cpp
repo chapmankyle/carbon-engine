@@ -59,21 +59,18 @@ void carbon::RenderPass::setupSubpassDescriptions() {
 void carbon::RenderPass::setupSubpassDependencies() {
 	m_subpass_dependencies.clear();
 
-	// specify dependencies for each subpass
-	for (int i{ 0 }; i < m_subpass_descriptions.size(); i++) {
-		VkSubpassDependency dep{};
-		dep.srcSubpass = VK_SUBPASS_EXTERNAL;
-		dep.dstSubpass = 0;
+	VkSubpassDependency dep{};
+	dep.srcSubpass = VK_SUBPASS_EXTERNAL;
+	dep.dstSubpass = 0;
 
-		dep.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-		dep.srcAccessMask = 0;
+	dep.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+	dep.srcAccessMask = 0;
 
-		dep.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-		dep.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+	dep.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+	dep.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
 
-		// add to vector
-		m_subpass_dependencies.push_back(dep);
-	}
+	// add to vector
+	m_subpass_dependencies.push_back(dep);
 }
 
 
