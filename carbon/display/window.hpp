@@ -21,7 +21,32 @@ namespace carbon {
 		Fullscreen,
 		Windowed,
 		BorderlessWindowed,
-		SIZE
+
+		NONE
+	};
+
+	/**
+	 * @brief Names associated with the window modes.
+	 */
+	static const char* m_window_mode_names[] = {
+		"Fullscreen",
+		"Windowed",
+		"Borderless Windowed",
+
+		"NONE"
+	};
+
+	static_assert(ARRAY_SIZE(m_window_mode_names) == static_cast<u32>(WindowMode::NONE) + 1, "Number of window modes must match number of names for the window modes.");
+
+	/**
+	 * @brief Mode for when the cursor is inside the window.
+	 */
+	enum class CursorMode {
+		Normal,
+		Hidden,
+		Disabled,
+
+		NONE
 	};
 
 	/**
@@ -29,59 +54,58 @@ namespace carbon {
 	 */
 	class Window {
 
-	private:
+		private:
 
 		/**
 		 * @brief Title of the window.
 		 */
-		std::string m_title = "Game";
+		std::string m_title{ "Game" };
 
 		/**
 		 * @brief Initial width of the window, upon creation.
 		 */
-		int m_initial_width = 800;
+		i32 m_initial_width{ 800 };
 
 		/**
 		 * @brief Initial height of the window, upon creation.
 		 */
-		int m_initial_height = 600;
+		i32 m_initial_height{ 600 };
 
 		/**
 		 * @brief Width of the window.
 		 */
-		int m_width = 800;
+		i32 m_width{ m_initial_width };
 
 		/**
 		 * @brief Height of the window.
 		 */
-		int m_height = 600;
+		i32 m_height{ m_initial_height };
 
 		/**
 		 * @brief Keep track of when the framebuffer has been
 		 * resized (when resizing or minimizing window).
 		 */
-		bool m_resized = false;
+		bool m_resized{ false };
 
 		/**
 		 * @brief Keep track of if the window is minimized or not.
 		 */
-		bool m_minimized = false;
-
-		/**
-		 * @brief Keep track of whether or not to show the mouse in
-		 * the window.
-		 */
-		bool m_mouse_visible = true;
+		bool m_minimized{ false };
 
 		/**
 		 * @brief Keep track of current window mode.
 		 */
-		WindowMode m_mode = WindowMode::Windowed;
+		WindowMode m_window_mode{ WindowMode::Windowed };
+
+		/**
+		 * @brief Keep track of the current cursor mode.
+		 */
+		CursorMode m_cursor_mode{ CursorMode::Normal };
 
 		/**
 		 * @brief Version number.
 		 */
-		carbon::utils::version m_version = { 1, 0, 0 };
+		utils::version m_version = { 1, 0, 0 };
 
 		/**
 		 * @brief Handle to the GLFW window object.
@@ -105,7 +129,7 @@ namespace carbon {
 		 * @param width The new width of the framebuffer.
 		 * @param height The new height of the framebuffer.
 		 */
-		static void framebufferResizeCallback(GLFWwindow *window, int width, int height);
+		static void framebufferResizeCallback(GLFWwindow *window, i32 width, i32 height);
 
 	public:
 
@@ -116,7 +140,7 @@ namespace carbon {
 		 * @param height The height of the window.
 		 * @param version Optional. The version of the application.
 		 */
-		Window(const char *title, const int width, const int height, carbon::utils::version version = { 1, 0, 0 });
+		Window(const char *title, const i32 width, const i32 height, utils::version version = { 1, 0, 0 });
 
 		/**
 		 * @brief Initializes a GLFW window with default title, width
@@ -151,17 +175,16 @@ namespace carbon {
 		void waitForFocus();
 
 		/**
-		 * @brief Sets the mouse to be visible or not.
-		 * @param visible `true` if the mouse should be shown,
-		 * otherwise `false` to hide mouse.
-		 */
-		void setMouseVisible(bool visible);
-
-		/**
 		 * @brief Sets the mode of the window.
 		 * @param mode The new mode to set the window to.
 		 */
 		void setWindowMode(WindowMode mode);
+
+		/**
+		 * @brief Sets the cursor mode when inside the window.
+		 * @param mode The new mode to set the cursor to.
+		 */
+		void setCursorMode(CursorMode mode);
 
 		/**
 		 * @brief Creates a surface for the window.
@@ -188,14 +211,14 @@ namespace carbon {
 		/**
 		 * @returns The width of the window.
 		 */
-		const int getWidth() const {
+		const i32 getWidth() const {
 			return m_width;
 		}
 
 		/**
 		 * @returns The height of the window.
 		 */
-		const int getHeight() const {
+		const i32 getHeight() const {
 			return m_height;
 		}
 
@@ -214,23 +237,42 @@ namespace carbon {
 		}
 
 		/**
-		 * @returns `true` if the mouse is visible, `false` otherwise.
-		 */
-		const bool isMouseVisible() const {
-			return m_mouse_visible;
-		}
-
-		/**
 		 * @returns The current mode of the window.
 		 */
 		const WindowMode getWindowMode() const {
-			return m_mode;
+			return m_window_mode;
+		}
+
+		/**
+		 * @brief Gets the name of the given window mode as a string.
+		 * @param mode The window mode to get as a string.
+		 * @returns The window mode string.
+		 */
+		const char* getWindowModeName(WindowMode mode) const {
+			i32 idx = static_cast<i32>(mode);
+			assert(idx < static_cast<i32>(WindowMode::NONE) + 1 && "[ERROR] Invalid window mode!");
+
+			return m_window_mode_names[idx];
+		}
+
+		/**
+		 * @returns The current mode of the cursor inside the window.
+		 */
+		const CursorMode getCursorMode() const {
+			return m_cursor_mode;
+		}
+
+		/**
+		 * @returns `true` if the mouse is visible, `false` otherwise.
+		 */
+		const bool isMouseVisible() const {
+			return m_cursor_mode == CursorMode::Normal;
 		}
 
 		/**
 		 * @returns The version of the application.
 		 */
-		const carbon::utils::version& getVersion() const {
+		const utils::version& getVersion() const {
 			return m_version;
 		}
 
