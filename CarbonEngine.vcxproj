@@ -167,6 +167,7 @@
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
+    <ClInclude Include="carbon\types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
