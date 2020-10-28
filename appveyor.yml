@@ -1,17 +1,17 @@
 version: '{build}'
 max_jobs: 4
 
+branches:
+  only:
+    - master
+    - release
+
 image:
 - Visual Studio 2019
 - Visual Studio 2017
 
 configuration:
 - Release
-
-# test with only release version
-environment:
-  matrix:
-  - DIS_RELEASE: 1
 
 cache:
   - VulkanSDK.exe
@@ -30,7 +30,7 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
   - git submodule update --init --recursive
   - mkdir -p build && cd build
-  - cmake .. -A %PLATFORM% -DENABLE_MULTICORE=OFF
+  - cmake .. -A %PLATFORM% -DENABLE_MULTICORE=OFF -DIS_RELEASE=ON
 
 before_build:
   - ps: $env:VULKAN_SDK="C:/VulkanSDK/1.2.141.2"
