@@ -39,6 +39,34 @@ git submodule update --init --recursive
 The following dependencies are included as submodules in the `deps` directory:
 - :tv: [GLFW](https://www.glfw.org/) - Used for handling window interaction
 
+# Modules :card_index_dividers:
+
+#### carbon [common](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/common)
+
+[![debug](https://img.shields.io/badge/carbon-debug-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/debug.hpp)
+[![template-types](https://img.shields.io/badge/carbon-template_types-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/template_types.hpp)
+[![utils](https://img.shields.io/badge/carbon-utils-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/utils.hpp)
+
+#### carbon [core](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/core)
+
+[![instance](https://img.shields.io/badge/carbon-instance-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/instance.hpp)
+[![logical-device](https://img.shields.io/badge/carbon-logical_device-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/logical_device.hpp)
+[![physical-device](https://img.shields.io/badge/carbon-physical_device-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/physical_device.hpp)
+
+#### carbon [display](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/display)
+
+[![surface](https://img.shields.io/badge/carbon-surface-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/surface.hpp)
+[![swapchain](https://img.shields.io/badge/carbon-swapchain-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/swapchain.hpp)
+[![window](https://img.shields.io/badge/carbon-window-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/window.hpp)
+
+#### carbon [engine](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/engine)
+
+[![config](https://img.shields.io/badge/carbon-config-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/config.hpp)
+
+#### carbon [pipeline](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/pipeline)
+
+[![render-pass](https://img.shields.io/badge/carbon-render_pass-red.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/pipeline/render_pass.hpp)
+
 # Contributing :tada:
 This engine is in a very early alpha stage, so any criticism or ideas are welcome! Simply open a pull request
 with details of the changes and I'll review it!
