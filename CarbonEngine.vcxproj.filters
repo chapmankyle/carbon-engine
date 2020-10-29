@@ -95,7 +95,7 @@
     <ClInclude Include="carbon\types.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="carbon\input\input_types.hpp">
+    <ClInclude Include="carbon\display\input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
