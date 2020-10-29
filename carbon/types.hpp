@@ -18,15 +18,21 @@ namespace carbon {
 	//   |____/ \__,_|___/\___|
 	//
 
-	using u8 = uint8_t;
-	using u16 = uint16_t;
-	using u32 = uint32_t;
-	using u64 = uint64_t;
+	using u8 = std::uint8_t;
+	using u16 = std::uint16_t;
+	using u32 = std::uint32_t;
+	using u64 = std::uint64_t;
 
-	using i8 = int8_t;
-	using i16 = int16_t;
-	using i32 = int32_t;
-	using i64 = int64_t;
+	using i8 = std::int8_t;
+	using i16 = std::int16_t;
+	using i32 = std::int32_t;
+	using i64 = std::int64_t;
+
+	using uc8 = std::uint_fast8_t;
+	using c8 = std::int_fast8_t;
+
+	using f32 = float;
+	using f64 = double;
 
 	//    _____
 	//   |  __ \
@@ -61,6 +67,77 @@ namespace carbon {
 
 	inline static constexpr auto i64_min = std::numeric_limits<i64>::min();
 	inline static constexpr auto i64_max = std::numeric_limits<i64>::max();
+
+	//     _____                              _
+	//    / ____|                            (_)
+	//   | |     ___  _ ____   _____ _ __ ___ _  ___  _ __
+	//   | |    / _ \| '_ \ \ / / _ \ '__/ __| |/ _ \| '_ \
+	//   | |___| (_) | | | \ V /  __/ |  \__ \ | (_) | | | |
+	//    \_____\___/|_| |_|\_/ \___|_|  |___/_|\___/|_| |_|
+	//
+
+	template<typename T>
+	static inline u8 to_u8(T value) {
+		return static_cast<u8>(value);
+	}
+
+	template<typename T>
+	static inline u16 to_u16(T value) {
+		return static_cast<u16>(value);
+	}
+
+	template<typename T>
+	static inline u32 to_u32(T value) {
+		return static_cast<u32>(value);
+	}
+
+	template<typename T>
+	static inline u64 to_u64(T value) {
+		return static_cast<u64>(value);
+	}
+
+
+	template<typename T>
+	static inline i8 to_i8(T value) {
+		return static_cast<i8>(value);
+	}
+
+	template<typename T>
+	static inline i16 to_i16(T value) {
+		return static_cast<i16>(value);
+	}
+
+	template<typename T>
+	static inline i32 to_i32(T value) {
+		return static_cast<i32>(value);
+	}
+
+	template<typename T>
+	static inline i64 to_i64(T value) {
+		return static_cast<i64>(value);
+	}
+
+
+	template<typename T>
+	static inline uc8 to_uc8(T value) {
+		return static_cast<uc8>(value);
+	}
+
+	template<typename T>
+	static inline c8 to_c8(T value) {
+		return static_cast<c8>(value);
+	}
+
+
+	template<typename T>
+	static inline f32 to_f32(T value) {
+		return static_cast<f32>(value);
+	}
+
+	template<typename T>
+	static inline f64 to_f64(T value) {
+		return static_cast<f64>(value);
+	}
 
 }
 
