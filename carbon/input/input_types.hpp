@@ -203,6 +203,85 @@ namespace carbon {
 			Last = Menu
 		};
 
+		/**
+		 * @brief Any event that occurs involving keys.
+		 */
+		struct event {
+
+			/**
+			 * @brief The key that has been activated.
+			 */
+			carbon::key::Code key{ carbon::key::Code::Unknown };
+
+			/**
+			 * @brief The state of the key.
+			 */
+			carbon::key::State state{ carbon::key::State::NONE };
+
+			/**
+			 * @brief The modifier, if any, applied to the key.
+			 */
+			carbon::key::Modifier modifier{ carbon::key::Modifier::NONE };
+
+			/**
+			 * @returns `true` if any key is pressed, `false` otherwise.
+			 */
+			bool anyKeyPressed() const {
+				return state == carbon::key::State::Press;
+			}
+
+			/**
+			 * @returns `true` if any key is released, `false` otherwise.
+			 */
+			bool anyKeyReleased() const {
+				return state == carbon::key::State::Release;
+			}
+
+			/**
+			 * @returns `true` if any key is repeated, `false` otherwise.
+			 */
+			bool anyKeyRepeated() const {
+				return state == carbon::key::State::Repeat;
+			}
+
+			/**
+			 * @brief Checks if a specific key was pressed.
+			 * @param k The key to check.
+			 * @returns `true` if the given key was pressed, `false` otherwise.
+			 */
+			bool isPressed(carbon::key::Code k) const {
+				return anyKeyPressed() && key == k;
+			}
+
+			/**
+			 * @brief Checks if a specific key was released.
+			 * @param k The key to check.
+			 * @returns `true` if the given key was released, `false` otherwise.
+			 */
+			bool isReleased(carbon::key::Code k) const {
+				return anyKeyReleased() && key == k;
+			}
+
+			/**
+			 * @brief Checks if a specific key was repeated.
+			 * @param k The key to check.
+			 * @returns `true` if the given key was repeated, `false` otherwise.
+			 */
+			bool isRepeated(carbon::key::Code k) const {
+				return anyKeyRepeated() && key == k;
+			}
+
+			/**
+			 * @brief Checks if a specific key and modifier combination was pressed.
+			 * @param k The key to check.
+			 * @param m The modifier to check.
+			 * @returns `true` if the given key and modifier combination was pressed, `false` otherwise.
+			 */
+			bool isPressed(carbon::key::Code k, carbon::key::Modifier m) const {
+				return isPressed(k) && modifier == m;
+			}
+		};
+
 	} // namespace key
 
 } // namespace carbon
