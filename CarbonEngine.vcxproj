@@ -159,6 +159,7 @@
     <ClInclude Include="carbon\core\instance.hpp" />
     <ClInclude Include="carbon\core\logical_device.hpp" />
     <ClInclude Include="carbon\core\physical_device.hpp" />
+    <ClInclude Include="carbon\core\time.hpp" />
     <ClInclude Include="carbon\display\surface.hpp" />
     <ClInclude Include="carbon\display\swapchain.hpp" />
     <ClInclude Include="carbon\display\window.hpp" />

@@ -98,6 +98,9 @@
     <ClInclude Include="carbon\display\input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="carbon\core\time.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
