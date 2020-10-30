@@ -1,3 +1,7 @@
+// file      : carbon/carbon.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef CARBON_HPP
@@ -12,6 +16,7 @@
 #include "core/instance.hpp"
 #include "core/logical_device.hpp"
 #include "core/physical_device.hpp"
+#include "core/time.hpp"
 
 #include "display/surface.hpp"
 #include "display/swapchain.hpp"
