@@ -42,8 +42,9 @@ namespace carbon {
 
 		/**
 		 * @brief Populates the debug messenger create info struct.
+		 * @param createInfo The struct to fill.
 		 */
-		void fillMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
+		void fillMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT *createInfo);
 
 		/**
 		 * @brief Creates a debug messenger and attaches it to an instance.
