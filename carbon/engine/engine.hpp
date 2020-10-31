@@ -110,9 +110,27 @@ namespace carbon {
 		void update();
 
 		/**
+		 * @returns The window associated with the engine.
+		 */
+		const Window& getWindow() const {
+			return *m_window;
+		}
+
+		/**
 		 * @returns The instance associated with the engine.
 		 */
 		const class Instance& getInstance() const;
+
+		/**
+		 * @returns The physical device associated with the engine.
+		 */
+		const class PhysicalDevice& getPhysicalDevice() const;
+
+		/**
+		 * @returns The logical device used to interact with the physical
+		 * device in the engine.
+		 */
+		const class LogicalDevice& getLogicalDevice() const;
 
 	};
 

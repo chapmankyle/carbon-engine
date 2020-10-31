@@ -65,4 +65,14 @@ namespace carbon {
 		return *m_instance;
 	}
 
+
+	const PhysicalDevice& Engine::getPhysicalDevice() const {
+		return *m_physical_device;
+	}
+
+
+	const LogicalDevice& Engine::getLogicalDevice() const {
+		return *m_logical_device;
+	}
+
 } // namespace carbon
