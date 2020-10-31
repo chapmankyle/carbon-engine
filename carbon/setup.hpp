@@ -1,3 +1,7 @@
+// file      : carbon/setup.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef SETUP_HPP

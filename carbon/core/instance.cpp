@@ -1,3 +1,7 @@
+// file      : carbon/core/instance.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "instance.hpp"
 
 namespace carbon {

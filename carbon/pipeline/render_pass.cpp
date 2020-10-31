@@ -1,3 +1,7 @@
+// file      : carbon/pipeline/render_pass.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "render_pass.hpp"
 
 #include "carbon/core/logical_device.hpp"

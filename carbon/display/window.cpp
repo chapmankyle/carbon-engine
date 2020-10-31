@@ -1,3 +1,7 @@
+// file      : carbon/display/window.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "window.hpp"
 
 #include "carbon/core/instance.hpp"

@@ -1,3 +1,7 @@
+// file      : carbon/common/debug.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "debug.hpp"
 
 namespace carbon {

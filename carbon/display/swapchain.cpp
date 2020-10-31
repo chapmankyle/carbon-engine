@@ -1,3 +1,7 @@
+// file      : carbon/display/swapchain.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "swapchain.hpp"
 
 #include "carbon/core/physical_device.hpp"

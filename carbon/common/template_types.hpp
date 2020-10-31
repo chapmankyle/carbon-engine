@@ -1,3 +1,7 @@
+// file      : carbon/common/template_types.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef COMMON_TEMPLATE_TYPES_HPP
@@ -28,5 +32,4 @@ namespace carbon {
 
 } // namespace carbon
 
-#endif // !COMMON_TEMPLATE_TYPES_HPP
-
+#endif // COMMON_TEMPLATE_TYPES_HPP

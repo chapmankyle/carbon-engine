@@ -1,3 +1,7 @@
+// file      : carbon/pipeline/render_pass.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef PIPELINE_RENDER_PASS_HPP

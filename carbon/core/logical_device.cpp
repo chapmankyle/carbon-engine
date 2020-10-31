@@ -1,3 +1,7 @@
+// file      : carbon/core/logical_device.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "logical_device.hpp"
 
 #include "instance.hpp"
