@@ -23,6 +23,8 @@
 #include "display/swapchain.hpp"
 #include "display/window.hpp"
 
+#include "engine/engine.hpp"
+
 #include "pipeline/render_pass.hpp"
 
 #endif // CARBON_HPP
