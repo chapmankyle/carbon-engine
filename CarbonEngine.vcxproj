@@ -148,6 +148,7 @@
     <ClCompile Include="carbon\display\surface.cpp" />
     <ClCompile Include="carbon\display\swapchain.cpp" />
     <ClCompile Include="carbon\display\window.cpp" />
+    <ClCompile Include="carbon\engine\engine.cpp" />
     <ClCompile Include="carbon\pipeline\render_pass.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>

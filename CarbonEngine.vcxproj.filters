@@ -45,6 +45,9 @@
     <ClCompile Include="carbon\pipeline\render_pass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="carbon\engine\engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="carbon\carbon.hpp">
