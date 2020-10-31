@@ -22,9 +22,9 @@ namespace carbon {
 		 * @brief Stores application version information.
 		 */
 		struct version {
-			u32 major{ 1 };
-			u32 minor{ 0 };
-			u32 patch{ 0 };
+			u32 major = 1;
+			u32 minor = 0;
+			u32 patch = 0;
 		};
 
 		/**
