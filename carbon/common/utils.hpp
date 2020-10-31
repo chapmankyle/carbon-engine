@@ -63,7 +63,7 @@ namespace carbon {
 		template<class T>
 		bool containsRequired(const std::vector<const char *> required, const std::vector<T> available) {
 			// ensure type is correct
-			assert(carbon::types::is_supported_properties_struct<T>::value);
+			assert(carbon::types::is_supported_properties_struct<T>::value && "[ERROR] `containsRequired` template parameter not supported.");
 			bool found;
 
 			for (const auto &req : required) {
