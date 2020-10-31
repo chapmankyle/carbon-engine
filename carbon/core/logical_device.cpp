@@ -97,16 +97,16 @@ namespace carbon {
 		VkDeviceCreateInfo createInfo;
 		initStruct(createInfo, VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO);
 
-		createInfo.queueCreateInfoCount = static_cast<u32>(createInfoQueues.size());
+		createInfo.queueCreateInfoCount = to_u32(createInfoQueues.size());
 		createInfo.pQueueCreateInfos = createInfoQueues.data();
 
 		createInfo.pEnabledFeatures = &deviceFeats;
 
-		createInfo.enabledExtensionCount = static_cast<u32>(deviceExtensions.size());
+		createInfo.enabledExtensionCount = to_u32(deviceExtensions.size());
 		createInfo.ppEnabledExtensionNames = deviceExtensions.data();
 
 		if (m_instance->isValidationEnabled()) {
-			createInfo.enabledLayerCount = static_cast<u32>(validationLayers.size());
+			createInfo.enabledLayerCount = to_u32(validationLayers.size());
 			createInfo.ppEnabledLayerNames = validationLayers.data();
 		} else {
 			createInfo.enabledLayerCount = 0;
