@@ -86,7 +86,7 @@ namespace carbon {
 
 		instInfo.pApplicationInfo = &appInfo;
 
-		instInfo.enabledExtensionCount = static_cast<u32>(m_req_instance_extensions.size());
+		instInfo.enabledExtensionCount = to_u32(m_req_instance_extensions.size());
 		instInfo.ppEnabledExtensionNames = m_req_instance_extensions.data();
 
 		// set enabled extensions
@@ -94,10 +94,10 @@ namespace carbon {
 
 		// enable validation layers if flag set
 		if (m_validation_enabled) {
-			instInfo.enabledLayerCount = static_cast<u32>(m_req_validation_layers.size());
+			instInfo.enabledLayerCount = to_u32(m_req_validation_layers.size());
 			instInfo.ppEnabledLayerNames = m_req_validation_layers.data();
 
-			debug::fillMessengerCreateInfo(m_debug_create_info);
+			debug::fillMessengerCreateInfo(&m_debug_create_info);
 			instInfo.pNext = reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT *>(&m_debug_create_info);
 		} else {
 			instInfo.enabledLayerCount = 0;
