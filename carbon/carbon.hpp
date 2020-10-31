@@ -18,6 +18,7 @@
 #include "core/physical_device.hpp"
 #include "core/time.hpp"
 
+#include "display/input.hpp"
 #include "display/surface.hpp"
 #include "display/swapchain.hpp"
 #include "display/window.hpp"
