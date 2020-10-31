@@ -55,6 +55,12 @@ namespace carbon {
 		 */
 		i32 compare(const char *str, const VkLayerProperties &propStruct);
 
+		/**
+		 * @brief Performs the greatest common divisor algorithm on the two inputs.
+		 * @returns The greatest common divisor between `x` and `y`.
+		 */
+		i32 gcd(i32 x, i32 y);
+
 		/*
 		 * @brief Checks if the required strings are available.
 		 * @tparam T The type of the Vulkan properties structure (e.g. VkExtensionProperties).

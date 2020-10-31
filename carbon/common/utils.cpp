@@ -45,6 +45,23 @@ namespace carbon {
 			return strcmp(str, propStruct.layerName);
 		}
 
+
+		i32 gcd(i32 x, i32 y) {
+			assert(x >= 0 && y >= 0 && "[ERROR] Negative numbers not allowed.");
+
+			while (y != 0) {
+				x %= y;
+
+				if (x == 0) {
+					return y;
+				}
+
+				y %= x;
+			}
+
+			return x;
+		}
+
 	} // namespace utils
 
 } // namespace carbon
