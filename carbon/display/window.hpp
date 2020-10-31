@@ -54,16 +54,51 @@ namespace carbon {
 	};
 
 	/**
+	 * @brief Properties for the Window class.
+	 */
+	struct WindowProps {
+		/**
+		 * @brief Title of the window.
+		 */
+		std::string title = "Application";
+
+		/**
+		 * @brief Width of the window.
+		 */
+		i32 width = 800;
+
+		/**
+		 * @brief Height of the window.
+		 */
+		i32 height = 600;
+
+		/**
+		 * @brief The x position of the window.
+		 */
+		i32 x = 100;
+
+		/**
+		 * @brief The y position of the window.
+		 */
+		i32 y = 100;
+
+		/**
+		 * @brief The version of the application using the window.
+		 */
+		utils::version version;
+	};
+
+	/**
 	 * @brief Class to allow on-screen rendering using GLFW.
 	 */
 	class Window {
 
-		private:
+	private:
 
 		/**
-		 * @brief Title of the window.
+		 * @brief Properties relating to the window.
 		 */
-		std::string m_title{ "Game" };
+		WindowProps m_props;
 
 		/**
 		 * @brief Initial width of the window, upon creation.
@@ -74,16 +109,6 @@ namespace carbon {
 		 * @brief Initial height of the window, upon creation.
 		 */
 		i32 m_initial_height{ 600 };
-
-		/**
-		 * @brief Width of the window.
-		 */
-		i32 m_width{ m_initial_width };
-
-		/**
-		 * @brief Height of the window.
-		 */
-		i32 m_height{ m_initial_height };
 
 		/**
 		 * @brief Keep track of when the framebuffer has been
@@ -105,11 +130,6 @@ namespace carbon {
 		 * @brief Keep track of the current cursor mode.
 		 */
 		CursorMode m_cursor_mode{ CursorMode::Normal };
-
-		/**
-		 * @brief Version number.
-		 */
-		utils::version m_version = { 1, 0, 0 };
 
 		/**
 		 * @brief Handle to the GLFW window object.
@@ -139,12 +159,9 @@ namespace carbon {
 
 		/**
 		 * @brief Initializes a GLFW window for on-screen rendering.
-		 * @param title The title of the window.
-		 * @param width The width of the window.
-		 * @param height The height of the window.
-		 * @param version Optional. The version of the application.
+		 * @param properties The window properties.
 		 */
-		Window(const char *title, const i32 width, const i32 height, utils::version version = { 1, 0, 0 });
+		Window(const WindowProps &properties);
 
 		/**
 		 * @brief Initializes a GLFW window with default title, width
@@ -182,13 +199,13 @@ namespace carbon {
 		 * @brief Sets the mode of the window.
 		 * @param mode The new mode to set the window to.
 		 */
-		void setWindowMode(WindowMode mode);
+		void setWindowMode(const WindowMode mode);
 
 		/**
 		 * @brief Sets the cursor mode when inside the window.
 		 * @param mode The new mode to set the cursor to.
 		 */
-		void setCursorMode(CursorMode mode);
+		void setCursorMode(const CursorMode mode);
 
 		/**
 		 * @brief Creates a surface for the window.
@@ -209,28 +226,28 @@ namespace carbon {
 		 * @returns The title of the window.
 		 */
 		const std::string getTitle() const {
-			return m_title;
+			return m_props.title;
 		}
 
 		/**
 		 * @returns The width of the window.
 		 */
 		const i32 getWidth() const {
-			return m_width;
+			return m_props.width;
 		}
 
 		/**
 		 * @returns The height of the window.
 		 */
 		const i32 getHeight() const {
-			return m_height;
+			return m_props.height;
 		}
 
 		/**
 		 * @returns The aspect ratio of the window.
 		 */
 		const float getAspectRatio() const {
-			return static_cast<float>(m_width) / static_cast<float>(m_height);
+			return static_cast<float>(m_props.width) / static_cast<float>(m_props.height);
 		}
 
 		/**
@@ -277,7 +294,7 @@ namespace carbon {
 		 * @returns The version of the application.
 		 */
 		const utils::version& getVersion() const {
-			return m_version;
+			return m_props.version;
 		}
 
 	};

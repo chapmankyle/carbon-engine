@@ -25,7 +25,8 @@ namespace carbon {
 		m_monitor = glfwGetPrimaryMonitor();
 
 		// create window
-		m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr);
+		m_window = glfwCreateWindow(m_props.width, m_props.height, m_props.title.c_str(), nullptr, nullptr);
+		glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_props.width, m_props.height, GLFW_DONT_CARE);
 
 		// set callback for framebuffer resize
 		glfwSetWindowUserPointer(m_window, this);
@@ -38,8 +39,8 @@ namespace carbon {
 		app->m_resized = true;
 
 		// update width and height in application
-		app->m_width = width;
-		app->m_height = height;
+		app->m_props.width = width;
+		app->m_props.height = height;
 
 		if (width == 0 || height == 0) {
 			app->m_minimized = true;
@@ -49,14 +50,12 @@ namespace carbon {
 	}
 
 
-	Window::Window(const char *title, const i32 width, const i32 height, utils::version version)
-		: m_title(title)
-		, m_initial_width(width)
-		, m_initial_height(height)
-		, m_width(width)
-		, m_height(height)
-		, m_version(version)
+	Window::Window(const WindowProps &properties)
+		: m_props(properties)
 	{
+		m_initial_width = m_props.width;
+		m_initial_height = m_props.height;
+
 		createWindow();
 	}
 
@@ -102,7 +101,7 @@ namespace carbon {
 
 
 
-	void Window::setWindowMode(WindowMode mode) {
+	void Window::setWindowMode(const WindowMode mode) {
 		// nothing has changed
 		if (m_window_mode == mode) {
 			return;
@@ -116,21 +115,21 @@ namespace carbon {
 		switch (mode) {
 			case WindowMode::Fullscreen:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_FALSE);
-				glfwSetWindowMonitor(m_window, m_monitor, 0, 0, videoMode->width, videoMode->height, GLFW_DONT_CARE);
+				glfwSetWindowMonitor(m_window, m_monitor, 0, 0, videoMode->width, videoMode->height, videoMode->refreshRate);
 				break;
 			case WindowMode::Windowed:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_TRUE);
-				glfwSetWindowMonitor(m_window, nullptr, 100, 100, m_initial_width, m_initial_height, GLFW_DONT_CARE);
+				glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_initial_width, m_initial_height, GLFW_DONT_CARE);
 				break;
 			case WindowMode::BorderlessWindowed:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_FALSE);
-				glfwSetWindowMonitor(m_window, nullptr, 100, 100, m_initial_width, m_initial_height, GLFW_DONT_CARE);
+				glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_initial_width, m_initial_height, GLFW_DONT_CARE);
 				break;
 		}
 	}
 
 
-	void Window::setCursorMode(CursorMode mode) {
+	void Window::setCursorMode(const CursorMode mode) {
 		// nothing has changed
 		if (m_cursor_mode == mode) {
 			return;
