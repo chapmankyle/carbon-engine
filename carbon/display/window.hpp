@@ -245,9 +245,10 @@ namespace carbon {
 
 		/**
 		 * @returns The aspect ratio of the window.
+		 * The form is `width:height` and can be used as `1:<returned value>`.
 		 */
 		const float getAspectRatio() const {
-			return static_cast<float>(m_props.width) / static_cast<float>(m_props.height);
+			return static_cast<float>(m_props.height) / static_cast<float>(m_props.width);
 		}
 
 		/**
