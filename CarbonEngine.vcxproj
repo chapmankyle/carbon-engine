@@ -148,6 +148,7 @@
     <ClCompile Include="carbon\display\surface.cpp" />
     <ClCompile Include="carbon\display\swapchain.cpp" />
     <ClCompile Include="carbon\display\window.cpp" />
+    <ClCompile Include="carbon\engine\engine.cpp" />
     <ClCompile Include="carbon\pipeline\render_pass.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
@@ -159,14 +160,17 @@
     <ClInclude Include="carbon\core\instance.hpp" />
     <ClInclude Include="carbon\core\logical_device.hpp" />
     <ClInclude Include="carbon\core\physical_device.hpp" />
+    <ClInclude Include="carbon\core\time.hpp" />
     <ClInclude Include="carbon\display\surface.hpp" />
     <ClInclude Include="carbon\display\swapchain.hpp" />
     <ClInclude Include="carbon\display\window.hpp" />
     <ClInclude Include="carbon\engine\config.hpp" />
     <ClInclude Include="carbon\engine\engine.hpp" />
+    <ClInclude Include="carbon\display\input.hpp" />
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
+    <ClInclude Include="carbon\types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

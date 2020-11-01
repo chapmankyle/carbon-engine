@@ -1,3 +1,7 @@
+// file      : carbon/common/debug.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef COMMON_DEBUG_HPP
@@ -38,8 +42,9 @@ namespace carbon {
 
 		/**
 		 * @brief Populates the debug messenger create info struct.
+		 * @param createInfo The struct to fill.
 		 */
-		void fillMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
+		void fillMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT *createInfo);
 
 		/**
 		 * @brief Creates a debug messenger and attaches it to an instance.

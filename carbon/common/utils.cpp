@@ -1,37 +1,67 @@
+// file      : carbon/common/utils.cpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #include "utils.hpp"
 
-const std::vector<VkLayerProperties> carbon::utils::getSupportedValidationLayers() {
-	uint32_t numLayers{ 0 };
+namespace carbon {
 
-	// request number of layers
-	vkEnumerateInstanceLayerProperties(&numLayers, nullptr);
+	namespace utils {
 
-	// put supported layers into std::vector
-	std::vector<VkLayerProperties> supportedLayers(numLayers);
-	vkEnumerateInstanceLayerProperties(&numLayers, supportedLayers.data());
+		const std::vector<VkLayerProperties> getSupportedValidationLayers() {
+			u32 numLayers{ 0 };
 
-	return supportedLayers;
-}
+			// request number of layers
+			vkEnumerateInstanceLayerProperties(&numLayers, nullptr);
 
+			// put supported layers into std::vector
+			std::vector<VkLayerProperties> supportedLayers(numLayers);
+			vkEnumerateInstanceLayerProperties(&numLayers, supportedLayers.data());
 
-const std::vector<VkExtensionProperties> carbon::utils::getSupportedExtensions() {
-	uint32_t numExtensions{ 0 };
-
-	// request number of extensions available
-	vkEnumerateInstanceExtensionProperties(nullptr, &numExtensions, nullptr);
-
-	// pack available extensions into vector
-	std::vector<VkExtensionProperties> supportedExtensions(numExtensions);
-	vkEnumerateInstanceExtensionProperties(nullptr, &numExtensions, supportedExtensions.data());
-
-	return supportedExtensions;
-}
+			return supportedLayers;
+		}
 
 
-int32_t carbon::utils::compare(const char *str, const VkExtensionProperties &propStruct) {
-	return strcmp(str, propStruct.extensionName);
-}
+		const std::vector<VkExtensionProperties> getSupportedExtensions() {
+			u32 numExtensions{ 0 };
 
-int32_t carbon::utils::compare(const char *str, const VkLayerProperties &propStruct) {
-	return strcmp(str, propStruct.layerName);
-}
+			// request number of extensions available
+			vkEnumerateInstanceExtensionProperties(nullptr, &numExtensions, nullptr);
+
+			// pack available extensions into vector
+			std::vector<VkExtensionProperties> supportedExtensions(numExtensions);
+			vkEnumerateInstanceExtensionProperties(nullptr, &numExtensions, supportedExtensions.data());
+
+			return supportedExtensions;
+		}
+
+
+		i32 compare(const char *str, const VkExtensionProperties &propStruct) {
+			return strcmp(str, propStruct.extensionName);
+		}
+
+
+		i32 compare(const char *str, const VkLayerProperties &propStruct) {
+			return strcmp(str, propStruct.layerName);
+		}
+
+
+		i32 gcd(i32 x, i32 y) {
+			assert(x >= 0 && y >= 0 && "[ERROR] Negative numbers not allowed.");
+
+			while (y != 0) {
+				x %= y;
+
+				if (x == 0) {
+					return y;
+				}
+
+				y %= x;
+			}
+
+			return x;
+		}
+
+	} // namespace utils
+
+} // namespace carbon

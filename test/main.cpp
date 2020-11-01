@@ -7,19 +7,28 @@ int main() {
 	// before the
 	// #include "carbon/carbon.hpp"
 
-	const char *title{ "Work In Progress: Game " };
-	carbon::utils::version ver{ 1, 1, 0 };
+	carbon::WindowProps properties;
+	properties.title = "Work In Progress: Game";
+	properties.version = carbon::utils::version{ 1, 1, 0 };
+	properties.width = 1280;
+	properties.height = 720;
 
-	// create window
-	carbon::Window win = carbon::Window(title, 1280, 720, ver);
+	carbon::Timer t;
+	carbon::Engine engine(properties);
+	std::cout << "\nEngine creation took " << t.elapsed() << " ms\n";
+
+	std::cout << "Validation ?= " << std::boolalpha << engine.getInstance().isValidationEnabled() << std::noboolalpha << '\n';
+	std::cout << "\nAspect ratio = " << engine.getWindow().getAspectRatio() << '\n';
+
+	carbon::i32 factor = carbon::utils::gcd(properties.width, properties.height);
+	std::cout << "Aspect ratio [factor=" << factor << "] => " << properties.width / factor << ':' << properties.height / factor << '\n';
+
+	std::cout << engine.getPhysicalDevice().getPropertiesAsStr() << '\n';
 
 	// main loop when window is open
-	while (!win.shouldClose()) {
-		win.update();
+	while (engine.isRunning()) {
+		engine.update();
 	}
-
-	// destroy window
-	win.destroy();
 
 	return 0;
 }

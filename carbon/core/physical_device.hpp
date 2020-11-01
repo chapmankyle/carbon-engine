@@ -1,3 +1,7 @@
+// file      : carbon/core/physical_device.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef CORE_PHYSICAL_DEVICE_HPP
@@ -7,6 +11,7 @@
 
 #include <map>
 #include <set>
+#include <string>
 #include <vector>
 
 namespace carbon {
@@ -57,7 +62,7 @@ namespace carbon {
 		/**
 		 * @brief Ordered map of possible candidate physical devices.
 		 */
-		std::multimap<int32_t, VkPhysicalDevice> m_candidates;
+		std::multimap<i32, VkPhysicalDevice> m_candidates;
 
 		/*
 		 * @returns `true` if the device supports all the extensions, `false` otherwise.
@@ -67,7 +72,7 @@ namespace carbon {
 		/**
 		 * @returns The score for the given physical device.
 		 */
-		int32_t getDeviceScore(const VkPhysicalDevice &device);
+		i32 getDeviceScore(const VkPhysicalDevice &device);
 
 		/**
 		 * @returns The best physical device.
@@ -89,14 +94,14 @@ namespace carbon {
 		~PhysicalDevice() = default;
 
 		/**
-		 * @brief Prints the properties of the physical device.
+		 * @returns The properties of the best physical device as a string.
 		 */
-		void showProperties();
+		const std::string getPropertiesAsStr() const;
 
 		/**
 		 * @returns The type of the device, as a string.
 		 */
-		const char *getDeviceType();
+		const char* getDeviceType() const;
 
 		/**
 		 * @returns The underlying `VkPhysicalDevice`.
@@ -129,7 +134,7 @@ namespace carbon {
 		/**
 		 * @returns The found physical devices and their scores.
 		 */
-		const std::multimap<int, VkPhysicalDevice> getCandidates() const {
+		const std::multimap<i32, VkPhysicalDevice> getCandidates() const {
 			return m_candidates;
 		}
 
