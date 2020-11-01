@@ -52,9 +52,11 @@ The following dependencies are included as submodules in the `deps` directory:
 [![instance](https://img.shields.io/badge/carbon-instance-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/instance.hpp)
 [![logical-device](https://img.shields.io/badge/carbon-logical_device-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/logical_device.hpp)
 [![physical-device](https://img.shields.io/badge/carbon-physical_device-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/physical_device.hpp)
+[![time](https://img.shields.io/badge/carbon-time-orange.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/core/time.hpp)
 
 #### carbon [display](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/display)
 
+[![input](https://img.shields.io/badge/carbon-input-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/input.hpp)
 [![surface](https://img.shields.io/badge/carbon-surface-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/surface.hpp)
 [![swapchain](https://img.shields.io/badge/carbon-swapchain-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/swapchain.hpp)
 [![window](https://img.shields.io/badge/carbon-window-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/window.hpp)
@@ -62,6 +64,7 @@ The following dependencies are included as submodules in the `deps` directory:
 #### carbon [engine](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/engine)
 
 [![config](https://img.shields.io/badge/carbon-config-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/config.hpp)
+[![engine](https://img.shields.io/badge/carbon-engine-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/engine.hpp)
 
 #### carbon [pipeline](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/pipeline)
 
