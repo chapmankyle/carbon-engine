@@ -99,29 +99,26 @@ namespace carbon {
 
 
 	const std::string PhysicalDevice::getPropertiesAsStr() const {
-		std::string props("Physical Device -> ");
+		std::string props("Selected Physical Device -> ");
 		props.append(m_device_props.deviceName);
-		props.push_back('\n');
 
-		props.append("    Type:                        ");
+		props.append("\n    Type:                        ");
 		props.append(getDeviceType());
-		props.push_back('\n');
-		props.append("    Vendor ID:                   " + m_device_props.vendorID);
-		props.push_back('\n');
-		props.append("    Vendor ID:                   " + m_device_props.vendorID);
-		props.push_back('\n');
-		props.append("    Memory heap count:           " + m_device_memory_props.memoryHeapCount);
-		props.push_back('\n');
-		props.append("    Maximum clip distances:      " + m_device_props.limits.maxClipDistances);
-		props.push_back('\n');
-		props.append("    Maximum cull distances:      " + m_device_props.limits.maxCullDistances);
-		props.push_back('\n');
-		props.append("    Maximum number of viewports: " + m_device_props.limits.maxViewports);
-		props.push_back('\n');
-		props.append("    Maximum size of 2D textures: " + m_device_props.limits.maxImageDimension2D);
-		props.push_back('\n');
-		props.append("    Maximum size of 3D textures: " + m_device_props.limits.maxImageDimension3D);
-		props.push_back('\n');
+		props.append("\n    Vendor ID:                   ");
+		props.append(std::to_string(m_device_props.vendorID));
+		props.append("\n    Memory heap count:           ");
+		props.append(std::to_string(m_device_memory_props.memoryHeapCount));
+		props.append("\n    Maximum clip distances:      ");
+		props.append(std::to_string(m_device_props.limits.maxClipDistances));
+		props.append("\n    Maximum cull distances:      ");
+		props.append(std::to_string(m_device_props.limits.maxCullDistances));
+		props.append("\n    Maximum number of viewports: ");
+		props.append(std::to_string(m_device_props.limits.maxViewports));
+		props.append("\n    Maximum size of 2D textures: ");
+		props.append(std::to_string(m_device_props.limits.maxImageDimension2D));
+		props.append("\n    Maximum size of 3D textures: ");
+		props.append(std::to_string(m_device_props.limits.maxImageDimension3D));
+		props.append("\n");
 
 		return props;
 	}

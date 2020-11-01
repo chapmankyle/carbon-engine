@@ -94,7 +94,7 @@ namespace carbon {
 		~PhysicalDevice() = default;
 
 		/**
-		 * @returns The properties of the physical device as a string.
+		 * @returns The properties of the best physical device as a string.
 		 */
 		const std::string getPropertiesAsStr() const;
 
