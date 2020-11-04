@@ -19,11 +19,9 @@ int main() {
 
 	std::cout << "Validation ?= " << std::boolalpha << engine.getInstance().isValidationEnabled() << std::noboolalpha << '\n';
 	std::cout << "\nAspect ratio = " << engine.getWindow().getAspectRatio() << '\n';
+	std::cout << "Aspect ratio => " << carbon::utils::getEstimatedAspectRatio(properties.width, properties.height) << '\n';
 
-	carbon::i32 factor = carbon::utils::gcd(properties.width, properties.height);
-	std::cout << "Aspect ratio [factor=" << factor << "] => " << properties.width / factor << ':' << properties.height / factor << '\n';
-
-	std::cout << engine.getPhysicalDevice().getPropertiesAsStr() << '\n';
+	std::cout << '\n' << engine.getPhysicalDevice().getPropertiesAsStr() << '\n';
 
 	// main loop when window is open
 	while (engine.isRunning()) {
