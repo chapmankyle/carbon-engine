@@ -9,6 +9,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include "carbon/setup.hpp"
@@ -60,6 +61,14 @@ namespace carbon {
 		 * @returns The greatest common divisor between `x` and `y`.
 		 */
 		i32 gcd(i32 x, i32 y);
+
+		/**
+		 * @brief Calculates the estimated aspect ratio as a string in the form `width:height`.
+		 * @param width The width of the window.
+		 * @param height The height of the window.
+		 * @returns The estimated aspect ratio as a string in the form `width:height`.
+		 */
+		std::string getEstimatedAspectRatio(i32 width, i32 height);
 
 		/*
 		 * @brief Checks if the required strings are available.
