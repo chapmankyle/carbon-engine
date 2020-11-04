@@ -25,6 +25,9 @@ namespace carbon {
 
 		// create physical device used for computation
 		m_physical_device = new PhysicalDevice(m_instance);
+
+		// create logical device
+		m_logical_device = new LogicalDevice(m_instance, m_physical_device, m_surface);
 	}
 
 
@@ -43,6 +46,7 @@ namespace carbon {
 
 
 	Engine::~Engine() {
+		delete m_logical_device;
 		delete m_physical_device;
 		delete m_surface;
 		delete m_instance;
