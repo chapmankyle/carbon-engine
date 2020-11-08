@@ -8,6 +8,7 @@
 #define DISPLAY_SWAPCHAIN_HPP
 
 #include "carbon/setup.hpp"
+
 #include <cassert>
 #include <vector>
 
@@ -83,7 +84,7 @@ namespace carbon {
 		/**
 		 * @brief Index of the current image in the swapchain.
 		 */
-		uint32_t m_curr_image_idx{};
+		u32 m_curr_image_idx{};
 
 		/**
 		 * @brief The support details of the swapchain.
@@ -102,13 +103,23 @@ namespace carbon {
 
 		/**
 		 * @brief Queries the swapchain support of a device.
+		 * @returns The `SupportDetails` struct containing support information for the swapchain.
 		 */
-		void querySwapchainSupport();
+		SupportDetails querySwapchainSupport();
 
 		/**
-		 * @brief Selects the swap surface format.
+		 * @brief Selects the swap surface format from the given formats.
+		 * @param availableFormats The formats to choose from.
+		 * @param format The format to look for.
+		 * @param colourSpace The colour space to look for.
+		 * @returns The surface format that has the given format and colour space, otherwise
+		 * the first entry in the `availableFormats` vector.
 		 */
-		void chooseSwapSurfaceFormat();
+		VkSurfaceFormatKHR chooseSwapSurfaceFormat(
+			const std::vector<VkSurfaceFormatKHR> &availableFormats,
+			const VkFormat &format,
+			const VkColorSpaceKHR &colourSpace
+		);
 
 		/**
 		 * @brief Selects the swap presentation mode.
@@ -120,15 +131,21 @@ namespace carbon {
 		 * - VK_PRESENT_MODE_MAILBOX_KHR : instead of blocking application when queue is full, the images
 		 * that are already queued are replaced with newer ones. Can be used to implement triple buffering,
 		 * as opposed to double buffering used by vsync.
+		 * @param availableModes The presentation modes to choose from.
+		 * @param mode The desired presentation mode.
+		 * @returns The desired presentation mode if it exists in `availableModes`, otherwise `VK_PRESENT_MODE_FIFO_KHR`.
 		 */
-		void chooseSwapPresentMode();
+		VkPresentModeKHR chooseSwapPresentMode(
+			const std::vector<VkPresentModeKHR> &availableModes,
+			const VkPresentModeKHR &mode
+		);
 
 		/**
-		 * @brief Selects the resolution for the swapchain images. Width and height of image is in
-		 * `currentExtent` member, but if set to UINT32_MAX, then we set the resolution to one
-		 * that best matches the window within the `minImageExtent` and `maxImageExtent` bounds.
+		 * @brief Selects the resolution for the swapchain images using the given capabilities.
+		 * @param capabilities The surface capabilities.
+		 * @returns The extent to use for swapchain images.
 		 */
-		void chooseSwapExtent();
+		VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
 		/**
 		 * @brief Sets up the swapchain resources.
@@ -247,7 +264,7 @@ namespace carbon {
 		/**
 		 * @returns The index of the current image in the swapchain.
 		 */
-		const uint32_t getCurrentImageIndex() const {
+		const u32 getCurrentImageIndex() const {
 			return m_curr_image_idx;
 		}
 
