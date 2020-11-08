@@ -61,3 +61,6 @@ endif()
 # include submodules
 add_subdirectory( deps/glfw )
 include_directories( deps/glfw/include )
+
+add_subdirectory( deps/glm )
+include_directories( deps/glm )
