@@ -38,6 +38,7 @@ git submodule update --init --recursive
 
 The following dependencies are included as submodules in the `deps` directory:
 - :tv: [GLFW](https://www.glfw.org/) - Used for handling window interaction
+- :triangular_ruler: [GLM](https://glm.g-truc.net/0.9.9/index.html) - Used for working with vectors and matrices
 
 # Modules :card_index_dividers:
 
