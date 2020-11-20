@@ -65,7 +65,7 @@ namespace carbon {
 		const VkPresentModeKHR &mode
 	) {
 		for (const auto &presentMode : availableModes) {
-			if (presentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+			if (presentMode == mode) {
 				return presentMode;
 			}
 		}
