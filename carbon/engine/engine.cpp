@@ -65,6 +65,11 @@ namespace carbon {
 	}
 
 
+	const bool Engine::isValidationEnabled() const {
+		return m_instance->isValidationEnabled();
+	}
+
+
 	const Instance& Engine::getInstance() const {
 		return *m_instance;
 	}

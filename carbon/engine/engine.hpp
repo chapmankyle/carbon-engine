@@ -117,6 +117,11 @@ namespace carbon {
 		}
 
 		/**
+		 * @returns `true` if validation layers are enabled, `false` otherwise.
+		 */
+		const bool isValidationEnabled() const;
+
+		/**
 		 * @returns The instance associated with the engine.
 		 */
 		const class Instance& getInstance() const;
