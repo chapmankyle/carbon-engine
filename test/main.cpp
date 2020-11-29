@@ -17,7 +17,7 @@ int main() {
 	carbon::Engine engine(properties);
 	std::cout << "\nEngine creation took " << t.elapsed() << " ms\n";
 
-	std::cout << "Validation ?= " << std::boolalpha << engine.getInstance().isValidationEnabled() << std::noboolalpha << '\n';
+	std::cout << "Validation ?= " << std::boolalpha << engine.isValidationEnabled() << std::noboolalpha << '\n';
 	std::cout << "\nAspect ratio = " << engine.getWindow().getAspectRatio() << '\n';
 	std::cout << "Aspect ratio => " << carbon::utils::getEstimatedAspectRatio(properties.width, properties.height) << '\n';
 
