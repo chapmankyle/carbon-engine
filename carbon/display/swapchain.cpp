@@ -97,7 +97,7 @@ namespace carbon {
 
 
 	void Swapchain::setup() {
-		assert(m_logical_device && m_surface && "Logical device and surface must not be null.");
+		assert(m_physical_device && m_logical_device && m_surface && "Physical device, logical device and surface must not be null.");
 
 		m_swapchain_details = querySwapchainSupport();
 
