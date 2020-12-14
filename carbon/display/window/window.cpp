@@ -12,8 +12,13 @@ namespace carbon {
 	Window::Window(const window::Props &properties)
 		: m_props(properties)
 	{
-		m_initial_width = m_props.width;
-		m_initial_height = m_props.height;
+		// set initial size and position of window
+		m_initial_size = glm::ivec2(m_props.width, m_props.height);
+		m_initial_pos = glm::ivec2(m_props.x, m_props.y);
+
+		// set current size and position to initial size and position
+		m_size = m_initial_size;
+		m_pos = m_initial_pos;
 	}
 
 	Window::Window() {}
@@ -27,17 +32,37 @@ namespace carbon {
 
 
 	const i32 Window::getWidth() const {
-		return m_props.width;
+		return to_i32(m_size[0]);
 	}
 
 
 	const i32 Window::getHeight() const {
-		return m_props.height;
+		return to_i32(m_size[1]);
+	}
+
+
+	const glm::ivec2 Window::getSize() const {
+		return m_size;
+	}
+
+
+	const i32 Window::getX() const {
+		return to_i32(m_pos[0]);
+	}
+
+
+	const i32 Window::getY() const {
+		return to_i32(m_pos[1]);
+	}
+
+
+	const glm::ivec2 Window::getPosition() const {
+		return m_pos;
 	}
 
 
 	const float Window::getAspectRatio() const {
-		return static_cast<float>(m_props.height) / static_cast<float>(m_props.width);
+		return static_cast<float>(m_size[1]) / static_cast<float>(m_size[0]); // 0 -> width, 1 -> height
 	}
 
 

@@ -10,6 +10,9 @@
 #include "carbon/setup.hpp"
 #include "carbon/common/utils.hpp"
 
+#include <glm/glm.hpp>
+
+#include <array>
 #include <string>
 
 namespace carbon {
@@ -19,6 +22,13 @@ namespace carbon {
 	class Surface;
 
 	namespace window {
+
+		// window default constants
+
+		static inline constexpr i32 DEFAULT_WIDTH = 800;
+		static inline constexpr i32 DEFAULT_HEIGHT = 600;
+		static inline constexpr i32 DEFAULT_X = 100;
+		static inline constexpr i32 DEFAULT_Y = 100;
 
 		/**
 		 * @brief Mode for the window to be presented.
@@ -43,22 +53,22 @@ namespace carbon {
 			/**
 			 * @brief Width of the window.
 			 */
-			i32 width = 800;
+			i32 width = DEFAULT_WIDTH;
 
 			/**
 			 * @brief Height of the window.
 			 */
-			i32 height = 600;
+			i32 height = DEFAULT_HEIGHT;
 
 			/**
 			 * @brief The x position of the window.
 			 */
-			i32 x = 100;
+			i32 x = DEFAULT_X;
 
 			/**
 			 * @brief The y position of the window.
 			 */
-			i32 y = 100;
+			i32 y = DEFAULT_Y;
 
 			/**
 			 * @brief The version of the application using the window.
@@ -97,7 +107,9 @@ namespace carbon {
 	} // namespace cursor
 
 	/**
-	 * @brief Class to allow on-screen rendering.
+	 * @brief Virtual class to allow on-screen rendering.
+	 * Used as a base class so that any library can be used for rendering
+	 * a window, instead of being forced to use GLFW.
 	 */
 	class Window {
 
@@ -109,14 +121,24 @@ namespace carbon {
 		window::Props m_props;
 
 		/**
-		 * @brief Initial width of the window, upon creation.
+		 * @brief Initial size of the window, as [width, height]
 		 */
-		i32 m_initial_width{ 800 };
+		glm::ivec2 m_initial_size{ window::DEFAULT_WIDTH, window::DEFAULT_HEIGHT };
 
 		/**
-		 * @brief Initial height of the window, upon creation.
+		 * @brief Initial position of the window, as [x, y]
 		 */
-		i32 m_initial_height{ 600 };
+		glm::ivec2 m_initial_pos{ window::DEFAULT_X, window::DEFAULT_Y };
+
+		/**
+		 * @brief Current size of the window, as [width, height]
+		 */
+		glm::ivec2 m_size = m_initial_size;
+
+		/**
+		 * @brief Current position of the window, as [x, y]
+		 */
+		glm::ivec2 m_pos = m_initial_pos;
 
 		/**
 		 * @brief Keep track of when the framebuffer has been
@@ -192,6 +214,12 @@ namespace carbon {
 		virtual void setCursorMode(const cursor::Mode mode) = 0;
 
 		/**
+		 * @brief Sets the title for the window.
+		 * @param title The new title for the window.
+		 */
+		virtual void setTitle(const std::string &title) = 0;
+
+		/**
 		 * @brief Creates a surface for the window.
 		 * @param instance The instance to create the surface from.
 		 * @param surface The surface that is returned.
@@ -213,6 +241,26 @@ namespace carbon {
 		 * @returns The height of the window.
 		 */
 		const i32 getHeight() const;
+
+		/*
+		 * @returns The size of the window, as [width, height]
+		 */
+		const glm::ivec2 getSize() const;
+
+		/**
+		 * @returns The x co-ordinate of the window.
+		 */
+		const i32 getX() const;
+
+		/**
+		 * @returns The y co-ordinate of the window.
+		 */
+		const i32 getY() const;
+
+		/*
+		 * @returns The position of the window, as [x, y]
+		 */
+		const glm::ivec2 getPosition() const;
 
 		/**
 		 * @returns The aspect ratio of the window.
