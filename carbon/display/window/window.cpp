@@ -9,7 +9,7 @@
 
 namespace carbon {
 
-	Window::Window(const WindowProps &properties)
+	Window::Window(const window::Props &properties)
 		: m_props(properties)
 	{
 		m_initial_width = m_props.width;
@@ -46,26 +46,26 @@ namespace carbon {
 	}
 
 
-	const WindowMode Window::getWindowMode() const {
+	const window::Mode Window::getWindowMode() const {
 		return m_window_mode;
 	}
 
 
-	const char* Window::getWindowModeName(WindowMode mode) const {
+	const char* Window::getWindowModeName(window::Mode mode) const {
 		i32 idx = static_cast<i32>(mode);
-		assert(idx < static_cast<i32>(WindowMode::NONE) + 1 && "[ERROR] Invalid window mode!");
+		assert(idx < static_cast<i32>(window::Mode::NONE) + 1 && "[ERROR] Invalid window mode!");
 
 		return m_window_mode_names[idx];
 	}
 
 
-	const CursorMode Window::getCursorMode() const {
+	const cursor::Mode Window::getCursorMode() const {
 		return m_cursor_mode;
 	}
 
 
 	const bool Window::isMouseVisible() const {
-		return m_cursor_mode == CursorMode::Normal;
+		return m_cursor_mode == cursor::Mode::Normal;
 	}
 
 

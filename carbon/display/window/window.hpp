@@ -18,16 +18,55 @@ namespace carbon {
 	class Instance;
 	class Surface;
 
-	/**
-	 * @brief Mode for the window to be presented.
-	 */
-	enum class WindowMode {
-		Fullscreen,
-		Windowed,
-		BorderlessWindowed,
+	namespace window {
 
-		NONE
-	};
+		/**
+		 * @brief Mode for the window to be presented.
+		 */
+		enum class Mode {
+			Fullscreen,
+			Windowed,
+			BorderlessWindowed,
+
+			NONE
+		};
+
+		/**
+		 * @brief Properties for the Window class.
+		 */
+		struct Props {
+			/**
+			 * @brief Title of the window.
+			 */
+			std::string title = "Application";
+
+			/**
+			 * @brief Width of the window.
+			 */
+			i32 width = 800;
+
+			/**
+			 * @brief Height of the window.
+			 */
+			i32 height = 600;
+
+			/**
+			 * @brief The x position of the window.
+			 */
+			i32 x = 100;
+
+			/**
+			 * @brief The y position of the window.
+			 */
+			i32 y = 100;
+
+			/**
+			 * @brief The version of the application using the window.
+			 */
+			utils::version version;
+		};
+
+	} // namespace window
 
 	/**
 	 * @brief Names associated with the window modes.
@@ -40,53 +79,22 @@ namespace carbon {
 		"NONE"
 	};
 
-	static_assert(ARRAY_SIZE(m_window_mode_names) == static_cast<u32>(WindowMode::NONE) + 1, "Number of window modes must match number of names for the window modes.");
+	static_assert(ARRAY_SIZE(m_window_mode_names) == static_cast<u32>(window::Mode::NONE) + 1, "Number of window modes must match number of names for the window modes.");
 
-	/**
-	 * @brief Mode for when the cursor is inside the window.
-	 */
-	enum class CursorMode {
-		Normal,
-		Hidden,
-		Disabled,
-
-		NONE
-	};
-
-	/**
-	 * @brief Properties for the Window class.
-	 */
-	struct WindowProps {
-		/**
-		 * @brief Title of the window.
-		 */
-		std::string title = "Application";
+	namespace cursor {
 
 		/**
-		 * @brief Width of the window.
+		 * @brief Mode for when the cursor is inside the window.
 		 */
-		i32 width = 800;
+		enum class Mode {
+			Normal,
+			Hidden,
+			Disabled,
 
-		/**
-		 * @brief Height of the window.
-		 */
-		i32 height = 600;
+			NONE
+		};
 
-		/**
-		 * @brief The x position of the window.
-		 */
-		i32 x = 100;
-
-		/**
-		 * @brief The y position of the window.
-		 */
-		i32 y = 100;
-
-		/**
-		 * @brief The version of the application using the window.
-		 */
-		utils::version version;
-	};
+	} // namespace cursor
 
 	/**
 	 * @brief Class to allow on-screen rendering.
@@ -98,7 +106,7 @@ namespace carbon {
 		/**
 		 * @brief Properties relating to the window.
 		 */
-		WindowProps m_props;
+		window::Props m_props;
 
 		/**
 		 * @brief Initial width of the window, upon creation.
@@ -124,12 +132,12 @@ namespace carbon {
 		/**
 		 * @brief Keep track of current window mode.
 		 */
-		WindowMode m_window_mode{ WindowMode::Windowed };
+		window::Mode m_window_mode{ window::Mode::Windowed };
 
 		/**
 		 * @brief Keep track of the current cursor mode.
 		 */
-		CursorMode m_cursor_mode{ CursorMode::Normal };
+		cursor::Mode m_cursor_mode{ cursor::Mode::Normal };
 
 	public:
 
@@ -137,7 +145,7 @@ namespace carbon {
 		 * @brief Initializes a window for on-screen rendering.
 		 * @param properties The window properties.
 		 */
-		Window(const WindowProps &properties);
+		Window(const window::Props &properties);
 
 		/**
 		 * @brief Initializes a window with default title, width
@@ -175,13 +183,13 @@ namespace carbon {
 		 * @brief Sets the mode of the window.
 		 * @param mode The new mode to set the window to.
 		 */
-		virtual void setWindowMode(const WindowMode mode) = 0;
+		virtual void setWindowMode(const window::Mode mode) = 0;
 
 		/**
 		 * @brief Sets the cursor mode when inside the window.
 		 * @param mode The new mode to set the cursor to.
 		 */
-		virtual void setCursorMode(const CursorMode mode) = 0;
+		virtual void setCursorMode(const cursor::Mode mode) = 0;
 
 		/**
 		 * @brief Creates a surface for the window.
@@ -220,19 +228,19 @@ namespace carbon {
 		/**
 		 * @returns The current mode of the window.
 		 */
-		const WindowMode getWindowMode() const;
+		const window::Mode getWindowMode() const;
 
 		/**
 		 * @brief Gets the name of the given window mode as a string.
 		 * @param mode The window mode to get as a string.
 		 * @returns The window mode string.
 		 */
-		const char* getWindowModeName(WindowMode mode) const;
+		const char* getWindowModeName(window::Mode mode) const;
 
 		/**
 		 * @returns The current mode of the cursor inside the window.
 		 */
-		const CursorMode getCursorMode() const;
+		const cursor::Mode getCursorMode() const;
 
 		/**
 		 * @returns `true` if the mouse is visible, `false` otherwise.
