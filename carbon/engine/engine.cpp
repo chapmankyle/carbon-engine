@@ -12,7 +12,7 @@
 namespace carbon {
 
 	void Engine::createWindow() {
-		m_window = new Window(m_props);
+		m_window = new WindowGLFW(m_props);
 	}
 
 
@@ -31,7 +31,7 @@ namespace carbon {
 	}
 
 
-	Engine::Engine(const WindowProps &properties)
+	Engine::Engine(const window::Props &properties)
 		: m_props(properties)
 	{
 		createWindow();
