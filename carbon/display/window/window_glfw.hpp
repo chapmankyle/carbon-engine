@@ -42,6 +42,15 @@ namespace carbon {
 		 */
 		static void framebufferResizeCallback(GLFWwindow *window, i32 width, i32 height);
 
+		/**
+		 * @brief Callback for when GLFW detects that the window
+		 * position has changed.
+		 * @param window The GLFWwindow object.
+		 * @param xpos The new x co-ordinate of the window.
+		 * @param ypos The new y co-ordinate of the window.
+		 */
+		static void windowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos);
+
 	public:
 
 		/**
@@ -93,6 +102,12 @@ namespace carbon {
 		 * @param mode The new mode to set the cursor to.
 		 */
 		virtual void setCursorMode(const cursor::Mode mode) override;
+
+		/**
+		 * @brief Sets the title for the window.
+		 * @param title The new title for the window.
+		 */
+		virtual void setTitle(const std::string &title) override;
 
 		/**
 		 * @brief Creates a surface for the window.

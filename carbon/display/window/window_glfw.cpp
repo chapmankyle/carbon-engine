@@ -28,9 +28,12 @@ namespace carbon {
 		m_window = glfwCreateWindow(m_props.width, m_props.height, m_props.title.c_str(), nullptr, nullptr);
 		glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_props.width, m_props.height, GLFW_DONT_CARE);
 
-		// set callback for framebuffer resize
+		// access local variables through the window
 		glfwSetWindowUserPointer(m_window, this);
+
+		// set callback functions
 		glfwSetFramebufferSizeCallback(m_window, framebufferResizeCallback);
+		glfwSetWindowPosCallback(m_window, windowPositionCallback);
 	}
 
 
@@ -39,14 +42,23 @@ namespace carbon {
 		app->m_resized = true;
 
 		// update width and height in application
-		app->m_props.width = width;
-		app->m_props.height = height;
+		app->m_size[0] = width;
+		app->m_size[1] = height;
 
 		if (width == 0 || height == 0) {
 			app->m_minimized = true;
 		} else {
 			app->m_minimized = false;
 		}
+	}
+
+
+	void WindowGLFW::windowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos) {
+		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
+
+		// update x and y co-ordinates in application
+		app->m_pos[0] = xpos;
+		app->m_pos[1] = ypos;
 	}
 
 
@@ -117,11 +129,11 @@ namespace carbon {
 				break;
 			case window::Mode::Windowed:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_TRUE);
-				glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_initial_width, m_initial_height, GLFW_DONT_CARE);
+				glfwSetWindowMonitor(m_window, nullptr, m_initial_pos[0], m_initial_pos[1], m_initial_size[0], m_initial_size[1], GLFW_DONT_CARE);
 				break;
 			case window::Mode::BorderlessWindowed:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_FALSE);
-				glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_initial_width, m_initial_height, GLFW_DONT_CARE);
+				glfwSetWindowMonitor(m_window, nullptr, m_initial_pos[0], m_initial_pos[1], m_initial_size[0], m_initial_size[1], GLFW_DONT_CARE);
 				break;
 		}
 	}
@@ -147,6 +159,18 @@ namespace carbon {
 				glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 				break;
 		}
+	}
+
+
+	void WindowGLFW::setTitle(const std::string &title) {
+		// title has not changed
+		if (m_props.title == title) {
+			return;
+		}
+
+		// change title and update in window
+		m_props.title = title;
+		glfwSetWindowTitle(m_window, title.c_str());
 	}
 
 
