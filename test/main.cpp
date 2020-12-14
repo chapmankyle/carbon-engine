@@ -7,7 +7,7 @@ int main() {
 	// before the
 	// #include "carbon/carbon.hpp"
 
-	carbon::WindowProps properties;
+	carbon::window::Props properties;
 	properties.title = "Work In Progress: Game";
 	properties.version = carbon::utils::version{ 1, 1, 0 };
 	properties.width = 1280;
