@@ -48,7 +48,7 @@ namespace carbon {
 		 * @brief Initializes a GLFW window for on-screen rendering.
 		 * @param properties The window properties.
 		 */
-		WindowGLFW(const WindowProps &properties);
+		WindowGLFW(const window::Props &properties);
 
 		/**
 		 * @brief Initializes a GLFW window with default title, width
@@ -86,13 +86,13 @@ namespace carbon {
 		 * @brief Sets the mode of the window.
 		 * @param mode The new mode to set the window to.
 		 */
-		virtual void setWindowMode(const WindowMode mode) override;
+		virtual void setWindowMode(const window::Mode mode) override;
 
 		/**
 		 * @brief Sets the cursor mode when inside the window.
 		 * @param mode The new mode to set the cursor to.
 		 */
-		virtual void setCursorMode(const CursorMode mode) override;
+		virtual void setCursorMode(const cursor::Mode mode) override;
 
 		/**
 		 * @brief Creates a surface for the window.

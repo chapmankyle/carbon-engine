@@ -50,7 +50,7 @@ namespace carbon {
 	}
 
 
-	WindowGLFW::WindowGLFW(const WindowProps &properties)
+	WindowGLFW::WindowGLFW(const window::Props &properties)
 		: Window(properties)
 	{
 		createWindow();
@@ -99,7 +99,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::setWindowMode(const WindowMode mode) {
+	void WindowGLFW::setWindowMode(const window::Mode mode) {
 		// nothing has changed
 		if (m_window_mode == mode) {
 			return;
@@ -111,15 +111,15 @@ namespace carbon {
 		const GLFWvidmode *videoMode = glfwGetVideoMode(m_monitor);
 
 		switch (mode) {
-			case WindowMode::Fullscreen:
+			case window::Mode::Fullscreen:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_FALSE);
 				glfwSetWindowMonitor(m_window, m_monitor, 0, 0, videoMode->width, videoMode->height, videoMode->refreshRate);
 				break;
-			case WindowMode::Windowed:
+			case window::Mode::Windowed:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_TRUE);
 				glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_initial_width, m_initial_height, GLFW_DONT_CARE);
 				break;
-			case WindowMode::BorderlessWindowed:
+			case window::Mode::BorderlessWindowed:
 				glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_FALSE);
 				glfwSetWindowMonitor(m_window, nullptr, m_props.x, m_props.y, m_initial_width, m_initial_height, GLFW_DONT_CARE);
 				break;
@@ -127,7 +127,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::setCursorMode(const CursorMode mode) {
+	void WindowGLFW::setCursorMode(const cursor::Mode mode) {
 		// nothing has changed
 		if (m_cursor_mode == mode) {
 			return;
@@ -137,13 +137,13 @@ namespace carbon {
 		m_cursor_mode = mode;
 
 		switch (mode) {
-			case CursorMode::Normal:
+			case cursor::Mode::Normal:
 				glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 				break;
-			case CursorMode::Hidden:
+			case cursor::Mode::Hidden:
 				glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 				break;
-			case CursorMode::Disabled:
+			case cursor::Mode::Disabled:
 				glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 				break;
 		}
