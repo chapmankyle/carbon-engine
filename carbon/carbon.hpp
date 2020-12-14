@@ -21,7 +21,7 @@
 #include "display/input.hpp"
 #include "display/surface.hpp"
 #include "display/swapchain.hpp"
-#include "display/window.hpp"
+#include "display/window/window_glfw.hpp"
 
 #include "engine/engine.hpp"
 
