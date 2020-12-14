@@ -147,7 +147,8 @@
     <ClCompile Include="carbon\core\physical_device.cpp" />
     <ClCompile Include="carbon\display\surface.cpp" />
     <ClCompile Include="carbon\display\swapchain.cpp" />
-    <ClCompile Include="carbon\display\window.cpp" />
+    <ClCompile Include="carbon\display\window\window.cpp" />
+    <ClCompile Include="carbon\display\window\window_glfw.cpp" />
     <ClCompile Include="carbon\engine\engine.cpp" />
     <ClCompile Include="carbon\pipeline\render_pass.cpp" />
     <ClCompile Include="test\main.cpp" />
@@ -163,7 +164,8 @@
     <ClInclude Include="carbon\core\time.hpp" />
     <ClInclude Include="carbon\display\surface.hpp" />
     <ClInclude Include="carbon\display\swapchain.hpp" />
-    <ClInclude Include="carbon\display\window.hpp" />
+    <ClInclude Include="carbon\display\window\window.hpp" />
+    <ClInclude Include="carbon\display\window\window_glfw.hpp" />
     <ClInclude Include="carbon\engine\config.hpp" />
     <ClInclude Include="carbon\engine\engine.hpp" />
     <ClInclude Include="carbon\display\input.hpp" />
