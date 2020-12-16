@@ -51,6 +51,26 @@ namespace carbon {
 		 */
 		static void windowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos);
 
+		/**
+		 * @brief Callback for when GLFW detects a key has been
+		 * activated.
+		 * @param window The GLFWwindow object.
+		 * @param key The key that was activated.
+		 * @param scancode The platform-specific code for the key.
+		 * @param action The action of the key (pressed, released or repeated).
+		 * @param mods The modifier bits (shift, control, alt, etc.).
+		 */
+		static void keyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods);
+
+		/**
+		 * @brief Callback for when GLFW detects that the mouse position
+		 * has changed.
+		 * @param window The GLFWwindow object.
+		 * @param xpos The x-position of the mouse.
+		 * @param ypos The y-position of the mouse.
+		 */
+		static void mousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos);
+
 	public:
 
 		/**
