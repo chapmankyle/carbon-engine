@@ -7,13 +7,17 @@
 #ifndef COMMON_UTILS_HPP
 #define COMMON_UTILS_HPP
 
+#include "carbon/setup.hpp"
+#include "template_types.hpp"
+
 #include <cassert>
 #include <cstring>
 #include <string>
 #include <vector>
 
-#include "carbon/setup.hpp"
-#include "template_types.hpp"
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 
 namespace carbon {
 
@@ -69,6 +73,54 @@ namespace carbon {
 		 * @returns The estimated aspect ratio as a string in the form `width:height`.
 		 */
 		std::string getEstimatedAspectRatio(i32 width, i32 height);
+
+		/**
+		 * @brief Converts the given vector into a string representation of
+		 * the vector.
+		 * @param vector The vector of arbitrary length and type to convert
+		 * to string.
+		 * @returns The vector as (x, y[, ...]) in string form.
+		 */
+		template<glm::length_t L, typename T, enum glm::qualifier Q>
+		std::string showVector(const glm::vec<L, T, Q> &vector) {
+			std::string str("(");
+
+			switch (L) {
+				case 1:
+					str.append(std::to_string(vector[0]));
+					str.append(")");
+					break;
+				case 2:
+					str.append(std::to_string(vector[0]));
+					str.append(", ");
+					str.append(std::to_string(vector[1]));
+					str.append(")");
+					break;
+				case 3:
+					str.append(std::to_string(vector[0]));
+					str.append(", ");
+					str.append(std::to_string(vector[1]));
+					str.append(", ");
+					str.append(std::to_string(vector[2]));
+					str.append(")");
+					break;
+				case 4:
+					str.append(std::to_string(vector[0]));
+					str.append(", ");
+					str.append(std::to_string(vector[1]));
+					str.append(", ");
+					str.append(std::to_string(vector[2]));
+					str.append(", ");
+					str.append(std::to_string(vector[3]));
+					str.append(")");
+					break;
+				default:
+					str.append(")");
+					break;
+			}
+
+			return str;
+		}
 
 		/*
 		 * @brief Checks if the required strings are available.
