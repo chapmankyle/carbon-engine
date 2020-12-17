@@ -21,7 +21,35 @@ namespace carbon {
 		m_pos = m_initial_pos;
 	}
 
-	Window::Window() {}
+
+	Window::Window(const std::string &title, i32 width, i32 height) {
+		m_props = {};
+		m_props.title = title;
+		m_props.width = width;
+		m_props.height = height;
+
+		// set size of window
+		m_initial_size = glm::ivec2(m_props.width, m_props.height);
+		m_size = m_initial_size;
+	}
+
+
+	Window::Window(i32 width, i32 height) {
+		m_props = {};
+		m_props.width = width;
+		m_props.height = height;
+
+		// set size of window
+		m_initial_size = glm::ivec2(m_props.width, m_props.height);
+		m_size = m_initial_size;
+	}
+
+
+	Window::Window() {
+		// initialize props to all default values
+		m_props = {};
+	}
+
 
 	Window::~Window() {}
 

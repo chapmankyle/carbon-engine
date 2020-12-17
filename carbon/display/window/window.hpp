@@ -170,6 +170,23 @@ namespace carbon {
 		Window(const window::Props &properties);
 
 		/**
+		 * @brief Initializes a window with the given title, width
+		 * and height.
+		 * @param title The title of the window.
+		 * @param width The width of the window.
+		 * @param height The height of the window.
+		 */
+		Window(const std::string &title, i32 width, i32 height);
+
+		/**
+		 * @brief Initializes a window with the given width and
+		 * height.
+		 * @param width The width of the window.
+		 * @param height The height of the window.
+		 */
+		Window(i32 width, i32 height);
+
+		/**
 		 * @brief Initializes a window with default title, width
 		 * and height.
 		 */
