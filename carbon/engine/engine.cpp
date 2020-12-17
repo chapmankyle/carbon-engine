@@ -50,8 +50,7 @@ namespace carbon {
 		delete m_physical_device;
 		delete m_surface;
 		delete m_instance;
-
-		m_window->destroy();
+		delete m_window;
 	}
 
 
