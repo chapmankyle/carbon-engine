@@ -80,6 +80,23 @@ namespace carbon {
 		WindowGLFW(const window::Props &properties);
 
 		/**
+		 * @brief Initializes a GLFW window with the given title, width
+		 * and height.
+		 * @param title The title of the window.
+		 * @param width The width of the window.
+		 * @param height The height of the window.
+		 */
+		WindowGLFW(const std::string &title, i32 width, i32 height);
+
+		/**
+		 * @brief Initializes a GLFW window with the given width and
+		 * height.
+		 * @param width The width of the window.
+		 * @param height The height of the window.
+		 */
+		WindowGLFW(i32 width, i32 height);
+
+		/**
 		 * @brief Initializes a GLFW window with default title, width
 		 * and height.
 		 */

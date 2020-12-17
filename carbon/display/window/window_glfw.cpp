@@ -34,6 +34,8 @@ namespace carbon {
 		// set callback functions
 		glfwSetFramebufferSizeCallback(m_window, framebufferResizeCallback);
 		glfwSetWindowPosCallback(m_window, windowPositionCallback);
+		glfwSetKeyCallback(m_window, keyCallback);
+		glfwSetCursorPosCallback(m_window, mousePositionCallback);
 	}
 
 
@@ -62,8 +64,28 @@ namespace carbon {
 	}
 
 
+	void WindowGLFW::keyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods) {}
+
+
+	void WindowGLFW::mousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos) {}
+
+
 	WindowGLFW::WindowGLFW(const window::Props &properties)
 		: Window(properties)
+	{
+		createWindow();
+	}
+
+
+	WindowGLFW::WindowGLFW(const std::string &title, i32 width, i32 height)
+		: Window(title, width, height)
+	{
+		createWindow();
+	}
+
+
+	WindowGLFW::WindowGLFW(i32 width, i32 height)
+		: Window(width, height)
 	{
 		createWindow();
 	}
