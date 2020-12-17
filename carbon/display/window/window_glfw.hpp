@@ -71,6 +71,9 @@ namespace carbon {
 		 */
 		static void mousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos);
 
+		WindowGLFW(const WindowGLFW&) = delete;
+		WindowGLFW& operator=(const WindowGLFW&) = delete;
+
 	public:
 
 		/**

@@ -161,6 +161,11 @@ namespace carbon {
 		 */
 		cursor::Mode m_cursor_mode{ cursor::Mode::Normal };
 
+	private:
+
+		Window(const Window&) = delete;
+		Window& operator=(const Window&) = delete;
+
 	public:
 
 		/**
