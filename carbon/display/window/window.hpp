@@ -9,6 +9,7 @@
 
 #include "carbon/setup.hpp"
 #include "carbon/common/utils.hpp"
+#include "carbon/display/input.hpp"
 
 #include <glm/glm.hpp>
 
@@ -161,6 +162,21 @@ namespace carbon {
 		 */
 		cursor::Mode m_cursor_mode{ cursor::Mode::Normal };
 
+		/**
+		 * @brief Keep track of any key events that occur.
+		 */
+		key::event keyEvent{};
+
+		/**
+		 * @brief Keep track of any button events that occur.
+		 */
+		mouse::button_event buttonEvent{};
+
+		/**
+		 * @brief Keep track of the position of the mouse.
+		 */
+		mouse::position mousePosition{};
+
 	private:
 
 		Window(const Window&) = delete;
@@ -203,25 +219,72 @@ namespace carbon {
 		~Window();
 
 		/**
-		 * @brief Destroys the window object.
+		 * @brief Pure virtual function to destroy the window object.
 		 */
 		virtual void destroy() = 0;
 
 		/**
-		 * @brief Checks if the window has not been closed.
+		 * @brief Pure virtual function to check if the window has not been closed.
 		 * @return `true` if the window should be open, `false` otherwise.
 		 */
 		virtual bool shouldClose() = 0;
 
 		/**
-		 * @brief Updates the window.
+		 * @brief Pure virtual function to update the window.
 		 */
 		virtual void update() = 0;
 
 		/**
-		 * @brief Waits until the window has is not minimized.
+		 * @brief Pure virtual function to wait until the window is in focus.
 		 */
 		virtual void waitForFocus() = 0;
+
+		/**
+		 * @brief Pure virtual callback function for when the framebuffer
+		 * has been resized.
+		 * @param width The new width of the framebuffer.
+		 * @param height The new height of the framebuffer.
+		 */
+		virtual void framebufferResizeCallback(i32 width, i32 height) = 0;
+
+		/**
+		 * @brief Pure virtual callback function for when the focus of the
+		 * window has changed.
+		 * @param focused The new state of focus.
+		 */
+		virtual void windowFocusCallback(i32 focused) = 0;
+
+		/*
+		 * @brief Pure virtual callback function for when the position
+		 * of the window changes.
+		 * @param xpos The new x co-ordinate of the window.
+		 * @param ypos The new y co-ordinate of the window.
+		 */
+		virtual void windowPositionCallback(i32 xpos, i32 ypos) = 0;
+
+		/**
+		 * @brief Pure virtual callback function for when a key is activated.
+		 * @param keyCode The code of the activated key.
+		 * @param action The action of the activated key.
+		 * @param mods The modifier bits.
+		 */
+		virtual void keyCallback(key::Code keyCode, InputState action, i32 mods) = 0;
+
+		/**
+		 * @brief Pure virtual callback function for when a mouse button is activated.
+		 * @param button The button that has been activated.
+		 * @param action The action of the button.
+		 * @param mods The modifier bits.
+		 */
+		virtual void mouseButtonCallback(mouse::Button button, InputState action, i32 mods) = 0;
+
+		/**
+		 * @brief Pure virtual callback function for when the
+		 * position of the mouse changes.
+		 * @param xpos The new x-position of the mouse.
+		 * @param ypos The new y-position of the mouse.
+		 */
+		virtual void mousePositionCallback(f64 xpos, f64 ypos) = 0;
 
 		/**
 		 * @brief Sets the mode of the window.
