@@ -32,14 +32,14 @@ namespace carbon {
 		glfwSetWindowUserPointer(m_window, this);
 
 		// set callback functions
-		glfwSetFramebufferSizeCallback(m_window, framebufferResizeCallback);
-		glfwSetWindowPosCallback(m_window, windowPositionCallback);
-		glfwSetKeyCallback(m_window, keyCallback);
-		glfwSetCursorPosCallback(m_window, mousePositionCallback);
+		glfwSetFramebufferSizeCallback(m_window, glfwFramebufferResizeCallback);
+		glfwSetWindowPosCallback(m_window, glfwWindowPositionCallback);
+		glfwSetKeyCallback(m_window, glfwKeyCallback);
+		glfwSetCursorPosCallback(m_window, glfwMousePositionCallback);
 	}
 
 
-	void WindowGLFW::framebufferResizeCallback(GLFWwindow *window, i32 width, i32 height) {
+	void WindowGLFW::glfwFramebufferResizeCallback(GLFWwindow *window, i32 width, i32 height) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 		app->m_resized = true;
 
@@ -55,7 +55,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::windowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos) {
+	void WindowGLFW::glfwWindowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update x and y co-ordinates in application
@@ -64,10 +64,23 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::keyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods) {}
+	void WindowGLFW::glfwKeyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods) {
+		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
+
+		// update current key activated
+		app->keyEvent.key = static_cast<key::Code>(key);
+		app->keyEvent.modifier = static_cast<key::Modifier>(mods);
+		app->keyEvent.state = static_cast<InputState>(action);
+	}
 
 
-	void WindowGLFW::mousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos) {}
+	void WindowGLFW::glfwMousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos) {
+		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
+
+		// update current mouse position
+		app->mousePosition.x = xpos;
+		app->mousePosition.y = ypos;
+	}
 
 
 	WindowGLFW::WindowGLFW(const window::Props &properties)
