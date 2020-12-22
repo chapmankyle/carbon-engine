@@ -32,16 +32,16 @@ namespace carbon {
 		glfwSetWindowUserPointer(m_window, this);
 
 		// set callback functions
-		glfwSetFramebufferSizeCallback(m_window, glfwFramebufferResizeCallback);
-		glfwSetWindowFocusCallback(m_window, glfwWindowFocusCallback);
-		glfwSetWindowPosCallback(m_window, glfwWindowPositionCallback);
-		glfwSetKeyCallback(m_window, glfwKeyCallback);
-		glfwSetMouseButtonCallback(m_window, glfwMouseButtonCallback);
-		glfwSetCursorPosCallback(m_window, glfwMousePositionCallback);
+		glfwSetFramebufferSizeCallback(m_window, callbackFramebufferResizeGLFW);
+		glfwSetWindowFocusCallback(m_window, callbackWindowFocusGLFW);
+		glfwSetWindowPosCallback(m_window, callbackWindowPositionGLFW);
+		glfwSetKeyCallback(m_window, callbackKeyGLFW);
+		glfwSetMouseButtonCallback(m_window, callbackMouseButtonGLFW);
+		glfwSetCursorPosCallback(m_window, callbackMousePositionGLFW);
 	}
 
 
-	void WindowGLFW::glfwFramebufferResizeCallback(GLFWwindow *window, i32 width, i32 height) {
+	void WindowGLFW::callbackFramebufferResizeGLFW(GLFWwindow *window, i32 width, i32 height) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 		app->m_resized = true;
 
@@ -57,7 +57,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::glfwWindowFocusCallback(GLFWwindow *window, i32 focused) {
+	void WindowGLFW::callbackWindowFocusGLFW(GLFWwindow *window, i32 focused) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update focus for window
@@ -65,7 +65,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::glfwWindowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos) {
+	void WindowGLFW::callbackWindowPositionGLFW(GLFWwindow *window, i32 xpos, i32 ypos) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update x and y co-ordinates in application
@@ -74,7 +74,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::glfwKeyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods) {
+	void WindowGLFW::callbackKeyGLFW(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update current key activated
@@ -84,7 +84,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::glfwMouseButtonCallback(GLFWwindow *window, i32 button, i32 action, i32 mods) {
+	void WindowGLFW::callbackMouseButtonGLFW(GLFWwindow *window, i32 button, i32 action, i32 mods) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update mouse button
@@ -94,7 +94,7 @@ namespace carbon {
 	}
 
 
-	void WindowGLFW::glfwMousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos) {
+	void WindowGLFW::callbackMousePositionGLFW(GLFWwindow *window, f64 xpos, f64 ypos) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update current mouse position
