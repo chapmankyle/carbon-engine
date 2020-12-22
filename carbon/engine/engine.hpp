@@ -9,7 +9,7 @@
 
 #include "config.hpp"
 #include "carbon/common/utils.hpp"
-#include "carbon/display/window.hpp"
+#include "carbon/display/window/window_glfw.hpp"
 
 #include <string>
 
@@ -53,12 +53,12 @@ namespace carbon {
 		/**
 		 * @brief Base window that handles user interaction.
 		 */
-		Window *m_window = nullptr;
+		WindowGLFW *m_window = nullptr;
 
 		/**
 		 * @brief Properties of the window.
 		 */
-		WindowProps m_props{};
+		window::Props m_props{};
 
 		/**
 		 * @brief Used to indicate if a resize operation is necessary.
@@ -87,7 +87,7 @@ namespace carbon {
 		 * @brief Initializes the engine with a name. Version number is optional.
 		 * @param properties The properties for the Engine window.
 		 */
-		Engine(const WindowProps &properties);
+		Engine(const window::Props &properties);
 
 		/**
 		 * @brief Initializes the engine with all default settings.
@@ -112,9 +112,14 @@ namespace carbon {
 		/**
 		 * @returns The window associated with the engine.
 		 */
-		const Window& getWindow() const {
+		const WindowGLFW& getWindow() const {
 			return *m_window;
 		}
+
+		/**
+		 * @returns `true` if validation layers are enabled, `false` otherwise.
+		 */
+		const bool isValidationEnabled() const;
 
 		/**
 		 * @returns The instance associated with the engine.

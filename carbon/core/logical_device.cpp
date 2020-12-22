@@ -70,7 +70,7 @@ namespace carbon {
 		};
 
 		// createinfo for each queue family
-		std::vector<VkDeviceQueueCreateInfo> createInfoQueues(uniqueQueueFamilies.size());
+		std::vector<VkDeviceQueueCreateInfo> createInfoQueues;
 
 		// priority given to this queue
 		float queuePriority{ 1.0f };
