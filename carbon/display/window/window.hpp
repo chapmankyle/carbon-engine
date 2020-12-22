@@ -153,6 +153,11 @@ namespace carbon {
 		bool m_minimized{ false };
 
 		/**
+		 * @brief Keep track of if the window is currently in focus or not.
+		 */
+		bool m_focused{ false };
+
+		/**
 		 * @brief Keep track of current window mode.
 		 */
 		window::Mode m_window_mode{ window::Mode::Windowed };
@@ -165,17 +170,17 @@ namespace carbon {
 		/**
 		 * @brief Keep track of any key events that occur.
 		 */
-		key::event keyEvent{};
+		key::event m_key_event{};
 
 		/**
 		 * @brief Keep track of any button events that occur.
 		 */
-		mouse::button_event buttonEvent{};
+		mouse::button_event m_mouse_button_event{};
 
 		/**
 		 * @brief Keep track of the position of the mouse.
 		 */
-		mouse::position mousePosition{};
+		mouse::position m_mouse_position{};
 
 	private:
 
