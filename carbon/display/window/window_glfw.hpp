@@ -43,6 +43,13 @@ namespace carbon {
 		static void glfwFramebufferResizeCallback(GLFWwindow *window, i32 width, i32 height);
 
 		/**
+		 * @brief Callback for when GLFW detects window focus.
+		 * @param window The GLFWwindow object to detect when window is focused.
+		 * @param focused 1 if focused, 0 otherwise.
+		 */
+		static void glfwWindowFocusCallback(GLFWwindow *window, i32 focused);
+
+		/**
 		 * @brief Callback for when GLFW detects that the window
 		 * position has changed.
 		 * @param window The GLFWwindow object.
@@ -63,6 +70,16 @@ namespace carbon {
 		static void glfwKeyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods);
 
 		/**
+		 * @brief Callback for when GLFW detects that a mouse button
+		 * has been activated.
+		 * @param window The GLFWwindow object.
+		 * @param button The button that was activated.
+		 * @param action The action of the button.
+		 * @param mods The modifier bits (shift, control, alt, etc.).
+		 */
+		static void glfwMouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods);
+
+		/**
 		 * @brief Callback for when GLFW detects that the mouse position
 		 * has changed.
 		 * @param window The GLFWwindow object.
@@ -70,6 +87,7 @@ namespace carbon {
 		 * @param ypos The y-position of the mouse.
 		 */
 		static void glfwMousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos);
+
 
 		WindowGLFW(const WindowGLFW&) = delete;
 		WindowGLFW& operator=(const WindowGLFW&) = delete;
