@@ -33,8 +33,10 @@ namespace carbon {
 
 		// set callback functions
 		glfwSetFramebufferSizeCallback(m_window, glfwFramebufferResizeCallback);
+		glfwSetWindowFocusCallback(m_window, glfwWindowFocusCallback);
 		glfwSetWindowPosCallback(m_window, glfwWindowPositionCallback);
 		glfwSetKeyCallback(m_window, glfwKeyCallback);
+		glfwSetMouseButtonCallback(m_window, glfwMouseButtonCallback);
 		glfwSetCursorPosCallback(m_window, glfwMousePositionCallback);
 	}
 
@@ -55,6 +57,14 @@ namespace carbon {
 	}
 
 
+	void WindowGLFW::glfwWindowFocusCallback(GLFWwindow *window, i32 focused) {
+		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
+
+		// update focus for window
+		app->m_focused = static_cast<bool>(focused);
+	}
+
+
 	void WindowGLFW::glfwWindowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos) {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
@@ -68,9 +78,19 @@ namespace carbon {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update current key activated
-		app->keyEvent.key = static_cast<key::Code>(key);
-		app->keyEvent.modifier = static_cast<key::Modifier>(mods);
-		app->keyEvent.state = static_cast<InputState>(action);
+		app->m_key_event.key = static_cast<key::Code>(key);
+		app->m_key_event.modifier = static_cast<key::Modifier>(mods);
+		app->m_key_event.state = static_cast<InputState>(action);
+	}
+
+
+	void WindowGLFW::glfwMouseButtonCallback(GLFWwindow *window, i32 button, i32 action, i32 mods) {
+		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
+
+		// update mouse button
+		app->m_mouse_button_event.button = static_cast<mouse::Button>(button);
+		app->m_mouse_button_event.modifier = static_cast<key::Modifier>(mods);
+		app->m_mouse_button_event.state = static_cast<InputState>(action);
 	}
 
 
@@ -78,8 +98,8 @@ namespace carbon {
 		auto app = reinterpret_cast<WindowGLFW*>(glfwGetWindowUserPointer(window));
 
 		// update current mouse position
-		app->mousePosition.x = xpos;
-		app->mousePosition.y = ypos;
+		app->m_mouse_position.x = xpos;
+		app->m_mouse_position.y = ypos;
 	}
 
 
