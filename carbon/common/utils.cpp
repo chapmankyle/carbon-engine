@@ -62,6 +62,22 @@ namespace carbon {
 			return x;
 		}
 
+
+		std::string getEstimatedAspectRatio(i32 width, i32 height) {
+			// find greatest common divisor
+			i32 factor = gcd(width, height);
+			i32 x = width / factor;
+			i32 y = height / factor;
+
+			// specifically to return 16:10 as 16:10 instead of 8:5
+			if (factor == 160) {
+				x *= 2;
+				y *= 2;
+			}
+
+			return std::to_string(x) + ":" + std::to_string(y);
+		}
+
 	} // namespace utils
 
 } // namespace carbon

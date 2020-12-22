@@ -12,7 +12,7 @@
 namespace carbon {
 
 	void Engine::createWindow() {
-		m_window = new Window(m_props);
+		m_window = new WindowGLFW(m_props);
 	}
 
 
@@ -25,10 +25,13 @@ namespace carbon {
 
 		// create physical device used for computation
 		m_physical_device = new PhysicalDevice(m_instance);
+
+		// create logical device
+		m_logical_device = new LogicalDevice(m_instance, m_physical_device, m_surface);
 	}
 
 
-	Engine::Engine(const WindowProps &properties)
+	Engine::Engine(const window::Props &properties)
 		: m_props(properties)
 	{
 		createWindow();
@@ -43,11 +46,11 @@ namespace carbon {
 
 
 	Engine::~Engine() {
+		delete m_logical_device;
 		delete m_physical_device;
 		delete m_surface;
 		delete m_instance;
-
-		m_window->destroy();
+		delete m_window;
 	}
 
 
@@ -58,6 +61,11 @@ namespace carbon {
 
 	void Engine::update() {
 		m_window->update();
+	}
+
+
+	const bool Engine::isValidationEnabled() const {
+		return m_instance->isValidationEnabled();
 	}
 
 

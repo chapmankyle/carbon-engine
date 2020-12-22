@@ -23,20 +23,24 @@ namespace carbon {
 		NONE
 	};
 
-	/**
-	 * @brief The types of cursors available.
-	 * Adapted from : https://www.glfw.org/docs/3.3/group__shapes.html
-	 */
-	enum class CursorType : i32 {
-		Arrow = 0x00036001,
-		Ibeam = 0x00036002,
-		Crosshair = 0x00036003,
-		Hand = 0x00036004,
-		HorizontalResize = 0x00036005,
-		VerticalResize = 0x00036006,
+	namespace cursor {
 
-		Normal = Arrow
-	};
+		/**
+		 * @brief The types of cursors available.
+		 * Adapted from : https://www.glfw.org/docs/3.3/group__shapes.html
+		 */
+		enum class Type : i32 {
+			Arrow = 0x00036001,
+			Ibeam = 0x00036002,
+			Crosshair = 0x00036003,
+			Hand = 0x00036004,
+			HorizontalResize = 0x00036005,
+			VerticalResize = 0x00036006,
+
+			Normal = Arrow
+		};
+
+	} // namespace cursor
 
 	//    _  __
 	//   | |/ /

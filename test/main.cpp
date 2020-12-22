@@ -7,7 +7,7 @@ int main() {
 	// before the
 	// #include "carbon/carbon.hpp"
 
-	carbon::WindowProps properties;
+	carbon::window::Props properties;
 	properties.title = "Work In Progress: Game";
 	properties.version = carbon::utils::version{ 1, 1, 0 };
 	properties.width = 1280;
@@ -16,14 +16,15 @@ int main() {
 	carbon::Timer t;
 	carbon::Engine engine(properties);
 	std::cout << "\nEngine creation took " << t.elapsed() << " ms\n";
+	std::cout << "Validation ?= " << std::boolalpha << engine.isValidationEnabled() << std::noboolalpha << '\n';
 
-	std::cout << "Validation ?= " << std::boolalpha << engine.getInstance().isValidationEnabled() << std::noboolalpha << '\n';
+	std::cout << "\nInitial position = " << carbon::utils::showVector(engine.getWindow().getPosition()) << '\n';
+	std::cout << "Initial size = " << carbon::utils::showVector(engine.getWindow().getSize()) << '\n';
+
 	std::cout << "\nAspect ratio = " << engine.getWindow().getAspectRatio() << '\n';
+	std::cout << "Aspect ratio => " << carbon::utils::getEstimatedAspectRatio(properties.width, properties.height) << '\n';
 
-	carbon::i32 factor = carbon::utils::gcd(properties.width, properties.height);
-	std::cout << "Aspect ratio [factor=" << factor << "] => " << properties.width / factor << ':' << properties.height / factor << '\n';
-
-	std::cout << engine.getPhysicalDevice().getPropertiesAsStr() << '\n';
+	std::cout << '\n' << engine.getPhysicalDevice().getPropertiesAsStr() << '\n';
 
 	// main loop when window is open
 	while (engine.isRunning()) {

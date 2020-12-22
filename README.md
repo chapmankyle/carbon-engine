@@ -38,6 +38,7 @@ git submodule update --init --recursive
 
 The following dependencies are included as submodules in the `deps` directory:
 - :tv: [GLFW](https://www.glfw.org/) - Used for handling window interaction
+- :triangular_ruler: [GLM](https://glm.g-truc.net/0.9.9/index.html) - Used for working with vectors and matrices
 
 # Modules :card_index_dividers:
 
@@ -59,12 +60,16 @@ The following dependencies are included as submodules in the `deps` directory:
 [![input](https://img.shields.io/badge/carbon-input-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/input.hpp)
 [![surface](https://img.shields.io/badge/carbon-surface-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/surface.hpp)
 [![swapchain](https://img.shields.io/badge/carbon-swapchain-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/swapchain.hpp)
-[![window](https://img.shields.io/badge/carbon-window-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/window.hpp)
+
+#### carbon [display](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/display) > [window](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/display/window)
+
+[![window](https://img.shields.io/badge/carbon-window-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/window/window.hpp)
+[![window-glfw](https://img.shields.io/badge/carbon-window_glfw-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/window/window_glfw.hpp)
 
 #### carbon [engine](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/engine)
 
-[![config](https://img.shields.io/badge/carbon-config-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/config.hpp)
-[![engine](https://img.shields.io/badge/carbon-engine-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/engine.hpp)
+[![config](https://img.shields.io/badge/carbon-config-yellow.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/config.hpp)
+[![engine](https://img.shields.io/badge/carbon-engine-yellow.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/engine/engine.hpp)
 
 #### carbon [pipeline](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/pipeline)
 

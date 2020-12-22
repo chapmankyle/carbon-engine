@@ -21,9 +21,6 @@
     <ClCompile Include="carbon\core\instance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="carbon\display\window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,6 +45,12 @@
     <ClCompile Include="carbon\engine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="carbon\display\window\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="carbon\display\window\window_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="carbon\carbon.hpp">
@@ -66,9 +69,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="carbon\core\instance.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="carbon\display\window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="carbon\common\debug.hpp">
@@ -102,6 +102,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="carbon\core\time.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carbon\display\window\window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carbon\display\window\window_glfw.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
