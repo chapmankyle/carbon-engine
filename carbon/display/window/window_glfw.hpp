@@ -150,53 +150,6 @@ namespace carbon {
 		virtual void waitForFocus() override;
 
 		/**
-		 * @brief Callback function for when the framebuffer has
-		 * been resized.
-		 * @param width The new width of the framebuffer.
-		 * @param height The new height of the framebuffer.
-		 */
-		virtual void framebufferResizeCallback(i32 width, i32 height) override;
-
-		/**
-		 * @brief Callback function for when the focus of the window
-		 * has changed.
-		 * @param focused The new state of focus.
-		 */
-		virtual void windowFocusCallback(i32 focused) override;
-
-		/*
-		 * @brief Callback function for when the position of the
-		 * window changes.
-		 * @param xpos The new x co-ordinate of the window.
-		 * @param ypos The new y co-ordinate of the window.
-		 */
-		virtual void windowPositionCallback(i32 xpos, i32 ypos) override;
-
-		/**
-		 * @brief Callback function for when a key is activated.
-		 * @param keyCode The code of the activated key.
-		 * @param action The action of the activated key.
-		 * @param mods The modifier bits.
-		 */
-		virtual void keyCallback(key::Code keyCode, InputState action, i32 mods) override;
-
-		/**
-		 * @brief Callback function for when a mouse button is activated.
-		 * @param button The button that has been activated.
-		 * @param action The action of the button.
-		 * @param mods The modifier bits.
-		 */
-		virtual void mouseButtonCallback(mouse::Button button, InputState action, i32 mods) override;
-
-		/**
-		 * @brief Callback function for when the position of
-		 * the mouse changes.
-		 * @param xpos The new x-position of the mouse.
-		 * @param ypos The new y-position of the mouse.
-		 */
-		virtual void mousePositionCallback(f64 xpos, f64 ypos) override;
-
-		/**
 		 * @brief Sets the mode of the window.
 		 * @param mode The new mode to set the window to.
 		 */
