@@ -40,14 +40,14 @@ namespace carbon {
 		 * @param width The new width of the framebuffer.
 		 * @param height The new height of the framebuffer.
 		 */
-		static void glfwFramebufferResizeCallback(GLFWwindow *window, i32 width, i32 height);
+		static void callbackFramebufferResizeGLFW(GLFWwindow *window, i32 width, i32 height);
 
 		/**
 		 * @brief Callback for when GLFW detects window focus.
 		 * @param window The GLFWwindow object to detect when window is focused.
 		 * @param focused 1 if focused, 0 otherwise.
 		 */
-		static void glfwWindowFocusCallback(GLFWwindow *window, i32 focused);
+		static void callbackWindowFocusGLFW(GLFWwindow *window, i32 focused);
 
 		/**
 		 * @brief Callback for when GLFW detects that the window
@@ -56,7 +56,7 @@ namespace carbon {
 		 * @param xpos The new x co-ordinate of the window.
 		 * @param ypos The new y co-ordinate of the window.
 		 */
-		static void glfwWindowPositionCallback(GLFWwindow *window, i32 xpos, i32 ypos);
+		static void callbackWindowPositionGLFW(GLFWwindow *window, i32 xpos, i32 ypos);
 
 		/**
 		 * @brief Callback for when GLFW detects a key has been
@@ -67,7 +67,7 @@ namespace carbon {
 		 * @param action The action of the key (pressed, released or repeated).
 		 * @param mods The modifier bits (shift, control, alt, etc.).
 		 */
-		static void glfwKeyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods);
+		static void callbackKeyGLFW(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mods);
 
 		/**
 		 * @brief Callback for when GLFW detects that a mouse button
@@ -77,7 +77,7 @@ namespace carbon {
 		 * @param action The action of the button.
 		 * @param mods The modifier bits (shift, control, alt, etc.).
 		 */
-		static void glfwMouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods);
+		static void callbackMouseButtonGLFW(GLFWwindow* window, i32 button, i32 action, i32 mods);
 
 		/**
 		 * @brief Callback for when GLFW detects that the mouse position
@@ -86,7 +86,7 @@ namespace carbon {
 		 * @param xpos The x-position of the mouse.
 		 * @param ypos The y-position of the mouse.
 		 */
-		static void glfwMousePositionCallback(GLFWwindow *window, f64 xpos, f64 ypos);
+		static void callbackMousePositionGLFW(GLFWwindow *window, f64 xpos, f64 ypos);
 
 
 		WindowGLFW(const WindowGLFW&) = delete;
