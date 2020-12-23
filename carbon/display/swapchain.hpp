@@ -17,6 +17,7 @@ namespace carbon {
 	// forward-declare classes that would result in circular dependency
 	class PhysicalDevice;
 	class LogicalDevice;
+	class RenderPass;
 	class Surface;
 
 	/**
@@ -45,6 +46,11 @@ namespace carbon {
 		 * @brief The logical device to use in the swapchain.
 		 */
 		const class LogicalDevice *m_logical_device;
+
+		/**
+		 * @brief The render pass used for drawing.
+		 */
+		const class RenderPass *m_render_pass;
 
 		/**
 		 * @brief The surface to use in the swapchain.
@@ -164,6 +170,12 @@ namespace carbon {
 		void createImageViews();
 
 		/**
+		 * @brief Creates the render pass that specifies information about the framebuffer
+		 * attachments and how many colour and depth buffers there will be.
+		 */
+		void createRenderPass();
+
+		/**
 		 * @brief Creates the framebuffers that will be used for rendering the
 		 * swapchain images. We have to create a framebuffer for each image in
 		 * the swapchain and use the one that corresponds to the retrieved image
@@ -187,6 +199,10 @@ namespace carbon {
 			class PhysicalDevice *physDevice,
 			class Surface *surface
 		);
+
+		Swapchain(const Swapchain&) = delete;
+
+		Swapchain& operator=(const Swapchain&) = delete;
 
 		/**
 		 * @brief Destructor for the swapchain.
