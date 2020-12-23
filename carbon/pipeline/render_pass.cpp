@@ -112,7 +112,7 @@ namespace carbon {
 	}
 
 
-	RenderPass::RenderPass(LogicalDevice *device, const VkFormat &imageFormat)
+	RenderPass::RenderPass(const LogicalDevice *device, const VkFormat &imageFormat)
 		: m_logical_device(device)
 		, m_image_format(imageFormat)
 	{

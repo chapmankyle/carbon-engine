@@ -97,7 +97,11 @@ namespace carbon {
 		 * @param device The logical device to use for creating the render pass.
 		 * @param imageFormat The format of the swapchain images.
 		 */
-		explicit RenderPass(class LogicalDevice *device, const VkFormat &imageFormat);
+		explicit RenderPass(const class LogicalDevice *device, const VkFormat &imageFormat);
+
+		RenderPass(const RenderPass&) = delete;
+
+		RenderPass& operator=(const RenderPass&) = delete;
 
 		/**
 		 * @brief Destructor for the render pass.
