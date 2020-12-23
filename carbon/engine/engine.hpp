@@ -20,6 +20,7 @@ namespace carbon {
 	class PhysicalDevice;
 	class LogicalDevice;
 	class Surface;
+	class Swapchain;
 
 	/**
 	 * @brief Main engine that can be used to start creating a game.
@@ -49,6 +50,11 @@ namespace carbon {
 		 * @brief Surface to render swapchain images to.
 		 */
 		class Surface *m_surface = nullptr;
+
+		/**
+		 * @brief Swapchain to queue images for rendering.
+		 */
+		class Swapchain *m_swapchain = nullptr;
 
 		/**
 		 * @brief Base window that handles user interaction.
@@ -94,6 +100,10 @@ namespace carbon {
 		 */
 		explicit Engine();
 
+		Engine(const Engine&) = delete;
+
+		Engine& operator=(const Engine&) = delete;
+
 		/**
 		 * @brief Destructor for the Engine.
 		 */
@@ -136,6 +146,11 @@ namespace carbon {
 		 * device in the engine.
 		 */
 		const class LogicalDevice& getLogicalDevice() const;
+
+		/**
+		 * @returns The swapchain used in the engine.
+		 */
+		const Swapchain& getSwapchain() const;
 
 	};
 

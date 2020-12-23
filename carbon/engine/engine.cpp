@@ -8,6 +8,7 @@
 #include "carbon/core/physical_device.hpp"
 #include "carbon/core/logical_device.hpp"
 #include "carbon/display/surface.hpp"
+#include "carbon/display/swapchain.hpp"
 
 namespace carbon {
 
@@ -28,6 +29,9 @@ namespace carbon {
 
 		// create logical device
 		m_logical_device = new LogicalDevice(m_instance, m_physical_device, m_surface);
+
+		// create swapchain
+		m_swapchain = new Swapchain(m_window->getHandle(), m_logical_device, m_physical_device, m_surface);
 	}
 
 
@@ -46,6 +50,7 @@ namespace carbon {
 
 
 	Engine::~Engine() {
+		delete m_swapchain;
 		delete m_logical_device;
 		delete m_physical_device;
 		delete m_surface;
@@ -81,6 +86,11 @@ namespace carbon {
 
 	const LogicalDevice& Engine::getLogicalDevice() const {
 		return *m_logical_device;
+	}
+
+
+	const Swapchain& Engine::getSwapchain() const {
+		return *m_swapchain;
 	}
 
 } // namespace carbon
