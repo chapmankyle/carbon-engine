@@ -36,7 +36,7 @@ namespace carbon {
 		m_attachment_references.clear();
 
 		// attachment references for each attachment description
-		for (int i{ 0 }; i < m_attachment_descriptions.size(); i++) {
+		for (int i = 0; i < m_attachment_descriptions.size(); i++) {
 			VkAttachmentReference ref{};
 			ref.attachment = 0;
 			ref.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
@@ -90,6 +90,8 @@ namespace carbon {
 
 
 	void RenderPass::create() {
+		assert(m_logical_device && "Logical device cannot be null.");
+
 		// describe render pass
 		VkRenderPassCreateInfo renderPassInfo;
 		initStruct(renderPassInfo, VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO);
