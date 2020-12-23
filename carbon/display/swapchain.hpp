@@ -102,6 +102,11 @@ namespace carbon {
 		std::vector<VkImageView> m_image_views;
 
 		/**
+		 * @brief The framebuffers for the swapchain images.
+		 */
+		std::vector<VkFramebuffer> m_framebuffers;
+
+		/**
 		 * @brief Queries the swapchain support of a device.
 		 * @returns The `SupportDetails` struct containing support information for the swapchain.
 		 */
@@ -157,6 +162,14 @@ namespace carbon {
 		 * rendering to take place.
 		 */
 		void createImageViews();
+
+		/**
+		 * @brief Creates the framebuffers that will be used for rendering the
+		 * swapchain images. We have to create a framebuffer for each image in
+		 * the swapchain and use the one that corresponds to the retrieved image
+		 * at draw time.
+		 */
+		void createFramebuffers();
 
 	public:
 
