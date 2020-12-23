@@ -60,7 +60,6 @@ The following dependencies are included as submodules in the `deps` directory:
 [![input](https://img.shields.io/badge/carbon-input-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/input.hpp)
 [![surface](https://img.shields.io/badge/carbon-surface-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/surface.hpp)
 [![swapchain](https://img.shields.io/badge/carbon-swapchain-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/swapchain.hpp)
-[![window](https://img.shields.io/badge/carbon-window-blue.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/display/window/window.hpp)
 
 #### carbon [display](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/display) > [window](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/display/window)
 
