@@ -1,7 +1,6 @@
 [submodule "deps/glfw"]
 	path = deps/glfw
-	url = https://github.com/chapmankyle/glfw
-	branch = 3.3-stable
+	url = https://github.com/chapmankyle/glfw-bin
 [submodule "deps/glm"]
 	path = deps/glm
 	url = https://github.com/chapmankyle/glm
