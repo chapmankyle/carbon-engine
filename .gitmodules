@@ -1,5 +1,5 @@
-[submodule "deps/glfw"]
-	path = deps/glfw
+[submodule "deps/glfw-bin"]
+	path = deps/glfw-bin
 	url = https://github.com/chapmankyle/glfw-bin
 [submodule "deps/glm"]
 	path = deps/glm
