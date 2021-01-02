@@ -59,8 +59,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 endif()
 
 # include submodules
-add_subdirectory( deps/glfw )
-include_directories( deps/glfw/include )
+add_subdirectory( deps/glfw-bin )
+include_directories( deps/glfw-bin/include )
 
 add_subdirectory( deps/glm )
 include_directories( deps/glm )
