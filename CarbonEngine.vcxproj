@@ -151,6 +151,7 @@
     <ClCompile Include="carbon\display\window\window_glfw.cpp" />
     <ClCompile Include="carbon\engine\engine.cpp" />
     <ClCompile Include="carbon\pipeline\render_pass.cpp" />
+    <ClCompile Include="carbon\resources\buffer.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="carbon\display\input.hpp" />
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
+    <ClInclude Include="carbon\resources\buffer.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
     <ClInclude Include="carbon\types.hpp" />
   </ItemGroup>
