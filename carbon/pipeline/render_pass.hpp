@@ -22,7 +22,7 @@ namespace carbon {
 	 */
 	class RenderPass {
 
-		private:
+	private:
 
 		/**
 		 * @brief The logical device to use in the swapchain.
