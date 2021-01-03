@@ -32,9 +32,19 @@ namespace carbon {
 		VkDeviceSize m_size;
 
 		/**
+		 * @brief The use of the buffer.
+		 */
+		VkBufferUsageFlags m_usage;
+
+		/**
+		 * @brief The properties of the buffer memory.
+		 */
+		VkMemoryPropertyFlags m_properties;
+
+		/**
 		 * @brief Offset of the buffer, if applicable.
 		 */
-		VkDeviceSize m_offset;
+		VkDeviceSize m_offset = 0;
 
 		/**
 		 * @brief Physical device memory of this buffer.
@@ -53,8 +63,9 @@ namespace carbon {
 
 		/**
 		 * @brief Creates the buffer using the parameters from constructors.
+		 * @param data The data that the buffer should map to.
 		 */
-		void create();
+		void create(const void *data);
 
 	public:
 
@@ -66,9 +77,9 @@ namespace carbon {
 		 * @param data [Optional] Pointer to the data that the buffer should map to.
 		 */
 		Buffer(
-			const VkDeviceSize& size, 
-			const VkBufferUsageFlags& usage, 
-			const VkMemoryPropertyFlags& properties, 
+			const VkDeviceSize &size, 
+			const VkBufferUsageFlags &usage, 
+			const VkMemoryPropertyFlags &properties, 
 			const void *data = nullptr
 		);
 
@@ -149,6 +160,20 @@ namespace carbon {
 		 */
 		const VkDeviceSize& getSize() const {
 			return m_size;
+		}
+
+		/**
+		 * @returns The usage flags for the buffer.
+		 */
+		const VkBufferUsageFlags& getUsage() const {
+			return m_usage;
+		}
+
+		/**
+		 * @returns The memory properties of the buffer.
+		 */
+		const VkMemoryPropertyFlags& getMemoryProperties() const {
+			return m_properties;
 		}
 
 		/**
