@@ -10,11 +10,6 @@
 
 namespace carbon {
 
-	void Buffer::create(const void *data) {
-
-	}
-
-
 	Buffer::Buffer(const LogicalDevice *device, const VkDeviceSize &size, const VkBufferUsageFlags &usage, const VkMemoryPropertyFlags &properties, const void *data) 
 		: m_device(device)
 		, m_size(size)
@@ -26,7 +21,7 @@ namespace carbon {
 		assert(m_device && "Logical device must not be null.");
 
 		// create with given parameters
-		create(data);
+		create(m_size, m_usage, m_properties, data);
 
 		// initialize descriptor
 		m_descriptor = {};
@@ -50,7 +45,7 @@ namespace carbon {
 	}
 
 
-	Buffer::Buffer(const Buffer& other) {
+	Buffer::Buffer(const Buffer &other) {
 		// do nothing if they are exactly the same
 		if (*this == other) {
 			return;
@@ -96,17 +91,21 @@ namespace carbon {
 	}
 
 
-	bool Buffer::operator==(const Buffer& other) const {
+	bool Buffer::operator==(const Buffer &other) const {
 		return m_size == other.getSize() && m_buffer == other.getHandle() && m_mapped_memory == other.getMappedMemory();
 	}
 
 
-	bool Buffer::operator!=(const Buffer& other) const {
+	bool Buffer::operator!=(const Buffer &other) const {
 		return !(*this == other);
 	}
 
 
-	void Buffer::copyFrom(Buffer* src, VkDeviceSize size) {
+	void Buffer::create(const VkDeviceSize &size, const VkBufferUsageFlags &usage, const VkMemoryPropertyFlags &properties, const void *data) {
+	}
+
+
+	void Buffer::copyFrom(Buffer *src, const VkDeviceSize &size) {
 	}
 
 
@@ -134,7 +133,19 @@ namespace carbon {
 	}
 
 
-	void Buffer::flush(VkDeviceSize size, VkDeviceSize offset) {
+	bool Buffer::flush(const VkDeviceSize size, const VkDeviceSize offset) {
+		VkDevice dev = m_device->getHandle();
+
+		// flush memory mapped range
+		VkMappedMemoryRange mappedRange;
+		initStruct(mappedRange, VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE);
+
+		mappedRange.size = size;
+		mappedRange.offset = offset;
+		mappedRange.memory = m_memory;
+		mappedRange.pNext = nullptr;
+
+		return vkFlushMappedMemoryRanges(dev, 1, &mappedRange) == VK_SUCCESS;
 	}
 
 
@@ -145,8 +156,7 @@ namespace carbon {
 
 	namespace utils {
 
-		void copyBuffer(Buffer* src, Buffer* dest, VkDeviceSize size) {
-
+		void copyBuffer(Buffer *src, Buffer *dest, const VkDeviceSize &size) {
 		}
 
 	} // namespace utils

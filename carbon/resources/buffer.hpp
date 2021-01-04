@@ -158,8 +158,9 @@ namespace carbon {
 		 * @brief Flushes the memory of the device.
 		 * @param size The size of the memory range to flush.
 		 * @param offset The offset into the memory.
+		 * @returns `true` if the memory was successfully flushed, `false` otherwise.
 		 */
-		void flush(VkDeviceSize size, VkDeviceSize offset);
+		bool flush(const VkDeviceSize size, const VkDeviceSize offset);
 
 		/**
 		 * @returns The logical device associated with the buffer.
