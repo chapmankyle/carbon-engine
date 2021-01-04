@@ -170,6 +170,7 @@
     <ClInclude Include="carbon\engine\config.hpp" />
     <ClInclude Include="carbon\engine\engine.hpp" />
     <ClInclude Include="carbon\display\input.hpp" />
+    <ClInclude Include="carbon\paths.hpp" />
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\resources\buffer.hpp" />
