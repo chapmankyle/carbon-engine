@@ -63,3 +63,6 @@ include_directories( deps/glfw-bin/include )
 
 add_subdirectory( deps/glm )
 include_directories( deps/glm )
+
+add_subdirectory( deps/spdlog )
+include_directories( deps/spdlog/include )
