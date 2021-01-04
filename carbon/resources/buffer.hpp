@@ -66,12 +66,6 @@ namespace carbon {
 		 */
 		void *m_mapped_memory = nullptr;
 
-		/**
-		 * @brief Creates the buffer using the parameters from constructors.
-		 * @param data The data that the buffer should map to.
-		 */
-		void create(const void *data);
-
 	public:
 
 		/**
@@ -125,11 +119,22 @@ namespace carbon {
 		bool operator!=(const Buffer &other) const;
 
 		/**
+		 * @brief Creates the buffer with the given parameters.
+		 * Useful for when creating an empty buffer and filling it with information
+		 * later on.
+		 * @param size The size of the buffer.
+		 * @param usage The bits representing how the buffer will be used.
+		 * @param properties Properties of the buffer.
+		 * @param data [Optional] Pointer to the data that the buffer should map to.
+		 */
+		void create(const VkDeviceSize &size, const VkBufferUsageFlags &usage, const VkMemoryPropertyFlags &properties, const void *data = nullptr);
+
+		/**
 		 * @brief Copies the contents from the `src` buffer into this buffer.
 		 * @param src The buffer to copy the contents from.
 		 * @param size The size of the buffer to copy.
 		 */
-		static void copyFrom(Buffer *src, VkDeviceSize size);
+		static void copyFrom(Buffer *src, const VkDeviceSize &size);
 
 		/**
 		 * @brief Attempts to map the buffer into CPU-accessible memory.
@@ -228,7 +233,7 @@ namespace carbon {
 		 * @param dest The buffer to copy the contents to.
 		 * @param size The size of the buffer to copy.
 		 */
-		static void copyBuffer(Buffer *src, Buffer *dest, VkDeviceSize size);
+		static void copyBuffer(Buffer *src, Buffer *dest, const VkDeviceSize &size);
 
 	} // namespace utils
 
