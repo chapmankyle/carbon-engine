@@ -7,6 +7,9 @@
 #ifndef PATHS_HPP
 #define PATHS_HPP
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
 #include <string>
 
 namespace carbon {
@@ -42,9 +45,16 @@ namespace carbon {
 		static int makeDir(const char *dir);
 
 		/**
+		 * @brief Checks if the directory exists.
+		 * Adapted from : https://stackoverflow.com/a/52043954
 		 * @returns `true` if the directory exists, `false` otherwise.
 		 */
-		static bool dirExists(const char *dir);
+		static bool dirExists(const char *dir) {
+			struct stat buffer;
+
+			// treat any `stat` error as directory not existing
+			return stat(dir, &buffer) == 0 ? (buffer.st_mode & S_IFDIR) : false;
+		}
 
 	};
 
