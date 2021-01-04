@@ -57,6 +57,7 @@ namespace carbon {
 		}
 
 		// copy contents of buffer to *this
+		m_device = other.getLogicalDevice();
 		m_size = other.getSize();
 		m_usage = other.getUsage();
 		m_properties = other.getMemoryProperties();
@@ -134,6 +135,11 @@ namespace carbon {
 
 
 	void Buffer::flush(VkDeviceSize size, VkDeviceSize offset) {
+	}
+
+
+	const LogicalDevice* Buffer::getLogicalDevice() const {
+		return m_device;
 	}
 
 
