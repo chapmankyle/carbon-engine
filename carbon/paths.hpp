@@ -7,17 +7,12 @@
 #ifndef PATHS_HPP
 #define PATHS_HPP
 
-#include <sys/types.h>
-#include <sys/stat.h>
-
+#include <filesystem>
 #include <string>
 
 namespace carbon {
 
-	/**
-	 * @brief Struct containing useful paths for the engine.
-	 */
-	struct Paths {
+	namespace paths {
 
 		/**
 		 * @returns Directory where `carbon-engine` resides.
@@ -40,23 +35,22 @@ namespace carbon {
 		static const std::string& binaryDir();
 
 		/**
-		 * @returns 1 if directory was successfully created, 0 or > 1 otherwise.
+		 * @returns `true` if the directory was made, `false` otherwise.
 		 */
-		static int makeDir(const char *dir);
+		static bool makeDir(const char* dir) {
+			std::filesystem::path path{ dir };
+			return std::filesystem::create_directory(path);
+		}
 
 		/**
-		 * @brief Checks if the directory exists.
-		 * Adapted from : https://stackoverflow.com/a/52043954
 		 * @returns `true` if the directory exists, `false` otherwise.
 		 */
 		static bool dirExists(const char *dir) {
-			struct stat buffer;
-
-			// treat any `stat` error as directory not existing
-			return stat(dir, &buffer) == 0 ? (buffer.st_mode & S_IFDIR) : false;
+			std::filesystem::path path{ dir };
+			return std::filesystem::is_directory(path);
 		}
 
-	};
+	} // namespace paths
 
 } // namespace carbon
 
