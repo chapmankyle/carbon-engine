@@ -157,6 +157,11 @@ namespace carbon {
 		void flush(VkDeviceSize size, VkDeviceSize offset);
 
 		/**
+		 * @returns The logical device associated with the buffer.
+		 */
+		const class LogicalDevice* getLogicalDevice() const;
+
+		/**
 		 * @returns The handle on the underlying buffer.
 		 */
 		const VkBuffer& getHandle() const {
