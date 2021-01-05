@@ -7,7 +7,7 @@
 #ifndef COMMON_UTILS_HPP
 #define COMMON_UTILS_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 #include "template_types.hpp"
 
 #include <cassert>
