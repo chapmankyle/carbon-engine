@@ -7,6 +7,8 @@
 #ifndef PATHS_HPP
 #define PATHS_HPP
 
+#include "platform.hpp"
+
 #include <filesystem>
 #include <string>
 
@@ -15,30 +17,73 @@ namespace carbon {
 	namespace paths {
 
 		/**
+		 * @brief Name of the directory to use as the root.
+		 */
+		static inline const std::string NAME_ROOT_DIR = "carbon-engine";
+
+		/**
 		 * @brief Absolute path of where the executable is being run from.
 		 * Contains '\\' when in Windows and '/' otherwise.
 		 */
 		static inline const std::string CURRENT_PATH = std::filesystem::current_path().string();
 
+		// Anonymous namespace since functions in here are not necessary
+		namespace {
+
+			/**
+			 * @returns The root directory of the engine.
+			 */
+			static const std::string _getRoot() {
+				// copy variable into editable string
+				std::string curr = ::carbon::paths::CURRENT_PATH;
+				size_t idx = curr.find(::carbon::paths::NAME_ROOT_DIR);
+
+				// some error occurred if cannot find root directory
+				if (idx == std::string::npos) {
+					return ::carbon::paths::CURRENT_PATH;
+				}
+
+				// remove subdirectories from end of string
+				curr = curr.substr(0, idx + ::carbon::paths::NAME_ROOT_DIR.length());
+
+				// append trailing slash depending on operating system
+				if (CARBON_PLATFORM == CARBON_PLATFORM_WINDOWS) {
+					curr.append("\\");
+				} else {
+					curr.append("/");
+				}
+
+				return curr;
+			}
+
+		}
+
 		/**
-		 * @returns Path where the `carbon-engine` directory resides.
+		 * @brief Absolute path of the `NAME_ROOT_DIR` directory.
+		 * Includes trailing slash, which is '\\' in Windows and '/' otherwise.
 		 */
-		static const std::string& rootPath();
+		static inline const std::string ROOT_DIR = _getRoot();
 
 		/**
 		 * @returns Path where the assets for the engine reside.
 		 */
-		static const std::string& assetsPath();
+		static const std::string& assetsPath() {
+			return ROOT_DIR + "assets";
+		}
 
 		/**
 		 * @returns Path where the log files for the engine reside.
 		 */
-		static const std::string& logsPath();
+		static const std::string& logsPath() {
+			return ROOT_DIR + "logs";
+		}
 
 		/**
 		 * @returns Path where the generated binary files for the engine reside.
 		 */
-		static const std::string& binaryPath();
+		static const std::string& binaryPath() {
+			return ROOT_DIR + "x64";
+		}
 
 		/**
 		 * @returns `true` if the directory was made, `false` otherwise.
