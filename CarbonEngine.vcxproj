@@ -155,6 +155,7 @@
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="carbon\backend.hpp" />
     <ClInclude Include="carbon\carbon.hpp" />
     <ClInclude Include="carbon\common\debug.hpp" />
     <ClInclude Include="carbon\common\template_types.hpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="carbon\engine\config.hpp" />
     <ClInclude Include="carbon\engine\engine.hpp" />
     <ClInclude Include="carbon\display\input.hpp" />
+    <ClInclude Include="carbon\macros.hpp" />
     <ClInclude Include="carbon\paths.hpp" />
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
