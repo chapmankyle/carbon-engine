@@ -63,21 +63,21 @@ namespace carbon {
 		/**
 		 * @returns Path where the assets for the engine reside.
 		 */
-		static const std::string& assetsPath() {
+		static const std::string assetsPath() {
 			return ROOT_DIR + "assets";
 		}
 
 		/**
 		 * @returns Path where the log files for the engine reside.
 		 */
-		static const std::string& logsPath() {
+		static const std::string logsPath() {
 			return ROOT_DIR + "logs";
 		}
 
 		/**
 		 * @returns Path where the generated binary files for the engine reside.
 		 */
-		static const std::string& binaryPath() {
+		static const std::string binaryPath() {
 			return ROOT_DIR + "x64";
 		}
 
