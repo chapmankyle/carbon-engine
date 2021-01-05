@@ -40,6 +40,17 @@ namespace carbon {
 			Normal = Arrow
 		};
 
+		/**
+		 * @brief Mode for when the cursor is inside the window.
+		 */
+		enum class Mode : i32 {
+			Normal = 0,
+			Hidden,
+			Disabled,
+
+			NONE
+		};
+
 	} // namespace cursor
 
 	//    _  __
