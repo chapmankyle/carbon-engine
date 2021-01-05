@@ -7,7 +7,7 @@
 #ifndef COMMON_TEMPLATE_TYPES_HPP
 #define COMMON_TEMPLATE_TYPES_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 namespace carbon {
 
