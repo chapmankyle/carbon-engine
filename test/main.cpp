@@ -17,6 +17,7 @@ int main() {
 	properties.version = carbon::utils::version{ 1, 1, 0 };
 	properties.width = 1280;
 	properties.height = 720;
+	properties.resizable = true;
 
 	// setup timer
 	carbon::Timer t;
