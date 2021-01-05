@@ -7,6 +7,8 @@
 #include "carbon/core/instance.hpp"
 #include "carbon/display/surface.hpp"
 
+#include <iostream>
+
 namespace carbon {
 
 	void WindowGLFW::createWindow() {

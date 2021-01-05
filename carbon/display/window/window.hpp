@@ -7,7 +7,7 @@
 #ifndef DISPLAY_WINDOW_HPP
 #define DISPLAY_WINDOW_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/macros.hpp"
 #include "carbon/common/utils.hpp"
 #include "carbon/display/input.hpp"
 
@@ -91,21 +91,6 @@ namespace carbon {
 	};
 
 	static_assert(ARRAY_SIZE(m_window_mode_names) == static_cast<u32>(window::Mode::NONE) + 1, "Number of window modes must match number of names for the window modes.");
-
-	namespace cursor {
-
-		/**
-		 * @brief Mode for when the cursor is inside the window.
-		 */
-		enum class Mode {
-			Normal,
-			Hidden,
-			Disabled,
-
-			NONE
-		};
-
-	} // namespace cursor
 
 	/**
 	 * @brief Virtual class to allow on-screen rendering.
