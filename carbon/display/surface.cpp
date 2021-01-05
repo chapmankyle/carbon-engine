@@ -6,6 +6,8 @@
 
 #include "carbon/core/instance.hpp"
 
+#include <iostream>
+
 carbon::Surface::Surface(carbon::Instance *instance, GLFWwindow *window)
 	: m_instance(instance)
 	, m_window(window)

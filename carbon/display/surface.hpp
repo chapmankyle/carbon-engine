@@ -7,7 +7,7 @@
 #ifndef DISPLAY_SURFACE_HPP
 #define DISPLAY_SURFACE_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 namespace carbon {
 
