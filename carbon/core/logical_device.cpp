@@ -6,7 +6,10 @@
 
 #include "instance.hpp"
 #include "physical_device.hpp"
+
 #include "carbon/display/surface.hpp"
+
+#include <iostream>
 
 namespace carbon {
 

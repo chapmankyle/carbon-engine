@@ -7,7 +7,7 @@
 #ifndef CORE_LOGICAL_DEVICE_HPP
 #define CORE_LOGICAL_DEVICE_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 #include <vector>
 #include <set>
