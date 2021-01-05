@@ -3,7 +3,10 @@
 // license   : GPL-3.0; see accompanying LICENSE file
 
 #include "physical_device.hpp"
+
 #include "instance.hpp"
+
+#include <iostream>
 
 namespace carbon {
 

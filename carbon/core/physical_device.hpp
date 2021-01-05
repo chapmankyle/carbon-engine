@@ -7,7 +7,7 @@
 #ifndef CORE_PHYSICAL_DEVICE_HPP
 #define CORE_PHYSICAL_DEVICE_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 #include <map>
 #include <set>
