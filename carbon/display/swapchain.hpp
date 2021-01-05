@@ -7,7 +7,7 @@
 #ifndef DISPLAY_SWAPCHAIN_HPP
 #define DISPLAY_SWAPCHAIN_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 #include <cassert>
 #include <vector>
