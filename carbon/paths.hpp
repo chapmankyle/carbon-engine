@@ -15,29 +15,35 @@ namespace carbon {
 	namespace paths {
 
 		/**
-		 * @returns Directory where `carbon-engine` resides.
+		 * @brief Absolute path of where the executable is being run from.
+		 * Contains '\\' when in Windows and '/' otherwise.
 		 */
-		static const std::string& rootDir();
+		static inline const std::string CURRENT_PATH = std::filesystem::current_path().string();
 
 		/**
-		 * @returns Directory where the assets for the engine reside.
+		 * @returns Path where the `carbon-engine` directory resides.
 		 */
-		static const std::string& assetsDir();
+		static const std::string& rootPath();
 
 		/**
-		 * @returns Directory where the log files for the engine reside.
+		 * @returns Path where the assets for the engine reside.
 		 */
-		static const std::string& logsDir();
+		static const std::string& assetsPath();
 
 		/**
-		 * @returns Directory where the generated binary files for the engine reside.
+		 * @returns Path where the log files for the engine reside.
 		 */
-		static const std::string& binaryDir();
+		static const std::string& logsPath();
+
+		/**
+		 * @returns Path where the generated binary files for the engine reside.
+		 */
+		static const std::string& binaryPath();
 
 		/**
 		 * @returns `true` if the directory was made, `false` otherwise.
 		 */
-		static bool makeDir(const char* dir) {
+		static bool makeDir(const char *dir) {
 			std::filesystem::path path{ dir };
 			return std::filesystem::create_directory(path);
 		}
