@@ -23,6 +23,9 @@ namespace carbon {
 		// specify not to use OpenGL context
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
+		// set whether or not the window should be resizable
+		glfwWindowHint(GLFW_RESIZABLE, (m_props.resizable ? GLFW_TRUE : GLFW_FALSE));
+
 		// monitor to use for fullscreen
 		m_monitor = glfwGetPrimaryMonitor();
 
