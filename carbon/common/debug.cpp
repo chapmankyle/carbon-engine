@@ -4,6 +4,8 @@
 
 #include "debug.hpp"
 
+#include <iostream>
+
 namespace carbon {
 
 	namespace debug {
