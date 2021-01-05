@@ -8,6 +8,7 @@
 #define ENGINE_HPP
 
 #include "config.hpp"
+
 #include "carbon/common/utils.hpp"
 #include "carbon/display/window/window_glfw.hpp"
 
