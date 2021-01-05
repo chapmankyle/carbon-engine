@@ -4,6 +4,10 @@
 
 #include "instance.hpp"
 
+#include "carbon/macros.hpp"
+
+#include <iostream>
+
 namespace carbon {
 
 	const std::vector<const char*> Instance::getRequiredInstanceExtensions() {
