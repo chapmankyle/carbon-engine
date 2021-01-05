@@ -48,33 +48,45 @@ namespace carbon {
 		struct Props {
 			/**
 			 * @brief Title of the window.
+			 * Default is "Application".
 			 */
 			std::string title = "Application";
 
 			/**
 			 * @brief Width of the window.
+			 * Default is 800.
 			 */
 			i32 width = DEFAULT_WIDTH;
 
 			/**
 			 * @brief Height of the window.
+			 * Default is 600.
 			 */
 			i32 height = DEFAULT_HEIGHT;
 
 			/**
 			 * @brief The x position of the window.
+			 * Default is 100.
 			 */
 			i32 x = DEFAULT_X;
 
 			/**
 			 * @brief The y position of the window.
+			 * Default is 100.
 			 */
 			i32 y = DEFAULT_Y;
 
 			/**
-			 * @brief The version of the application using the window.
+			 * @brief Whether or not the window should be resizable.
+			 * Default is true.
 			 */
-			utils::version version;
+			bool resizable = true;
+
+			/**
+			 * @brief The version of the application using the window.
+			 * Default is v1.0.0
+			 */
+			utils::version version{};
 		};
 
 	} // namespace window
