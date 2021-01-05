@@ -7,7 +7,7 @@
 #ifndef RES_BUFFER_HPP
 #define RES_BUFFER_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 namespace carbon {
 
