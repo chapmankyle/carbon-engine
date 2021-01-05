@@ -6,6 +6,8 @@
 
 #include "carbon/core/logical_device.hpp"
 
+#include <iostream>
+
 namespace carbon {
 
 	void RenderPass::setupAttachmentDescriptions() {

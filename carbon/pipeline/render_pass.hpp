@@ -7,7 +7,8 @@
 #ifndef PIPELINE_RENDER_PASS_HPP
 #define PIPELINE_RENDER_PASS_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
+
 #include <cassert>
 #include <vector>
 
