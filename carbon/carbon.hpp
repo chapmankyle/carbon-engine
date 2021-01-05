@@ -8,6 +8,7 @@
 #define CARBON_HPP
 
 #include "setup.hpp"
+#include "paths.hpp"
 
 #include "common/debug.hpp"
 #include "common/template_types.hpp"
