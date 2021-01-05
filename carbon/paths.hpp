@@ -7,6 +7,7 @@
 #ifndef PATHS_HPP
 #define PATHS_HPP
 
+#include "macros.hpp"
 #include "platform.hpp"
 
 #include <filesystem>
@@ -15,11 +16,6 @@
 namespace carbon {
 
 	namespace paths {
-
-		/**
-		 * @brief Name of the directory to use as the root.
-		 */
-		static inline const std::string NAME_ROOT_DIR = "carbon-engine";
 
 		/**
 		 * @brief Absolute path of where the executable is being run from.
@@ -36,7 +32,7 @@ namespace carbon {
 			static const std::string _getRoot() {
 				// copy variable into editable string
 				std::string curr = ::carbon::paths::CURRENT_PATH;
-				size_t idx = curr.find(::carbon::paths::NAME_ROOT_DIR);
+				size_t idx = curr.find(CARBON_ENGINE_DIR_NAME);
 
 				// some error occurred if cannot find root directory
 				if (idx == std::string::npos) {
@@ -44,7 +40,7 @@ namespace carbon {
 				}
 
 				// remove subdirectories from end of string
-				curr = curr.substr(0, idx + ::carbon::paths::NAME_ROOT_DIR.length());
+				curr = curr.substr(0, idx + CARBON_ENGINE_DIR_NAME_LEN);
 
 				// append trailing slash depending on operating system
 				if (CARBON_PLATFORM == CARBON_PLATFORM_WINDOWS) {
