@@ -34,6 +34,62 @@ git pull
 git submodule update --init --recursive
 ```
 
+# Usage :cd:
+
+To create the most basic window, all you need is the following:
+```c++
+#include "carbon/carbon.hpp"
+
+int main() {
+    // create default engine
+    carbon::Engine engine();
+
+    // main loop when window is open
+    while (engine.isRunning()) {
+        engine.update();
+    }
+    
+    return 0;
+}
+```
+The above code will create a resizable `800 x 600` window with the title *"Application"*.
+
+---
+
+To create a window with a title, width, height, etc., you need the following:
+```c++
+#include "carbon/carbon.hpp"
+
+int main() {
+    // setup properties for the engine window
+    carbon::window::Props properties;
+    properties.title = "Game Title Goes Here";
+    properties.width = 1280;
+    properties.height = 720;
+    properties.resizable = true;
+    
+    // create engine with specified properties
+    carbon::Engine engine(properties);
+
+    // main loop when window is open
+    while (engine.isRunning()) {
+        engine.update();
+    }
+    
+    return 0;
+}
+```
+The above code will create a resizable `1280 x 720` window with the title *"Game Title Goes Here"*.
+
+---
+
+To disable debug messages, make sure to define the following flag:
+```c++
+#define CARBON_DISABLE_DEBUG
+#include "carbon/carbon.hpp"
+```
+The macro needs to be before the include of `carbon`, otherwise the debug messages will be present.
+
 # Dependencies :gift:
 
 The following dependencies are included as submodules in the `deps` directory:
