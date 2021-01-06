@@ -90,11 +90,25 @@ namespace carbon {
 		}
 
 		/**
+		 * @returns `true` if the directory was made, `false` otherwise.
+		 */
+		static bool makeDir(const std::string &dir) {
+			return makeDir(dir.c_str());
+		}
+
+		/**
 		 * @returns `true` if the directory exists, `false` otherwise.
 		 */
 		static bool dirExists(const char *dir) {
 			std::filesystem::path path{ dir };
 			return std::filesystem::is_directory(path);
+		}
+
+		/**
+		 * @returns `true` if the directory exists, `false` otherwise.
+		 */
+		static bool dirExists(const std::string &dir) {
+			return dirExists(dir.c_str());
 		}
 
 	} // namespace paths
