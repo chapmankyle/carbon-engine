@@ -54,9 +54,6 @@
     <ClCompile Include="carbon\resources\buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="carbon\common\logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="carbon\carbon.hpp">
@@ -126,9 +123,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="carbon\backend.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="carbon\common\logger.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
