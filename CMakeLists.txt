@@ -54,15 +54,14 @@ elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
 	add_definitions( -fPIC )
 
 # Clang
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" )
 	add_definitions( -fPIC )
 endif()
 
+# needed when using glm::hash with Clang compiler
+add_definitions( -DGLM_FORCE_CXX17 )
+
 # include submodules
 include_directories( deps/glfw-bin/include )
-
-add_subdirectory( deps/glm )
 include_directories( deps/glm )
-
-add_subdirectory( deps/spdlog )
 include_directories( deps/spdlog/include )
