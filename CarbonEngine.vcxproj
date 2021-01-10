@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="carbon\common\debug.cpp" />
+    <ClCompile Include="carbon\common\logger.cpp" />
     <ClCompile Include="carbon\common\utils.cpp" />
     <ClCompile Include="carbon\core\instance.cpp" />
     <ClCompile Include="carbon\core\logical_device.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="carbon\backend.hpp" />
     <ClInclude Include="carbon\carbon.hpp" />
     <ClInclude Include="carbon\common\debug.hpp" />
+    <ClInclude Include="carbon\common\logger.hpp" />
     <ClInclude Include="carbon\common\template_types.hpp" />
     <ClInclude Include="carbon\common\utils.hpp" />
     <ClInclude Include="carbon\core\instance.hpp" />
