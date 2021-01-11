@@ -14,25 +14,31 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+#include <stdexcept>
+
 namespace carbon {
 
-	/**
-	 * @brief Enum to state where to log to.
-	 */
-	enum class LogTo {
-		Console = 0,
-		File
-	};
+	namespace log {
 
-	/**
-	 * @brief Enum to show the type of log to produce.
-	 */
-	enum class LogState {
-		Info = 0,
-		Warn,
-		Error,
-		Fatal
-	};
+		/**
+		 * @brief Enum indicating where to log to.
+		 */
+		enum class To {
+			Console = 0,
+			File
+		};
+
+		/**
+		 * @brief Enum to show the type of log to produce.
+		 */
+		enum class State {
+			Info = 0,
+			Warn,
+			Error,
+			Fatal
+		};
+
+	} // namespace log
 
 	/**
 	 * @brief Class that allows logging to both console and file.
@@ -40,6 +46,11 @@ namespace carbon {
 	class Logger {
 
 	protected:
+
+		/**
+		 * @brief The format to use for date and time.
+		 */
+		static std::string m_date_time_format; 
 		
 		/**
 		 * @brief Pointer to console used for logging.
@@ -51,6 +62,14 @@ namespace carbon {
 		 */
 		static std::shared_ptr<spdlog::logger> m_file;
 
+		/**
+		 * @brief Formats the current date and time as a single string 
+		 * in the format specified.
+		 * @param format The format of the date and time.
+		 * @returns The date and time as a formatted string.
+		 */
+		static std::string getDateTime(const std::string &format);
+
 	public:
 
 		Logger() = default;
@@ -60,6 +79,14 @@ namespace carbon {
 		 * Must be called before calling any logging methods.
 		 */
 		static void init();
+
+		/**
+		 * @brief Logs a message of the given state to the output specified.
+		 * @param out Where to log the message to.
+		 * @param state The state of the log.
+		 * @param msg The message to log.
+		 */
+		static void log(const log::To &out, const log::State &state, const std::string &msg);
 
 		/**
 		 * @returns Pointer to logger used for console logging.
