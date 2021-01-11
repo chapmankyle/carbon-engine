@@ -83,6 +83,48 @@ namespace carbon {
 		if (!m_console || !m_file) {
 			init();
 		}
+
+		// check log output
+		switch (out) {
+			case log::To::Console:
+				switch (state) {
+					case log::State::Info:
+						m_console->info(msg);
+						break;
+					case log::State::Warn:
+						m_console->warn(msg);
+						break;
+					case log::State::Error:
+						m_console->error(msg);
+						break;
+					case log::State::Fatal:
+						m_console->error(msg);
+						throw std::runtime_error(msg);
+					default:
+						throw std::runtime_error("Log state not recognized!");
+				}
+				break;
+			case log::To::File:
+				switch (state) {
+					case log::State::Info:
+						m_file->info(msg);
+						break;
+					case log::State::Warn:
+						m_file->warn(msg);
+						break;
+					case log::State::Error:
+						m_file->error(msg);
+						break;
+					case log::State::Fatal:
+						m_file->error(msg);
+						throw std::runtime_error(msg);
+					default:
+						throw std::runtime_error("Log state not recognized!");
+				}
+				break;
+			default:
+				throw std::runtime_error("Log output not recognized!");
+		}
 	}
 
 } // namespace carbon
