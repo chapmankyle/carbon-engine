@@ -17,6 +17,24 @@
 namespace carbon {
 
 	/**
+	 * @brief Enum to state where to log to.
+	 */
+	enum class LogTo {
+		Console = 0,
+		File
+	};
+
+	/**
+	 * @brief Enum to show the type of log to produce.
+	 */
+	enum class LogState {
+		Info = 0,
+		Warn,
+		Error,
+		Fatal
+	};
+
+	/**
 	 * @brief Class that allows logging to both console and file.
 	 */
 	class Logger {
