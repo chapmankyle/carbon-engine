@@ -6,13 +6,15 @@
 
 #include <chrono>
 #include <ctime>
+#include <iomanip>
 #include <mutex>
+#include <sstream>
 
 namespace carbon {
 
 	// initial definitions
 
-	std::string Logger::m_date_time_format = "%Y-%m-%d.%H:%M:%S";
+	std::string Logger::m_date_time_format = "%Y-%m-%d";
 
 	std::shared_ptr<spdlog::logger> Logger::m_console = nullptr;
 	std::shared_ptr<spdlog::logger> Logger::m_file = nullptr;
@@ -21,25 +23,24 @@ namespace carbon {
 	std::string Logger::getDateTime(const std::string &format) {
 		// get current time
 		std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-
-		// convert to date and time format
-		std::string date(format.length() + 1, ' ');
-		std::tm timeToFormat{};
+		std::tm time{};
 		
 		// check platform
 #if CARBON_PLATFORM == CARBON_PLATFORM_WINDOWS
-		localtime_s(&timeToFormat, &now);
+		localtime_s(&time, &now);
 #elif CARBON_PLATFORM == CARBON_PLATFORM_UNIX
-		localtime_r(&now, &timeToFormat);
+		localtime_r(&now, &time);
 #else 
 		static std::mutex mtx;
 		std::lock_guard<std::mutex> lock(mtx);
-		timeToFormat = *std::localtime(&now);
+		time = *std::localtime(&now);
 #endif
 
-		// format time
-		std::strftime(&date[0], date.length(), format.c_str(), &timeToFormat);
-		return date.substr(0, date.length() - 1);
+		// convert to format
+		std::ostringstream oss;
+		oss << std::put_time(&time, format.c_str());
+
+		return oss.str();
 	}
 
 
@@ -73,7 +74,10 @@ namespace carbon {
 			);
 
 			// set global pattern
-			spdlog::set_pattern("[%H:%M:%S] [%^%=5l%$] [thread %t] %v");
+			spdlog::set_pattern("[%H:%M:%S] [%^%=7l%$] [thread %5t] %v");
+
+			// output that logger has been initialized
+			m_file->info("Logger initialized.");
 		}
 	}
 
