@@ -78,6 +78,7 @@ namespace carbon {
 
 			// output that logger has been initialized
 			m_file->info("Logger initialized.");
+			m_file->info("-------------------");
 		}
 	}
 
