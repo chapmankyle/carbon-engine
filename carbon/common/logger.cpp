@@ -79,10 +79,7 @@ namespace carbon {
 
 
 	void Logger::log(const log::To &out, const log::State &state, const std::string &msg) {
-		// logger has not been initialized
-		if (!m_console || !m_file) {
-			init();
-		}
+		assert(m_console && m_file && "Logger has not been initialized. Call `init` method before anything else.");
 
 		// check log output
 		switch (out) {
