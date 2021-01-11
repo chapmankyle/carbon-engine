@@ -34,7 +34,7 @@
 #define CARBON_ENGINE_DIR_NAME      "carbon-engine"
 #define CARBON_ENGINE_DIR_NAME_LEN  ARRAY_SIZE(CARBON_ENGINE_DIR_NAME) - 1
 
-#define CARBON_ENGINE_LOG_NAME "carbon.log"
+#define CARBON_ENGINE_LOG_PREFIX "carbon"
 
 // -----------
 // -- DEBUG --
