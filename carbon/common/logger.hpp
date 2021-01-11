@@ -104,9 +104,22 @@ namespace carbon {
 
 } // namespace carbon
 
-#define CARBON_LOG_INFO(to, ...) carbon::Logger::log(to, carbon::log::State::Info, ##__VA_ARGS__)
-#define CARBON_LOG_WARN(to, ...) carbon::Logger::log(to, carbon::log::State::Warn, ##__VA_ARGS__)
-#define CARBON_LOG_ERROR(to, ...) carbon::Logger::log(to, carbon::log::State::Error, ##__VA_ARGS__)
-#define CARBON_LOG_FATAL(to, ...) carbon::Logger::log(to, carbon::log::State::Fatal, ##__VA_ARGS__)
+// debug messages are ON
+#ifndef CARBON_DISABLE_DEBUG
+
+#	define CARBON_LOG_INFO(to, ...) carbon::Logger::log(to, carbon::log::State::Info, ##__VA_ARGS__)
+#	define CARBON_LOG_WARN(to, ...) carbon::Logger::log(to, carbon::log::State::Warn, ##__VA_ARGS__)
+#	define CARBON_LOG_ERROR(to, ...) carbon::Logger::log(to, carbon::log::State::Error, ##__VA_ARGS__)
+#	define CARBON_LOG_FATAL(to, ...) carbon::Logger::log(to, carbon::log::State::Fatal, ##__VA_ARGS__)
+
+// debug messages are OFF
+#else
+
+#	define CARBON_LOG_INFO(to, ...) 
+#	define CARBON_LOG_WARN(to, ...) 
+#	define CARBON_LOG_ERROR(to, ...) 
+#	define CARBON_LOG_FATAL(to, ...) carbon::Logger::log(to, carbon::log::State::Fatal, ##__VA_ARGS__)
+
+#endif // CARBON_DISABLE_DEBUG
 
 #endif // COMMON_LOGGER_HPP
