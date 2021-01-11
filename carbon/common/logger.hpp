@@ -14,8 +14,6 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-#include <stdexcept>
-
 namespace carbon {
 
 	namespace log {
@@ -68,7 +66,7 @@ namespace carbon {
 		 * @param format The format of the date and time.
 		 * @returns The date and time as a formatted string.
 		 */
-		static std::string getDateTime(const std::string &format);
+		std::string getDateTime(const std::string &format);
 
 	public:
 
@@ -78,7 +76,7 @@ namespace carbon {
 		 * @brief Initializes the logger.
 		 * Must be called before calling any logging methods.
 		 */
-		static void init();
+		void init();
 
 		/**
 		 * @brief Logs a message of the given state to the output specified.
@@ -105,5 +103,10 @@ namespace carbon {
 	};
 
 } // namespace carbon
+
+#define CARBON_LOG_INFO(to, ...) carbon::Logger::log(to, carbon::log::State::Info, ##__VA_ARGS__)
+#define CARBON_LOG_WARN(to, ...) carbon::Logger::log(to, carbon::log::State::Warn, ##__VA_ARGS__)
+#define CARBON_LOG_ERROR(to, ...) carbon::Logger::log(to, carbon::log::State::Error, ##__VA_ARGS__)
+#define CARBON_LOG_FATAL(to, ...) carbon::Logger::log(to, carbon::log::State::Fatal, ##__VA_ARGS__)
 
 #endif // COMMON_LOGGER_HPP
