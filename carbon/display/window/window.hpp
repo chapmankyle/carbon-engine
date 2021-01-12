@@ -190,7 +190,7 @@ namespace carbon {
 		 * @brief Initializes a window for on-screen rendering.
 		 * @param properties The window properties.
 		 */
-		Window(const window::Props &properties);
+		explicit Window(const window::Props &properties);
 
 		/**
 		 * @brief Initializes a window with the given title, width

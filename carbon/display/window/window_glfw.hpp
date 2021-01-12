@@ -98,7 +98,7 @@ namespace carbon {
 		 * @brief Initializes a GLFW window for on-screen rendering.
 		 * @param properties The window properties.
 		 */
-		WindowGLFW(const window::Props &properties);
+		explicit WindowGLFW(const window::Props &properties);
 
 		/**
 		 * @brief Initializes a GLFW window with the given title, width
