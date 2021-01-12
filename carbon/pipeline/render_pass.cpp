@@ -6,6 +6,7 @@
 
 #include "carbon/core/logical_device.hpp"
 
+#include <cassert>
 #include <iostream>
 
 namespace carbon {
@@ -141,7 +142,7 @@ namespace carbon {
 	}
 
 
-	void RenderPass::setImageFormat(const VkFormat imageFormat) {
+	void RenderPass::setImageFormat(const VkFormat &imageFormat) {
 		m_image_format = imageFormat;
 
 		setupAttachmentDescriptions();
@@ -149,13 +150,13 @@ namespace carbon {
 	}
 
 
-	void RenderPass::setAttachmentDescriptions(const std::vector<VkAttachmentDescription> descs) {
+	void RenderPass::setAttachmentDescriptions(const std::vector<VkAttachmentDescription> &descs) {
 		m_attachment_descriptions = descs;
 		create();
 	}
 
 
-	void RenderPass::setAttachmentReferences(const std::vector<VkAttachmentReference> refs) {
+	void RenderPass::setAttachmentReferences(const std::vector<VkAttachmentReference> &refs) {
 		m_attachment_references = refs;
 
 		setupSubpassDescriptions();
@@ -163,7 +164,7 @@ namespace carbon {
 	}
 
 
-	void RenderPass::setSubpassDescriptions(const std::vector<VkSubpassDescription> descs) {
+	void RenderPass::setSubpassDescriptions(const std::vector<VkSubpassDescription> &descs) {
 		m_subpass_descriptions = descs;
 
 		setupSubpassDependencies();
@@ -171,7 +172,7 @@ namespace carbon {
 	}
 
 
-	void RenderPass::setSubpassDependencies(const std::vector<VkSubpassDependency> deps) {
+	void RenderPass::setSubpassDependencies(const std::vector<VkSubpassDependency> &deps) {
 		m_subpass_dependencies = deps;
 		create();
 	}
