@@ -4,6 +4,8 @@
 
 #include "utils.hpp"
 
+#include <cstring>
+
 namespace carbon {
 
 	namespace utils {
