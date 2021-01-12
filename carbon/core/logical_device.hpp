@@ -9,9 +9,6 @@
 
 #include "carbon/backend.hpp"
 
-#include <vector>
-#include <set>
-
 namespace carbon {
 
 	// forward-declare classes that would result in circular dependency
