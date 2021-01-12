@@ -4,7 +4,7 @@
 
 #include "debug.hpp"
 
-#include <iostream>
+#include "logger.hpp"
 
 namespace carbon {
 
@@ -20,29 +20,38 @@ namespace carbon {
 			switch (msgSeverity) {
 				case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
 					if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT) {
-						std::cerr << "[INFO | General] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_INFO(carbon::log::To::File, fmt::format("=General= {}", pCallbackData->pMessage));
+						CARBON_LOG_INFO(carbon::log::To::Console, fmt::format("=General= {}", pCallbackData->pMessage));
 					} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT) {
-						std::cerr << "[INFO | Validation] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_INFO(carbon::log::To::File, fmt::format("=Validation= {}", pCallbackData->pMessage));
+						CARBON_LOG_INFO(carbon::log::To::Console, fmt::format("=Validation= {}", pCallbackData->pMessage));
 					} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
-						std::cerr << "[INFO | Performance] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_INFO(carbon::log::To::File, fmt::format("=Performance= {}", pCallbackData->pMessage));
+						CARBON_LOG_INFO(carbon::log::To::Console, fmt::format("=Performance= {}", pCallbackData->pMessage));
 					}
 					break;
 				case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
 					if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT) {
-						std::cerr << "[WARNING | General] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_WARN(carbon::log::To::File, fmt::format("=General= {}", pCallbackData->pMessage));
+						CARBON_LOG_WARN(carbon::log::To::Console, fmt::format("=General= {}", pCallbackData->pMessage));
 					} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT) {
-						std::cerr << "[WARNING | Validation] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_WARN(carbon::log::To::File, fmt::format("=Validation= {}", pCallbackData->pMessage));
+						CARBON_LOG_WARN(carbon::log::To::Console, fmt::format("=Validation= {}", pCallbackData->pMessage));
 					} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
-						std::cerr << "[WARNING | Performance] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_WARN(carbon::log::To::File, fmt::format("=Performance= {}", pCallbackData->pMessage));
+						CARBON_LOG_WARN(carbon::log::To::Console, fmt::format("=Performance= {}", pCallbackData->pMessage));
 					}
 					break;
 				case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
 					if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT) {
-						std::cerr << "[ERROR | General] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_ERROR(carbon::log::To::File, fmt::format("=General= {}", pCallbackData->pMessage));
+						CARBON_LOG_ERROR(carbon::log::To::Console, fmt::format("=General= {}", pCallbackData->pMessage));
 					} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT) {
-						std::cerr << "[ERROR | Validation] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_ERROR(carbon::log::To::File, fmt::format("=Validation= {}", pCallbackData->pMessage));
+						CARBON_LOG_ERROR(carbon::log::To::Console, fmt::format("=Validation= {}", pCallbackData->pMessage));
 					} else if (msgType & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) {
-						std::cerr << "[ERROR | Performance] " << pCallbackData->pMessage << '\n';
+						CARBON_LOG_ERROR(carbon::log::To::File, fmt::format("=Performance= {}", pCallbackData->pMessage));
+						CARBON_LOG_ERROR(carbon::log::To::Console, fmt::format("=Performance= {}", pCallbackData->pMessage));
 					}
 					break;
 			}
