@@ -88,7 +88,7 @@ namespace carbon {
 		 * @brief Initializes the buffer to 0.
 		 * @param device The logical device to use for the buffer.
 		 */
-		Buffer(const class LogicalDevice *device);
+		explicit Buffer(const class LogicalDevice *device);
 
 		/**
 		 * @brief Copy constructor to set current buffer to mirror another buffer.
