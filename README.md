@@ -3,9 +3,13 @@
 <p align="center">
   <img src="https://travis-ci.com/chapmankyle/carbon-engine.svg?branch=master" alt="Travis CI"></img>
   <img src="https://ci.appveyor.com/api/projects/status/ja6b1h34y79t2hqk/branch/master?svg=true" alt="Appveyor CI"></img>
+  <a href="https://www.codacy.com/gh/chapmankyle/carbon-engine/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=chapmankyle/carbon-engine&amp;utm_campaign=Badge_Grade">
+    <img src="https://app.codacy.com/project/badge/Grade/be5c937e1dfd4df5856979bc967eeab9"/>
+  </a>
   <img src="https://img.shields.io/github/license/chapmankyle/carbon-engine.svg?" alt="License: GPL-3.0"></img>
   <img src="https://img.shields.io/github/v/release/chapmankyle/carbon-engine.svg?" alt="Release"></img>
 </p>
+
 
 A modular graphics engine built using C++17 and Vulkan :rocket:
 
