@@ -103,7 +103,7 @@ namespace carbon {
 	}
 
 
-	Instance::Instance(const std::string appName, const utils::version &version) {
+	Instance::Instance(const std::string &appName, const utils::version &version) {
 		// set status of validation layers
 		m_validation_enabled = static_cast<bool>(CARBON_USE_VALIDATION_LAYERS);
 
