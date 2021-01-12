@@ -17,6 +17,7 @@
 namespace carbon {
 
 	// forward-declare classes that would result in circular dependency
+	class Logger;
 	class Instance;
 	class PhysicalDevice;
 	class LogicalDevice;
@@ -31,6 +32,11 @@ namespace carbon {
 	class Engine {
 
 	private:
+
+		/**
+		 * @brief Logger object for any relevant information.
+		 */
+		class Logger *m_logger = nullptr;
 
 		/**
 		 * @brief Base Vulkan instance needed for almost everything.
@@ -94,7 +100,7 @@ namespace carbon {
 		 * @brief Initializes the engine with a name. Version number is optional.
 		 * @param properties The properties for the Engine window.
 		 */
-		Engine(const window::Props &properties);
+		explicit Engine(const window::Props &properties);
 
 		/**
 		 * @brief Initializes the engine with all default settings.
@@ -131,6 +137,11 @@ namespace carbon {
 		 * @returns `true` if validation layers are enabled, `false` otherwise.
 		 */
 		const bool isValidationEnabled() const;
+
+		/**
+		 * @returns The logger object used for logging information.
+		 */
+		const class Logger& getLogger() const;
 
 		/**
 		 * @returns The instance associated with the engine.

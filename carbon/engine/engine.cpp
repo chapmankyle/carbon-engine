@@ -4,6 +4,7 @@
 
 #include "engine.hpp"
 
+#include "carbon/common/logger.hpp"
 #include "carbon/core/instance.hpp"
 #include "carbon/core/physical_device.hpp"
 #include "carbon/core/logical_device.hpp"
@@ -38,12 +39,16 @@ namespace carbon {
 	Engine::Engine(const window::Props &properties)
 		: m_props(properties)
 	{
+		m_logger->init();
+
 		createWindow();
 		createVulkan();
 	}
 
 
 	Engine::Engine() {
+		m_logger->init();
+
 		createWindow();
 		createVulkan();
 	}
@@ -56,6 +61,7 @@ namespace carbon {
 		delete m_surface;
 		delete m_instance;
 		delete m_window;
+		delete m_logger;
 	}
 
 
@@ -71,6 +77,11 @@ namespace carbon {
 
 	const bool Engine::isValidationEnabled() const {
 		return m_instance->isValidationEnabled();
+	}
+
+
+	const Logger& Engine::getLogger() const {
+		return *m_logger;
 	}
 
 
