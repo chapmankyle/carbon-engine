@@ -10,7 +10,6 @@
   <img src="https://img.shields.io/github/v/release/chapmankyle/carbon-engine.svg?" alt="Release"></img>
 </p>
 
-
 A modular graphics engine built using C++17 and Vulkan :rocket:
 
 # Purpose :zap:
@@ -37,6 +36,14 @@ git pull
 # update submodules
 git submodule update --init --recursive
 ```
+
+# Installation :hammer:
+
+The engine is packaged as a header-only library, making installation easy.
+
+Simply copy the [source folder](https://github.com/chapmankyle/carbon-engine/tree/master/carbon) to your build tree and use a C++17 compiler.
+
+That's it, enjoy! :tada:
 
 # Usage :cd:
 
