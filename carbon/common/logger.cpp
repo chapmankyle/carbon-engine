@@ -4,11 +4,7 @@
 
 #include "logger.hpp"
 
-#include <chrono>
-#include <ctime>
-#include <iomanip>
-#include <mutex>
-#include <sstream>
+#include <spdlog/fmt/chrono.h>
 
 namespace carbon {
 
@@ -21,26 +17,11 @@ namespace carbon {
 
 
 	std::string Logger::getDateTime(const std::string &format) {
-		// get current time
-		std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-		std::tm time{};
-		
-		// check platform
-#if CARBON_PLATFORM == CARBON_PLATFORM_WINDOWS
-		localtime_s(&time, &now);
-#elif CARBON_PLATFORM == CARBON_PLATFORM_UNIX
-		localtime_r(&now, &time);
-#else 
-		static std::mutex mtx;
-		std::lock_guard<std::mutex> lock(mtx);
-		time = *std::localtime(&now);
-#endif
+		std::time_t now = std::time(nullptr);
+		std::string dateFormat = fmt::format("{}{}{}", "{:", format, "}");
 
-		// convert to format
-		std::ostringstream oss;
-		oss << std::put_time(&time, format.c_str());
-
-		return oss.str();
+		// format time using thread-safe fmt::localtime
+		return fmt::format(dateFormat, fmt::localtime(now));
 	}
 
 
@@ -62,10 +43,9 @@ namespace carbon {
 			// construct full log file name
 			std::string fileName = fmt::format("{}.{}.log", CARBON_ENGINE_LOG_PREFIX, date);
 
-			// construct path by detecting platform
-			std::string logPath = (CARBON_PLATFORM == CARBON_PLATFORM_WINDOWS)
-				? paths::logsPath() + "\\" + fileName
-				: paths::logsPath() + "/" + fileName;
+			// use separator based on operating system and construct full path
+			char sep = (CARBON_PLATFORM == CARBON_PLATFORM_WINDOWS) ? '\\' : '/';
+			std::string logPath = fmt::format("{}{}{}", paths::logsPath(), sep, fileName);
 
 			// create logger
 			m_file = spdlog::basic_logger_mt<spdlog::async_factory>(
@@ -77,6 +57,7 @@ namespace carbon {
 			spdlog::set_pattern("[%H:%M:%S] [%^%=7l%$] [thread %5t] %v");
 
 			// output that logger has been initialized
+			m_file->info("-------------------");
 			m_file->info("Logger initialized.");
 			m_file->info("-------------------");
 		}
