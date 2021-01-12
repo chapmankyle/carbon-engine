@@ -5,8 +5,7 @@
 #include "instance.hpp"
 
 #include "carbon/macros.hpp"
-
-#include <iostream>
+#include "carbon/common/logger.hpp"
 
 namespace carbon {
 
@@ -28,10 +27,7 @@ namespace carbon {
 
 	bool Instance::hasValidationLayerSupport() {
 		const std::vector<VkLayerProperties> supportedLayers = utils::getSupportedValidationLayers();
-
-#ifndef CARBON_DISABLE_DEBUG
-		std::cout << "[INFO] " << supportedLayers.size() << " supported layers.\n";
-#endif // !CARBON_DISABLE_DEBUG
+		CARBON_LOG_INFO(carbon::log::To::File, fmt::format("{} supported layers.", supportedLayers.size()));
 
 		return utils::containsRequired(m_req_validation_layers, supportedLayers);
 	}
@@ -39,10 +35,7 @@ namespace carbon {
 
 	bool Instance::hasExtensionSupport() {
 		const std::vector<VkExtensionProperties> supportedExtensions = utils::getSupportedExtensions();
-
-#ifndef CARBON_DISABLE_DEBUG
-		std::cout << "[INFO] " << supportedExtensions.size() << " supported extensions.\n";
-#endif // !CARBON_DISABLE_DEBUG
+		CARBON_LOG_INFO(carbon::log::To::File, fmt::format("{} supported extensions.", supportedExtensions.size()));
 
 		return utils::containsRequired(m_req_instance_extensions, supportedExtensions);
 	}
@@ -51,7 +44,7 @@ namespace carbon {
 	void Instance::checkSupport() {
 		// check validation layers support
 		if (m_validation_enabled && !hasValidationLayerSupport()) {
-			throw std::runtime_error("No support for validation layers!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "No support for validation layers!");
 		}
 
 		// set enabled validation layers
@@ -59,7 +52,7 @@ namespace carbon {
 
 		// check for extensions support
 		if (!hasExtensionSupport()) {
-			throw std::runtime_error("Failed to find required extensions.");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to find required extensions.");
 		}
 	}
 
@@ -126,7 +119,7 @@ namespace carbon {
 
 		// attempt to create instance
 		if (vkCreateInstance(&instanceInfo, nullptr, &m_handle) != VK_SUCCESS) {
-			throw std::runtime_error("Failed to create instance!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create instance.");
 		}
 
 		// do not create debug messenger if validation layers are off
@@ -135,7 +128,7 @@ namespace carbon {
 		}
 
 		if (debug::createMessenger(m_handle, &m_debug_create_info, nullptr, &m_debug_messenger) != VK_SUCCESS) {
-			throw std::runtime_error("Failed to create debug messenger!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create debug messenger.");
 		}
 	}
 
