@@ -4,10 +4,10 @@
 
 #include "render_pass.hpp"
 
+#include "carbon/common/logger.hpp"
 #include "carbon/core/logical_device.hpp"
 
 #include <cassert>
-#include <iostream>
 
 namespace carbon {
 
@@ -110,7 +110,7 @@ namespace carbon {
 
 		// create render pass
 		if (vkCreateRenderPass(m_logical_device->getHandle(), &renderPassInfo, nullptr, &m_render_pass) != VK_SUCCESS) {
-			throw std::runtime_error("[ERROR] Failed to create render pass!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create render pass.");
 		}
 	}
 
