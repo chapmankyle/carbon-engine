@@ -4,13 +4,15 @@
 
 #include "swapchain.hpp"
 
+#include "carbon/common/logger.hpp"
+
 #include "carbon/core/physical_device.hpp"
 #include "carbon/core/logical_device.hpp"
 #include "carbon/pipeline/render_pass.hpp"
 
 #include "surface.hpp"
 
-#include <iostream>
+#include <cassert>
 
 namespace carbon {
 
@@ -182,7 +184,7 @@ namespace carbon {
 
 		// create swapchain
 		if (vkCreateSwapchainKHR(m_logical_device->getHandle(), &createInfo, nullptr, &m_swapchain) != VK_SUCCESS) {
-			throw std::runtime_error("[ERROR] Failed to create swapchain!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create swapchain.");
 		}
 
 		// get images from swapchain and put into vector
@@ -224,7 +226,7 @@ namespace carbon {
 
 			// create image views
 			if (vkCreateImageView(m_logical_device->getHandle(), &createInfo, nullptr, &m_image_views[i]) != VK_SUCCESS) {
-				throw std::runtime_error("[ERROR] Failed to create image views!");
+				CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create image views.");
 			}
 		}
 	}
@@ -257,7 +259,7 @@ namespace carbon {
 			info.layers = 1;
 
 			if (vkCreateFramebuffer(m_logical_device->getHandle(), &info, nullptr, &m_framebuffers[i]) != VK_SUCCESS) {
-				throw std::runtime_error("Failed to create framebuffer!");
+				CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create framebuffer.");
 			}
 		}
 	}

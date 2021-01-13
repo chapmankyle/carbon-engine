@@ -9,7 +9,6 @@
 
 #include "carbon/backend.hpp"
 
-#include <cassert>
 #include <vector>
 
 namespace carbon {
