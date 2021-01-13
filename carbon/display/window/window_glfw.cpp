@@ -4,20 +4,19 @@
 
 #include "window_glfw.hpp"
 
+#include "carbon/common/logger.hpp"
 #include "carbon/core/instance.hpp"
 #include "carbon/display/surface.hpp"
-
-#include <iostream>
 
 namespace carbon {
 
 	void WindowGLFW::createWindow() {
 		if (!glfwInit()) {
-			throw std::runtime_error("Failed to initialize GLFW!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to initialize GLFW.");
 		}
 
 		if (!glfwVulkanSupported()) {
-			throw std::runtime_error("Vulkan not supported!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Vulkan not supported.");
 		}
 
 		// specify not to use OpenGL context
