@@ -113,6 +113,7 @@ The following dependencies are included as submodules in the `deps` directory:
 #### carbon [common](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/common)
 
 [![debug](https://img.shields.io/badge/carbon-debug-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/debug.hpp)
+[![logger](https://img.shields.io/badge/carbon-logger-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/logger.hpp)
 [![template-types](https://img.shields.io/badge/carbon-template_types-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/template_types.hpp)
 [![utils](https://img.shields.io/badge/carbon-utils-brightgreen.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/common/utils.hpp)
 
@@ -142,6 +143,10 @@ The following dependencies are included as submodules in the `deps` directory:
 #### carbon [pipeline](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/pipeline)
 
 [![render-pass](https://img.shields.io/badge/carbon-render_pass-red.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/pipeline/render_pass.hpp)
+
+#### carbon [resources](https://github.com/chapmankyle/carbon-engine/tree/master/carbon/resources)
+
+[![buffer](https://img.shields.io/badge/carbon-buffer-9b59b6.svg)](https://github.com/chapmankyle/carbon-engine/blob/master/carbon/resources/buffer.hpp)
 
 # Contributing :tada:
 This engine is in a very early alpha stage, so any criticism or ideas are welcome! Simply open a pull request
