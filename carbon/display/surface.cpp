@@ -4,9 +4,8 @@
 
 #include "surface.hpp"
 
+#include "carbon/common/logger.hpp"
 #include "carbon/core/instance.hpp"
-
-#include <iostream>
 
 carbon::Surface::Surface(carbon::Instance *instance, GLFWwindow *window)
 	: m_instance(instance)
@@ -14,7 +13,7 @@ carbon::Surface::Surface(carbon::Instance *instance, GLFWwindow *window)
 {
 	// check if surface creation was successful
 	if (glfwCreateWindowSurface(m_instance->getHandle(), m_window, nullptr, &m_surface) != VK_SUCCESS) {
-		throw std::runtime_error("Failed to create window surface!");
+		CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create window surface.");
 	}
 }
 
