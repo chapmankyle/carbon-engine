@@ -6,6 +6,8 @@
 
 #include <spdlog/fmt/chrono.h>
 
+#include <exception>
+
 namespace carbon {
 
 	// initial definitions
@@ -82,9 +84,9 @@ namespace carbon {
 						break;
 					case log::State::Fatal:
 						m_console->error(msg);
-						throw std::runtime_error(msg);
+						std::exit(1);
 					default:
-						throw std::runtime_error("Log state not recognized!");
+						std::exit(1);
 				}
 				break;
 			case log::To::File:
@@ -100,13 +102,13 @@ namespace carbon {
 						break;
 					case log::State::Fatal:
 						m_file->error(msg);
-						throw std::runtime_error(msg);
+						std::exit(1);
 					default:
-						throw std::runtime_error("Log state not recognized!");
+						std::exit(1);
 				}
 				break;
 			default:
-				throw std::runtime_error("Log output not recognized!");
+				std::exit(1);
 		}
 	}
 
