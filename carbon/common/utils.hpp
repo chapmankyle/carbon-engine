@@ -7,17 +7,18 @@
 #ifndef COMMON_UTILS_HPP
 #define COMMON_UTILS_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 #include "template_types.hpp"
 
 #include <cassert>
-#include <cstring>
 #include <string>
 #include <vector>
 
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
+
+#include <spdlog/fmt/fmt.h>
 
 namespace carbon {
 
@@ -44,7 +45,7 @@ namespace carbon {
 		 */
 		const std::vector<VkExtensionProperties> getSupportedExtensions();
 
-		/*
+		/**
 		 * @brief Compares a string to a Vulkan extension properties structure.
 		 * @param str The string to compare.
 		 * @param propStruct The Vulkan extension properties structure to compare.
@@ -52,7 +53,7 @@ namespace carbon {
 		 */
 		i32 compare(const char *str, const VkExtensionProperties &propStruct);
 
-		/*
+		/**
 		 * @brief Compares a string to a Vulkan layer properties structure.
 		 * @param str The string to compare.
 		 * @param propStruct The Vulkan layer properties structure to compare.
@@ -82,47 +83,22 @@ namespace carbon {
 		 * @returns The vector as (x, y[, ...]) in string form.
 		 */
 		template<glm::length_t L, typename T, enum glm::qualifier Q>
-		std::string showVector(const glm::vec<L, T, Q> &vector) {
-			std::string str("(");
-
+		const std::string showVector(const glm::vec<L, T, Q> &vector) {
 			switch (L) {
 				case 1:
-					str.append(std::to_string(vector[0]));
-					str.append(")");
-					break;
+					return fmt::format("({})", vector[0]);
 				case 2:
-					str.append(std::to_string(vector[0]));
-					str.append(", ");
-					str.append(std::to_string(vector[1]));
-					str.append(")");
-					break;
+					return fmt::format("({}, {})", vector[0], vector[1]);
 				case 3:
-					str.append(std::to_string(vector[0]));
-					str.append(", ");
-					str.append(std::to_string(vector[1]));
-					str.append(", ");
-					str.append(std::to_string(vector[2]));
-					str.append(")");
-					break;
+					return fmt::format("({}, {}, {})", vector[0], vector[1], vector[2]);
 				case 4:
-					str.append(std::to_string(vector[0]));
-					str.append(", ");
-					str.append(std::to_string(vector[1]));
-					str.append(", ");
-					str.append(std::to_string(vector[2]));
-					str.append(", ");
-					str.append(std::to_string(vector[3]));
-					str.append(")");
-					break;
+					return fmt::format("({}, {}, {}, {})", vector[0], vector[1], vector[2], vector[3]);
 				default:
-					str.append(")");
-					break;
+					return "()";
 			}
-
-			return str;
 		}
 
-		/*
+		/**
 		 * @brief Checks if the required strings are available.
 		 * @tparam T The type of the Vulkan properties structure (e.g. VkExtensionProperties).
 		 * @returns `true` if all required strings are present in the available struct, `false` otherwise.

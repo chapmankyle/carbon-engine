@@ -7,7 +7,7 @@
 #ifndef COMMON_DEBUG_HPP
 #define COMMON_DEBUG_HPP
 
-#include "carbon/setup.hpp"
+#include "carbon/backend.hpp"
 
 namespace carbon {
 

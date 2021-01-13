@@ -2,29 +2,35 @@
 
 int main() {
 
-	// to disable debug messages and validation layers, add
-	// #define CARBON_DISABLE_DEBUG
-	// before the
-	// #include "carbon/carbon.hpp"
-
+	// setup window properties
 	carbon::window::Props properties;
 	properties.title = "Work In Progress: Game";
 	properties.version = carbon::utils::version{ 1, 1, 0 };
 	properties.width = 1280;
 	properties.height = 720;
+	properties.resizable = true;
 
+	// setup timer
 	carbon::Timer t;
+
+	// start timing
+	t.reset();
 	carbon::Engine engine(properties);
-	std::cout << "\nEngine creation took " << t.elapsed() << " ms\n";
-	std::cout << "Validation ?= " << std::boolalpha << engine.isValidationEnabled() << std::noboolalpha << '\n';
+	double elapsed = t.elapsed();
 
-	std::cout << "\nInitial position = " << carbon::utils::showVector(engine.getWindow().getPosition()) << '\n';
-	std::cout << "Initial size = " << carbon::utils::showVector(engine.getWindow().getSize()) << '\n';
+	// use logger to output stats
+	carbon::Logger logger = engine.getLogger();
 
-	std::cout << "\nAspect ratio = " << engine.getWindow().getAspectRatio() << '\n';
-	std::cout << "Aspect ratio => " << carbon::utils::getEstimatedAspectRatio(properties.width, properties.height) << '\n';
+	logger.log(carbon::log::To::Console, carbon::log::State::Info, fmt::format("Root directory = |{}|", carbon::paths::ROOT_DIR));
 
-	std::cout << '\n' << engine.getPhysicalDevice().getPropertiesAsStr() << '\n';
+	logger.log(carbon::log::To::File, carbon::log::State::Info, "Engine Statistics:");
+	logger.log(carbon::log::To::File, carbon::log::State::Info, fmt::format("  Initialization -> {:.2f} ms", elapsed));
+	logger.log(carbon::log::To::File, carbon::log::State::Info, fmt::format("  Validation     -> {}", engine.isValidationEnabled() ? "Enabled" : "Disabled"));
+
+	logger.log(carbon::log::To::File, carbon::log::State::Info, "Window Statistics:");
+	logger.log(carbon::log::To::File, carbon::log::State::Info, fmt::format("  Initial position -> {}", carbon::utils::showVector(engine.getWindow().getPosition())));
+	logger.log(carbon::log::To::File, carbon::log::State::Info, fmt::format("  Initial size     -> {}", carbon::utils::showVector(engine.getWindow().getSize())));
+	logger.log(carbon::log::To::File, carbon::log::State::Info, fmt::format("  Aspect ratio     -> {:.2f} (= {})", engine.getWindow().getAspectRatio(), carbon::utils::getEstimatedAspectRatio(properties.width, properties.height)));
 
 	// main loop when window is open
 	while (engine.isRunning()) {

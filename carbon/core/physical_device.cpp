@@ -3,7 +3,11 @@
 // license   : GPL-3.0; see accompanying LICENSE file
 
 #include "physical_device.hpp"
+
 #include "instance.hpp"
+#include "carbon/common/logger.hpp"
+
+#include <set>
 
 namespace carbon {
 
@@ -77,7 +81,7 @@ namespace carbon {
 
 		// no physical devices found
 		if (numDevices == 0) {
-			throw std::runtime_error("[ERROR] Failed to find any physical devices!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to find any physical devices.");
 		}
 
 		// store all devices in vector
@@ -88,7 +92,7 @@ namespace carbon {
 		m_device = selectBestPhysicalDevice(devices);
 
 		if (m_device == VK_NULL_HANDLE) {
-			throw std::runtime_error("[ERROR] Failed to choose suitable physical device!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to choose suitable physical device.");
 		}
 
 		// get properties of device
@@ -99,26 +103,16 @@ namespace carbon {
 
 
 	const std::string PhysicalDevice::getPropertiesAsStr() const {
-		std::string props("Selected Physical Device -> ");
-		props.append(m_device_props.deviceName);
+		std::string props = fmt::format("Selected Physical Device -> {}", m_device_props.deviceName);
 
-		props.append("\n    Type:                        ");
-		props.append(getDeviceType());
-		props.append("\n    Vendor ID:                   ");
-		props.append(std::to_string(m_device_props.vendorID));
-		props.append("\n    Memory heap count:           ");
-		props.append(std::to_string(m_device_memory_props.memoryHeapCount));
-		props.append("\n    Maximum clip distances:      ");
-		props.append(std::to_string(m_device_props.limits.maxClipDistances));
-		props.append("\n    Maximum cull distances:      ");
-		props.append(std::to_string(m_device_props.limits.maxCullDistances));
-		props.append("\n    Maximum number of viewports: ");
-		props.append(std::to_string(m_device_props.limits.maxViewports));
-		props.append("\n    Maximum size of 2D textures: ");
-		props.append(std::to_string(m_device_props.limits.maxImageDimension2D));
-		props.append("\n    Maximum size of 3D textures: ");
-		props.append(std::to_string(m_device_props.limits.maxImageDimension3D));
-		props.append("\n");
+		props.append(fmt::format("\n  Type:                        {}", getDeviceType()));
+		props.append(fmt::format("\n  Vendor ID:                   {:d}", m_device_props.vendorID));
+		props.append(fmt::format("\n  Memory heap count:           {:d}", m_device_memory_props.memoryHeapCount));
+		props.append(fmt::format("\n  Maximum clip distances:      {:d}", m_device_props.limits.maxClipDistances));
+		props.append(fmt::format("\n  Maximum cull distances:      {:d}", m_device_props.limits.maxCullDistances));
+		props.append(fmt::format("\n  Maximum number of viewports: {:d}", m_device_props.limits.maxViewports));
+		props.append(fmt::format("\n  Maximum size of 2D textures: {:d}", m_device_props.limits.maxImageDimension2D));
+		props.append(fmt::format("\n  Maximum size of 3D textures: {:d}\n", m_device_props.limits.maxImageDimension3D));
 
 		return props;
 	}

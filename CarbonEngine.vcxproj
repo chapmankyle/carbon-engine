@@ -75,16 +75,16 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.141.2\Include;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\include;D:\Access\Documents\Libraries\glm;D:\Access\Documents\GitHub\carbon-engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.141.2\Lib;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.162.0\Lib;$(ProjectDir)deps\glfw-bin\lib-vc2019;$(ProjectDir)deps\spdlog\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -93,8 +93,8 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.141.2\Include;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\include;D:\Access\Documents\Libraries\glm;D:\Access\Documents\GitHub\carbon-engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -103,44 +103,45 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.141.2\Lib;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.162.0\Lib;$(ProjectDir)deps\glfw-bin\lib-vc2019;$(ProjectDir)deps\spdlog\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.141.2\Include;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\include;D:\Access\Documents\Libraries\glm;D:\Access\Documents\GitHub\carbon-engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.141.2\Lib;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.162.0\Lib;$(ProjectDir)deps\glfw-bin\lib-vc2019;$(ProjectDir)deps\spdlog\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.141.2\Include;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\include;D:\Access\Documents\Libraries\glm;D:\Access\Documents\GitHub\carbon-engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.141.2\Lib;D:\Access\Documents\Libraries\glfw-3.3.2.bin.WIN64\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.162.0\Lib;$(ProjectDir)deps\glfw-bin\lib-vc2019;$(ProjectDir)deps\spdlog\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="carbon\common\debug.cpp" />
+    <ClCompile Include="carbon\common\logger.cpp" />
     <ClCompile Include="carbon\common\utils.cpp" />
     <ClCompile Include="carbon\core\instance.cpp" />
     <ClCompile Include="carbon\core\logical_device.cpp" />
@@ -151,11 +152,14 @@
     <ClCompile Include="carbon\display\window\window_glfw.cpp" />
     <ClCompile Include="carbon\engine\engine.cpp" />
     <ClCompile Include="carbon\pipeline\render_pass.cpp" />
+    <ClCompile Include="carbon\resources\buffer.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="carbon\backend.hpp" />
     <ClInclude Include="carbon\carbon.hpp" />
     <ClInclude Include="carbon\common\debug.hpp" />
+    <ClInclude Include="carbon\common\logger.hpp" />
     <ClInclude Include="carbon\common\template_types.hpp" />
     <ClInclude Include="carbon\common\utils.hpp" />
     <ClInclude Include="carbon\core\instance.hpp" />
@@ -169,8 +173,11 @@
     <ClInclude Include="carbon\engine\config.hpp" />
     <ClInclude Include="carbon\engine\engine.hpp" />
     <ClInclude Include="carbon\display\input.hpp" />
+    <ClInclude Include="carbon\macros.hpp" />
+    <ClInclude Include="carbon\paths.hpp" />
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
+    <ClInclude Include="carbon\resources\buffer.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
     <ClInclude Include="carbon\types.hpp" />
   </ItemGroup>

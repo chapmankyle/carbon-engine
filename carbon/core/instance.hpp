@@ -111,7 +111,7 @@ namespace carbon {
 		 * @param appName The name of the application.
 		 * @param version Optional. The version of your application.
 		 */
-		Instance(const std::string appName, const carbon::utils::version &version = { 1, 0, 0 });
+		explicit Instance(const std::string &appName, const carbon::utils::version &version = { 1, 0, 0 });
 
 		/**
 		 * @brief Default constructor for initializing a Vulkan instance.

@@ -1,6 +1,7 @@
 ## Misc ##
 .vs
 build
+logs
 
 ## C++ ##
 # Prerequisites

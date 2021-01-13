@@ -8,6 +8,7 @@
 #define ENGINE_HPP
 
 #include "config.hpp"
+
 #include "carbon/common/utils.hpp"
 #include "carbon/display/window/window_glfw.hpp"
 
@@ -16,10 +17,12 @@
 namespace carbon {
 
 	// forward-declare classes that would result in circular dependency
+	class Logger;
 	class Instance;
 	class PhysicalDevice;
 	class LogicalDevice;
 	class Surface;
+	class Swapchain;
 
 	/**
 	 * @brief Main engine that can be used to start creating a game.
@@ -29,6 +32,11 @@ namespace carbon {
 	class Engine {
 
 	private:
+
+		/**
+		 * @brief Logger object for any relevant information.
+		 */
+		class Logger *m_logger = nullptr;
 
 		/**
 		 * @brief Base Vulkan instance needed for almost everything.
@@ -49,6 +57,11 @@ namespace carbon {
 		 * @brief Surface to render swapchain images to.
 		 */
 		class Surface *m_surface = nullptr;
+
+		/**
+		 * @brief Swapchain to queue images for rendering.
+		 */
+		class Swapchain *m_swapchain = nullptr;
 
 		/**
 		 * @brief Base window that handles user interaction.
@@ -87,12 +100,16 @@ namespace carbon {
 		 * @brief Initializes the engine with a name. Version number is optional.
 		 * @param properties The properties for the Engine window.
 		 */
-		Engine(const window::Props &properties);
+		explicit Engine(const window::Props &properties);
 
 		/**
 		 * @brief Initializes the engine with all default settings.
 		 */
 		explicit Engine();
+
+		Engine(const Engine&) = delete;
+
+		Engine& operator=(const Engine&) = delete;
 
 		/**
 		 * @brief Destructor for the Engine.
@@ -122,6 +139,11 @@ namespace carbon {
 		const bool isValidationEnabled() const;
 
 		/**
+		 * @returns The logger object used for logging information.
+		 */
+		const class Logger& getLogger() const;
+
+		/**
 		 * @returns The instance associated with the engine.
 		 */
 		const class Instance& getInstance() const;
@@ -136,6 +158,11 @@ namespace carbon {
 		 * device in the engine.
 		 */
 		const class LogicalDevice& getLogicalDevice() const;
+
+		/**
+		 * @returns The swapchain used in the engine.
+		 */
+		const Swapchain& getSwapchain() const;
 
 	};
 

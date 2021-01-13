@@ -6,7 +6,11 @@
 
 #include "instance.hpp"
 #include "physical_device.hpp"
+
+#include "carbon/common/logger.hpp"
 #include "carbon/display/surface.hpp"
+
+#include <set>
 
 namespace carbon {
 
@@ -57,7 +61,7 @@ namespace carbon {
 		}
 
 		if (m_queue_family_indices.graphicsFamily == u32_max) {
-			throw std::runtime_error("[ERROR] No graphics family support.");
+			CARBON_LOG_FATAL(carbon::log::To::File, "No graphics family support.");
 		}
 	}
 
@@ -90,8 +94,8 @@ namespace carbon {
 		deviceFeats.samplerAnisotropy = VK_TRUE;
 		deviceFeats.sampleRateShading = VK_TRUE;
 
-		std::vector<const char *> deviceExtensions{ m_physical_device->getDeviceExtensions() };
-		std::vector<const char *> validationLayers{ m_instance->getEnabledValidationLayers() };
+		std::vector<const char*> deviceExtensions{ m_physical_device->getDeviceExtensions() };
+		std::vector<const char*> validationLayers{ m_instance->getEnabledValidationLayers() };
 
 		// start creating device information
 		VkDeviceCreateInfo createInfo;
@@ -115,7 +119,7 @@ namespace carbon {
 
 		// attempt to create logical device
 		if (vkCreateDevice(m_physical_device->getHandle(), &createInfo, nullptr, &m_device) != VK_SUCCESS) {
-			throw std::runtime_error("[ERROR] Failed to create logical device!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create logical device.");
 		}
 
 		// create single graphics queue from device

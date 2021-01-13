@@ -4,10 +4,12 @@
 
 #include "engine.hpp"
 
+#include "carbon/common/logger.hpp"
 #include "carbon/core/instance.hpp"
 #include "carbon/core/physical_device.hpp"
 #include "carbon/core/logical_device.hpp"
 #include "carbon/display/surface.hpp"
+#include "carbon/display/swapchain.hpp"
 
 namespace carbon {
 
@@ -28,29 +30,38 @@ namespace carbon {
 
 		// create logical device
 		m_logical_device = new LogicalDevice(m_instance, m_physical_device, m_surface);
+
+		// create swapchain
+		m_swapchain = new Swapchain(m_window->getHandle(), m_logical_device, m_physical_device, m_surface);
 	}
 
 
 	Engine::Engine(const window::Props &properties)
 		: m_props(properties)
 	{
+		m_logger->init();
+
 		createWindow();
 		createVulkan();
 	}
 
 
 	Engine::Engine() {
+		m_logger->init();
+
 		createWindow();
 		createVulkan();
 	}
 
 
 	Engine::~Engine() {
+		delete m_swapchain;
 		delete m_logical_device;
 		delete m_physical_device;
 		delete m_surface;
 		delete m_instance;
 		delete m_window;
+		delete m_logger;
 	}
 
 
@@ -69,6 +80,11 @@ namespace carbon {
 	}
 
 
+	const Logger& Engine::getLogger() const {
+		return *m_logger;
+	}
+
+
 	const Instance& Engine::getInstance() const {
 		return *m_instance;
 	}
@@ -81,6 +97,11 @@ namespace carbon {
 
 	const LogicalDevice& Engine::getLogicalDevice() const {
 		return *m_logical_device;
+	}
+
+
+	const Swapchain& Engine::getSwapchain() const {
+		return *m_swapchain;
 	}
 
 } // namespace carbon

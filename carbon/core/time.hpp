@@ -62,14 +62,13 @@ namespace carbon {
 		 */
 		Timer()
 			: m_start(clock_t::now())
-		{ }
+		{}
 
 		/**
 		 * @brief Resets the internal clock.
 		 */
 		void reset() {
 			m_start = clock_t::now();
-			auto c = std::chrono::duration_cast<milliseconds_t>(clock_t::now() - m_start).count();
 		}
 
 		/**

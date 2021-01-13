@@ -4,9 +4,15 @@
 
 #include "swapchain.hpp"
 
+#include "carbon/common/logger.hpp"
+
 #include "carbon/core/physical_device.hpp"
 #include "carbon/core/logical_device.hpp"
+#include "carbon/pipeline/render_pass.hpp"
+
 #include "surface.hpp"
+
+#include <cassert>
 
 namespace carbon {
 
@@ -178,7 +184,7 @@ namespace carbon {
 
 		// create swapchain
 		if (vkCreateSwapchainKHR(m_logical_device->getHandle(), &createInfo, nullptr, &m_swapchain) != VK_SUCCESS) {
-			throw std::runtime_error("[ERROR] Failed to create swapchain!");
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create swapchain.");
 		}
 
 		// get images from swapchain and put into vector
@@ -220,7 +226,40 @@ namespace carbon {
 
 			// create image views
 			if (vkCreateImageView(m_logical_device->getHandle(), &createInfo, nullptr, &m_image_views[i]) != VK_SUCCESS) {
-				throw std::runtime_error("[ERROR] Failed to create image views!");
+				CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create image views.");
+			}
+		}
+	}
+
+
+	void Swapchain::createRenderPass() {
+		m_render_pass = new RenderPass(m_logical_device, m_image_format);
+	}
+
+
+	void Swapchain::createFramebuffers() {
+		assert(m_render_pass && "Render pass must not be null.");
+
+		// hold all image views
+		m_framebuffers.resize(m_image_views.size());
+
+		// create framebuffer for each image view
+		for (size_t i = 0; i < m_image_views.size(); i++) {
+			VkImageView attachments[]{ m_image_views[i] };
+
+			// create framebuffer
+			VkFramebufferCreateInfo info;
+			initStruct(info, VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO);
+
+			info.renderPass = m_render_pass->getHandle();
+			info.attachmentCount = 1;
+			info.pAttachments = attachments;
+			info.width = m_extent.width;
+			info.height = m_extent.height;
+			info.layers = 1;
+
+			if (vkCreateFramebuffer(m_logical_device->getHandle(), &info, nullptr, &m_framebuffers[i]) != VK_SUCCESS) {
+				CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create framebuffer.");
 			}
 		}
 	}
@@ -238,7 +277,11 @@ namespace carbon {
 		, m_surface(surface)
 	{
 		assert(m_logical_device && m_physical_device && m_surface && "Logical device, physical device and surface must not be null.");
-		recreate();
+
+		setup();
+		createImageViews();
+		createRenderPass();
+		createFramebuffers();
 	}
 
 
@@ -250,6 +293,17 @@ namespace carbon {
 	void Swapchain::destroy() {
 		assert(m_logical_device && "Logical device must not be null.");
 		VkDevice device = m_logical_device->getHandle();
+
+		// destroy framebuffers
+		for (size_t i = 0; i < m_framebuffers.size(); i++) {
+			if (m_framebuffers[i] != VK_NULL_HANDLE) {
+				vkDestroyFramebuffer(device, m_framebuffers[i], nullptr);
+				m_framebuffers[i] = VK_NULL_HANDLE;
+			}
+		}
+
+		// destroy render pass
+		delete m_render_pass;
 
 		// destroy image views
 		for (size_t i = 0; i < m_image_views.size(); i++) {
@@ -268,8 +322,27 @@ namespace carbon {
 
 
 	void Swapchain::recreate() {
+		int width{ 0 };
+		int height{ 0 };
+
+		// get framebuffer size
+		glfwGetFramebufferSize(m_window, &width, &height);
+
+		// wait until not minimized
+		while (width == 0 || height == 0) {
+			glfwWaitEvents();
+			glfwGetFramebufferSize(m_window, &width, &height);
+		}
+
+		// wait for logical device
+		vkDeviceWaitIdle(m_logical_device->getHandle());
+
+		destroy();
+
 		setup();
 		createImageViews();
+		createRenderPass();
+		createFramebuffers();
 	}
 
 
