@@ -102,7 +102,7 @@ namespace carbon {
 	}
 
 
-	const u32 PhysicalDevice::findMemoryType(u32 filter, const VkMemoryPropertyFlags& props) {
+	const u32 PhysicalDevice::findMemoryType(u32 filter, const VkMemoryPropertyFlags& props) const {
 		// get memory properties
 		VkPhysicalDeviceMemoryProperties memProps;
 		vkGetPhysicalDeviceMemoryProperties(m_device, &memProps);

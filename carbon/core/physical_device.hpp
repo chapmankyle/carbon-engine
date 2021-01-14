@@ -98,7 +98,7 @@ namespace carbon {
 		 * @param props The flags for the memory properties.
 		 * @returns The index of the type of memory that is compatible.
 		 */
-		const u32 findMemoryType(u32 filter, const VkMemoryPropertyFlags &props);
+		const u32 findMemoryType(u32 filter, const VkMemoryPropertyFlags &props) const;
 
 		/**
 		 * @returns The properties of the best physical device as a string.
