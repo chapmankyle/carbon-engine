@@ -31,6 +31,13 @@ namespace carbon {
 			u32 major = 1;
 			u32 minor = 0;
 			u32 patch = 0;
+
+			/**
+			 * @returns A string representing the version as `<major>.<minor>.<patch>`
+			 */
+			const std::string show() const {
+				return fmt::format("{}.{}.{}", major, minor, patch);
+			}
 		};
 
 		/**
