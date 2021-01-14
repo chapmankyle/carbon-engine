@@ -160,6 +160,11 @@ namespace carbon {
 	}
 
 
+	void LogicalDevice::bindBuffer(const VkBuffer &buffer, const VkDeviceMemory &memory, const VkDeviceSize &offset) {
+		vkBindBufferMemory(m_device, buffer, memory, offset);
+	}
+
+
 	const PhysicalDevice* LogicalDevice::getPhysicalDevice() const {
 		return m_physical_device;
 	}

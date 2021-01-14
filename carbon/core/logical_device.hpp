@@ -113,6 +113,14 @@ namespace carbon {
 		void destroy();
 
 		/**
+		 * @brief Binds buffer memory to the logical device.
+		 * @param buffer The buffer to bind.
+		 * @param memory The buffer memory to use.
+		 * @param offset The offset into the buffer memory.
+		 */
+		void bindBuffer(const VkBuffer &buffer, const VkDeviceMemory &memory, const VkDeviceSize &offset);
+
+		/**
 		 * @returns The handle of the underlying device.
 		 */
 		const VkDevice& getHandle() const {
