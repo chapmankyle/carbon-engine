@@ -94,6 +94,11 @@ namespace carbon {
 	}
 
 
+	const bool Window::isResizable() const {
+		return m_resizable;
+	}
+
+
 	const bool Window::isMinimized() const {
 		return m_minimized;
 	}

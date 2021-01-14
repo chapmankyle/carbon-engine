@@ -138,6 +138,11 @@ namespace carbon {
 		glm::ivec2 m_pos = m_initial_pos;
 
 		/**
+		 * @brief Keep track of if the window can be resized.
+		 */
+		bool m_resizable{ true };
+
+		/**
 		 * @brief Keep track of when the framebuffer has been
 		 * resized (when resizing or minimizing window).
 		 */
@@ -306,6 +311,11 @@ namespace carbon {
 		 * The form is `width:height` and can be used as `1:<returned value>`.
 		 */
 		const float getAspectRatio() const;
+
+		/**
+		 * @returns `true` if the window can be resized, `false` otherwise.
+		 */
+		const bool isResizable() const;
 
 		/**
 		 * @returns `true` if the window is minimized, `false` otherwise.
