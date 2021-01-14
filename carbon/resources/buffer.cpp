@@ -5,20 +5,28 @@
 #include "buffer.hpp"
 
 #include "carbon/core/logical_device.hpp"
+#include "carbon/core/physical_device.hpp"
 
 #include <cassert>
 
 namespace carbon {
 
-	Buffer::Buffer(const LogicalDevice *device, const VkDeviceSize &size, const VkBufferUsageFlags &usage, const VkMemoryPropertyFlags &properties, const void *data) 
-		: m_device(device)
+	Buffer::Buffer(
+		const LogicalDevice *logiDevice, 
+		const VkDeviceSize &size, 
+		const VkBufferUsageFlags &usage, 
+		const VkMemoryPropertyFlags &properties, 
+		const void *data
+	) 
+		: m_logi_device(logiDevice)
+		, m_phys_device(logiDevice->getPhysicalDevice())
 		, m_size(size)
 		, m_usage(usage)
 		, m_properties(properties)
 		, m_buffer(VK_NULL_HANDLE)
 		, m_memory(VK_NULL_HANDLE)
 	{
-		assert(m_device && "Logical device must not be null.");
+		assert(m_logi_device && m_phys_device && "Logical and physical devices must not be null.");
 
 		// create with given parameters
 		create(m_size, m_usage, m_properties, data);
@@ -31,17 +39,18 @@ namespace carbon {
 	}
 
 
-	Buffer::Buffer(const LogicalDevice *device) 
-		: m_device(device)
+	Buffer::Buffer(const LogicalDevice *logiDevice) 
+		: m_logi_device(logiDevice)
+		, m_phys_device(logiDevice->getPhysicalDevice())
 		, m_size(0)
 		, m_usage(VK_NULL_HANDLE)
 		, m_properties(VK_NULL_HANDLE)
 		, m_mapped_memory(nullptr)
 		, m_buffer(VK_NULL_HANDLE)
 		, m_memory(VK_NULL_HANDLE)
-		, m_descriptor{}
 	{
-		assert(m_device && "Logical device must not be null.");
+		assert(m_logi_device && m_phys_device && "Logical and physical devices must not be null.");
+		m_descriptor = {};
 	}
 
 
@@ -52,7 +61,8 @@ namespace carbon {
 		}
 
 		// copy contents of buffer to *this
-		m_device = other.getLogicalDevice();
+		m_logi_device = other.getLogicalDevice();
+		m_phys_device = other.getPhysicalDevice();
 		m_size = other.getSize();
 		m_usage = other.getUsage();
 		m_properties = other.getMemoryProperties();
@@ -75,7 +85,7 @@ namespace carbon {
 		unmapMemory();
 
 		// get logical device
-		VkDevice dev = m_device->getHandle();
+		VkDevice dev = m_logi_device->getHandle();
 
 		// destroy buffer
 		if (m_buffer != VK_NULL_HANDLE) {
@@ -110,7 +120,7 @@ namespace carbon {
 
 
 	bool Buffer::mapMemory(VkDeviceSize size, VkDeviceSize offset) {
-		VkDevice dev = m_device->getHandle();
+		VkDevice dev = m_logi_device->getHandle();
 		return vkMapMemory(dev, m_memory, offset, size, 0, &m_mapped_memory) == VK_SUCCESS;
 	}
 
@@ -122,7 +132,7 @@ namespace carbon {
 		}
 
 		// unmap the memory
-		VkDevice dev = m_device->getHandle();
+		VkDevice dev = m_logi_device->getHandle();
 		vkUnmapMemory(dev, m_memory);
 		m_mapped_memory = nullptr;
 	}
@@ -133,8 +143,8 @@ namespace carbon {
 	}
 
 
-	bool Buffer::flush(const VkDeviceSize size, const VkDeviceSize offset) {
-		VkDevice dev = m_device->getHandle();
+	bool Buffer::flush(const VkDeviceSize &size, const VkDeviceSize &offset) {
+		VkDevice dev = m_logi_device->getHandle();
 
 		// flush memory mapped range
 		VkMappedMemoryRange mappedRange;
@@ -150,7 +160,12 @@ namespace carbon {
 
 
 	const LogicalDevice* Buffer::getLogicalDevice() const {
-		return m_device;
+		return m_logi_device;
+	}
+
+
+	const PhysicalDevice* Buffer::getPhysicalDevice() const {
+		return m_phys_device;
 	}
 
 
