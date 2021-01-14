@@ -159,4 +159,9 @@ namespace carbon {
 		// after this class destructor
 	}
 
+
+	const PhysicalDevice* LogicalDevice::getPhysicalDevice() const {
+		return m_physical_device;
+	}
+
 } // namespace carbon

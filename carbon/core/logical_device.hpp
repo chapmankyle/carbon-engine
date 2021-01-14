@@ -120,6 +120,11 @@ namespace carbon {
 		}
 
 		/**
+		 * @returns The physical device associated with this logical device.
+		 */
+		const class PhysicalDevice* getPhysicalDevice() const;
+
+		/**
 		 * @returns The graphics queue.
 		 */
 		const VkQueue& getGraphicsQueue() const {
