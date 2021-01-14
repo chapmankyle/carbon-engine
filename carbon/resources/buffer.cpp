@@ -4,6 +4,7 @@
 
 #include "buffer.hpp"
 
+#include "carbon/common/logger.hpp"
 #include "carbon/core/logical_device.hpp"
 #include "carbon/core/physical_device.hpp"
 
@@ -12,7 +13,7 @@
 namespace carbon {
 
 	Buffer::Buffer(
-		const LogicalDevice *device, 
+		LogicalDevice *device, 
 		const VkDeviceSize &size, 
 		const VkBufferUsageFlags &usage, 
 		const VkMemoryPropertyFlags &properties, 
@@ -39,7 +40,7 @@ namespace carbon {
 	}
 
 
-	Buffer::Buffer(const LogicalDevice *device) 
+	Buffer::Buffer(LogicalDevice *device) 
 		: m_logi_device(device)
 		, m_phys_device(device->getPhysicalDevice())
 		, m_size(0)
@@ -111,7 +112,46 @@ namespace carbon {
 	}
 
 
-	void Buffer::create(const VkDeviceSize &size, const VkBufferUsageFlags &usage, const VkMemoryPropertyFlags &properties, const void *data) {
+	void Buffer::create(
+		const VkDeviceSize &size,
+		const VkBufferUsageFlags &usage, 
+		const VkMemoryPropertyFlags &properties,
+		const void *data
+	) {
+		// get handle on logical device
+		VkDevice dev = m_logi_device->getHandle();
+
+		// specify use of buffer
+		VkBufferCreateInfo bufferInfo;
+		initStruct(bufferInfo, VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO);
+
+		bufferInfo.size = size;
+		bufferInfo.usage = usage;
+		bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+		// attempt to create buffer
+		if (vkCreateBuffer(dev, &bufferInfo, nullptr, &m_buffer) != VK_SUCCESS) {
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to create buffer.");
+		}
+
+		// get memory requirements
+		VkMemoryRequirements memReqs;
+		vkGetBufferMemoryRequirements(dev, m_buffer, &memReqs);
+
+		// setup allocation of memory
+		VkMemoryAllocateInfo allocInfo;
+		initStruct(allocInfo, VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO);
+
+		allocInfo.allocationSize = memReqs.size;
+		allocInfo.memoryTypeIndex = m_phys_device->findMemoryType(memReqs.memoryTypeBits, properties);
+
+		// attempt to allocate buffer memory
+		if (vkAllocateMemory(dev, &allocInfo, nullptr, &m_memory) != VK_SUCCESS) {
+			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to allocate buffer memory.");
+		}
+
+		// bind memory
+		m_logi_device->bindBuffer(m_buffer, nullptr, 0);
 	}
 
 
@@ -159,7 +199,7 @@ namespace carbon {
 	}
 
 
-	const LogicalDevice* Buffer::getLogicalDevice() const {
+	LogicalDevice* Buffer::getLogicalDevice() const {
 		return m_logi_device;
 	}
 

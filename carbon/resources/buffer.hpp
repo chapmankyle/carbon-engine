@@ -25,7 +25,7 @@ namespace carbon {
 		/**
 		 * @brief The logical device to use in the buffer.
 		 */
-		const class LogicalDevice *m_logi_device;
+		class LogicalDevice *m_logi_device;
 
 		/**
 		 * @brief The physical device to use for buffer memory allocation.
@@ -83,7 +83,7 @@ namespace carbon {
 		 * @param data [Optional] Pointer to the data that the buffer should map to.
 		 */
 		Buffer(
-			const class LogicalDevice *device,
+			class LogicalDevice *device,
 			const VkDeviceSize &size, 
 			const VkBufferUsageFlags &usage, 
 			const VkMemoryPropertyFlags &properties, 
@@ -94,7 +94,7 @@ namespace carbon {
 		 * @brief Initializes the buffer to 0.
 		 * @param device The logical device to use for the buffer.
 		 */
-		explicit Buffer(const class LogicalDevice *device);
+		explicit Buffer(class LogicalDevice *device);
 
 		/**
 		 * @brief Copy constructor to set current buffer to mirror another buffer.
@@ -133,7 +133,12 @@ namespace carbon {
 		 * @param properties Properties of the buffer.
 		 * @param data [Optional] Pointer to the data that the buffer should map to.
 		 */
-		void create(const VkDeviceSize &size, const VkBufferUsageFlags &usage, const VkMemoryPropertyFlags &properties, const void *data = nullptr);
+		void create(
+			const VkDeviceSize &size, 
+			const VkBufferUsageFlags &usage,
+			const VkMemoryPropertyFlags &properties,
+			const void *data = nullptr
+		);
 
 		/**
 		 * @brief Copies the contents from the `src` buffer into this buffer.
@@ -171,7 +176,7 @@ namespace carbon {
 		/**
 		 * @returns The logical device associated with the buffer.
 		 */
-		const class LogicalDevice* getLogicalDevice() const;
+		class LogicalDevice* getLogicalDevice() const;
 
 		/**
 		 * @returns The physical device associated with the buffer.
