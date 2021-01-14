@@ -93,6 +93,14 @@ namespace carbon {
 		~PhysicalDevice() = default;
 
 		/**
+		 * @brief Finds the type of memory that is compatible with our application requirements.
+		 * @param filter The bit field of memory types that are suitable.
+		 * @param props The flags for the memory properties.
+		 * @returns The index of the type of memory that is compatible.
+		 */
+		const u32 findMemoryType(u32 filter, const VkMemoryPropertyFlags &props);
+
+		/**
 		 * @returns The properties of the best physical device as a string.
 		 */
 		const std::string getPropertiesAsStr() const;

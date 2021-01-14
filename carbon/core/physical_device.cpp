@@ -102,6 +102,22 @@ namespace carbon {
 	}
 
 
+	const u32 PhysicalDevice::findMemoryType(u32 filter, const VkMemoryPropertyFlags& props) {
+		// get memory properties
+		VkPhysicalDeviceMemoryProperties memProps;
+		vkGetPhysicalDeviceMemoryProperties(m_device, &memProps);
+
+		for (u32 i = 0; i < memProps.memoryTypeCount; i++) {
+			if ((filter & (1 << i)) && (memProps.memoryTypes[i].propertyFlags & props) == props) {
+				return i;
+			}
+		}
+
+		CARBON_LOG_FATAL(carbon::log::To::File, "Failed to find suitable memory type.");
+		return 0;
+	}
+
+
 	const std::string PhysicalDevice::getPropertiesAsStr() const {
 		std::string props = fmt::format("Selected Physical Device -> {}", m_device_props.deviceName);
 
