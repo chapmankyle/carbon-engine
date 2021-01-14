@@ -76,14 +76,14 @@ namespace carbon {
 
 		/**
 		 * @brief Initializes the buffer with the given parameters.
-		 * @param logiDevice The logical device to use for the buffer.
+		 * @param device The logical device to use for the buffer.
 		 * @param size The size of the buffer.
 		 * @param usage The bits representing how the buffer will be used.
 		 * @param properties Properties of the buffer.
 		 * @param data [Optional] Pointer to the data that the buffer should map to.
 		 */
 		Buffer(
-			const class LogicalDevice *logiDevice,
+			const class LogicalDevice *device,
 			const VkDeviceSize &size, 
 			const VkBufferUsageFlags &usage, 
 			const VkMemoryPropertyFlags &properties, 
@@ -92,9 +92,9 @@ namespace carbon {
 
 		/**
 		 * @brief Initializes the buffer to 0.
-		 * @param logiDevice The logical device to use for the buffer.
+		 * @param device The logical device to use for the buffer.
 		 */
-		explicit Buffer(const class LogicalDevice *logiDevice);
+		explicit Buffer(const class LogicalDevice *device);
 
 		/**
 		 * @brief Copy constructor to set current buffer to mirror another buffer.

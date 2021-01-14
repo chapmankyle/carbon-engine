@@ -12,14 +12,14 @@
 namespace carbon {
 
 	Buffer::Buffer(
-		const LogicalDevice *logiDevice, 
+		const LogicalDevice *device, 
 		const VkDeviceSize &size, 
 		const VkBufferUsageFlags &usage, 
 		const VkMemoryPropertyFlags &properties, 
 		const void *data
 	) 
-		: m_logi_device(logiDevice)
-		, m_phys_device(logiDevice->getPhysicalDevice())
+		: m_logi_device(device)
+		, m_phys_device(device->getPhysicalDevice())
 		, m_size(size)
 		, m_usage(usage)
 		, m_properties(properties)
@@ -39,9 +39,9 @@ namespace carbon {
 	}
 
 
-	Buffer::Buffer(const LogicalDevice *logiDevice) 
-		: m_logi_device(logiDevice)
-		, m_phys_device(logiDevice->getPhysicalDevice())
+	Buffer::Buffer(const LogicalDevice *device) 
+		: m_logi_device(device)
+		, m_phys_device(device->getPhysicalDevice())
 		, m_size(0)
 		, m_usage(VK_NULL_HANDLE)
 		, m_properties(VK_NULL_HANDLE)
