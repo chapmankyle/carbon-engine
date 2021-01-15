@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include;$(ProjectDir)deps\VulkanMemoryAllocator\src</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -93,7 +93,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include;$(ProjectDir)deps\VulkanMemoryAllocator\src</AdditionalIncludeDirectories>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -109,7 +109,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include;$(ProjectDir)deps\VulkanMemoryAllocator\src</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,7 +125,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.162.0\Include;$(ProjectDir);$(ProjectDir)deps\glm;$(ProjectDir)deps\glfw-bin\include;$(ProjectDir)deps\spdlog\include;$(ProjectDir)deps\VulkanMemoryAllocator\src</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
