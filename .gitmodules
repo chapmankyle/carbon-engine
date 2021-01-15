@@ -8,3 +8,6 @@
 	path = deps/spdlog
 	url = https://github.com/chapmankyle/spdlog
 	branch = v1.x
+[submodule "deps/VulkanMemoryAllocator"]
+	path = deps/VulkanMemoryAllocator
+	url = https://github.com/chapmankyle/VulkanMemoryAllocator
