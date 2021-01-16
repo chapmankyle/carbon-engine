@@ -1,3 +1,7 @@
+// file      : carbon/resources/command_pool.hpp
+// copyright : Copyright (c) 2020-present, Kyle Chapman
+// license   : GPL-3.0; see accompanying LICENSE file
+
 #pragma once
 
 #ifndef RES_COMMAND_POOL_HPP
@@ -7,6 +11,9 @@
 
 namespace carbon {
 
+	// forward-declare classes that would result in circular dependency
+	class LogicalDevice;
+
 	/**
 	 * @brief A wrapper for the Vulkan command pool, which allows command buffer
 	 * memory to be allocated from. Must not be used across multiple threads.
@@ -14,6 +21,11 @@ namespace carbon {
 	class CommandPool {
 
 	private:
+
+		/**
+		 * @brief The logical device to use in the command pool.
+		 */
+		const class LogicalDevice *m_device;
 
 		/**
 		 * @brief Handle on the command pool object.
@@ -30,14 +42,27 @@ namespace carbon {
 		 */
 		u32 m_queue_family;
 
+		/**
+		 * @brief Creates the command pool.
+		 */
+		void create();
+
 	public:
 
 		/**
 		 * @brief Initializes the command pool.
+		 * @param device The logical device to use in the command pool.
 		 * @param queueFamily The queue family to use for the command pool.
 		 * @param flags [Optional] The flags used to indicate usage of command pool.
 		 */
-		explicit CommandPool(u32 queueFamily, const VkCommandPoolCreateFlags &flags = 0u);
+		CommandPool(const class LogicalDevice *device, u32 queueFamily, const VkCommandPoolCreateFlags &flags = 0u);
+
+		/**
+		 * @brief Initializes the command pool.
+		 * @param device The logical device to use in the command pool.
+		 * @param flags [Optional] The flags used to indicate usage of command pool.
+		 */
+		explicit CommandPool(const class LogicalDevice *device, const VkCommandPoolCreateFlags &flags = 0u);
 
 		CommandPool(const CommandPool &other) = delete;
 
