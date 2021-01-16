@@ -57,6 +57,9 @@
     <ClCompile Include="carbon\common\logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="carbon\resources\command_pool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="carbon\carbon.hpp">

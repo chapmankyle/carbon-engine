@@ -153,6 +153,7 @@
     <ClCompile Include="carbon\engine\engine.cpp" />
     <ClCompile Include="carbon\pipeline\render_pass.cpp" />
     <ClCompile Include="carbon\resources\buffer.cpp" />
+    <ClCompile Include="carbon\resources\command_pool.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
   <ItemGroup>
