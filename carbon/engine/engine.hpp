@@ -84,6 +84,31 @@ namespace carbon {
 		size_t m_current_frame = 0;
 
 		/**
+		 * @brief Keeps track of current time.
+		 */
+		f64 m_time;
+
+		/**
+		 * @brief Difference between current time and last recorded time.
+		 */
+		f64 m_delta = 0.0;
+
+		/**
+		 * @brief Average frame rate over a one-second interval.
+		 */
+		f64 m_frame_rate = 0.0;
+
+		/**
+		 * @brief Average time to render a single frame.
+		 */
+		f64 m_frame_time = 0.0;
+
+		/**
+		 * @brief Number of frames that have been rendered.
+		 */
+		i32 m_num_frames = 0;
+
+		/**
 		 * @brief Creates the window for the Engine.
 		 */
 		void createWindow();
