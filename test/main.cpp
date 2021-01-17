@@ -9,6 +9,7 @@ int main() {
 	properties.width = 1280;
 	properties.height = 720;
 	properties.resizable = true;
+	properties.showFPS = true;
 
 	// setup timer
 	carbon::Timer t;
