@@ -82,6 +82,12 @@ namespace carbon {
 			bool resizable = true;
 
 			/**
+			 * @brief `true` if the FPS should be displayed in the title bar,
+			 * `false` to not display FPS anywhere. Default is `false`.
+			 */
+			bool showFPS = false;
+
+			/**
 			 * @brief The version of the application using the window.
 			 * Default is v1.0.0
 			 */
