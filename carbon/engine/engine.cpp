@@ -16,7 +16,7 @@ namespace carbon {
 	void Engine::createWindow() {
 		m_window = new WindowGLFW(m_props);
 
-		m_time = glfwGetTime();
+		m_title = m_props.title;
 		m_show_fps = m_props.showFPS;
 	}
 
@@ -48,9 +48,7 @@ namespace carbon {
 			m_frame_rate = static_cast<f64>(m_num_frames) / m_delta;
 			m_frame_time = 1.0 / m_frame_rate;
 
-			if (m_show_fps) {
-				m_window->setTitle(fmt::format("{} | {:.0f} fps | {:.2f} ms", m_props.title, m_frame_rate, m_frame_time));
-			}
+			m_window->setTitle(fmt::format("{} | {:.0f} fps | {:.2f} ms", m_title, m_frame_rate, m_frame_time));
 
 			m_time = now;
 			m_num_frames = 0;
@@ -93,10 +91,19 @@ namespace carbon {
 
 
 	void Engine::update() {
+		// initialize time
+		if (m_time < 0.0) {
+			m_time = glfwGetTime();
+		}
+
+		// update rendering
 		m_window->update();
 
+		// update FPS counter
 		m_num_frames++;
-		updateFrameCounter();
+		if (m_show_fps) {
+			updateFrameCounter();
+		}
 	}
 
 
