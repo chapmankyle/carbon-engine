@@ -109,6 +109,11 @@ namespace carbon {
 		i32 m_num_frames = 0;
 
 		/**
+		 * @brief Show/hide FPS in title bar.
+		 */
+		bool m_show_fps = false;
+
+		/**
 		 * @brief Creates the window for the Engine.
 		 */
 		void createWindow();
@@ -118,6 +123,11 @@ namespace carbon {
 		 * needed to start the Engine.
 		 */
 		void createVulkan();
+
+		/**
+		 * @brief Updates the FPS counter.
+		 */
+		void updateFrameCounter();
 
 	public:
 
