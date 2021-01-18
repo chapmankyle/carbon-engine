@@ -53,7 +53,7 @@ namespace carbon {
 			}
 
 			// check if all families are supported
-			if (m_queue_family_indices.hasFamilies()) {
+			if (m_queue_family_indices.isValid()) {
 				break;
 			}
 

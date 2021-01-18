@@ -37,7 +37,7 @@ namespace carbon {
 			/**
 			 * @returns `true` if all graphics families are present, `false` otherwise.
 			 */
-			bool hasFamilies() {
+			bool isValid() {
 				return graphicsFamily != u32_max && presentFamily != u32_max && computeFamily != u32_max && transferFamily != u32_max;
 			}
 		};
