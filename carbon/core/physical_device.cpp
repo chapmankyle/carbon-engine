@@ -54,7 +54,7 @@ namespace carbon {
 	}
 
 
-	VkPhysicalDevice PhysicalDevice::selectBestPhysicalDevice(const std::vector<VkPhysicalDevice> &devices) {
+	VkPhysicalDevice PhysicalDevice::selectBest(const std::vector<VkPhysicalDevice> &devices) {
 		i32 score{ 0 };
 
 		// add all device scores to candidates

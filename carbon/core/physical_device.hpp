@@ -76,7 +76,7 @@ namespace carbon {
 		/**
 		 * @returns The best physical device.
 		 */
-		VkPhysicalDevice selectBestPhysicalDevice(const std::vector<VkPhysicalDevice> &devices);
+		VkPhysicalDevice selectBest(const std::vector<VkPhysicalDevice> &devices);
 
 	public:
 
