@@ -74,6 +74,11 @@ namespace carbon {
 		window::Props m_props{};
 
 		/**
+		 * @brief Title of the window.
+		 */
+		std::string m_title;
+
+		/**
 		 * @brief Used to indicate if a resize operation is necessary.
 		 */
 		bool m_resized = false;
@@ -86,7 +91,7 @@ namespace carbon {
 		/**
 		 * @brief Keeps track of current time.
 		 */
-		f64 m_time;
+		f64 m_time = -1.0;
 
 		/**
 		 * @brief Difference between current time and last recorded time.
