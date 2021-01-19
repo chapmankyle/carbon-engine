@@ -165,6 +165,11 @@ namespace carbon {
 	}
 
 
+	const Instance* LogicalDevice::getInstance() const {
+		return m_instance;
+	}
+
+
 	const PhysicalDevice* LogicalDevice::getPhysicalDevice() const {
 		return m_physical_device;
 	}

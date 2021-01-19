@@ -128,6 +128,11 @@ namespace carbon {
 		}
 
 		/**
+		 * @returns The instance associated with this logical device.
+		 */
+		const class Instance* getInstance() const;
+
+		/**
 		 * @returns The physical device associated with this logical device.
 		 */
 		const class PhysicalDevice* getPhysicalDevice() const;
