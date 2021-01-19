@@ -145,6 +145,7 @@
     <ClCompile Include="carbon\common\utils.cpp" />
     <ClCompile Include="carbon\core\instance.cpp" />
     <ClCompile Include="carbon\core\logical_device.cpp" />
+    <ClCompile Include="carbon\core\memory.cpp" />
     <ClCompile Include="carbon\core\physical_device.cpp" />
     <ClCompile Include="carbon\display\surface.cpp" />
     <ClCompile Include="carbon\display\swapchain.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="carbon\common\utils.hpp" />
     <ClInclude Include="carbon\core\instance.hpp" />
     <ClInclude Include="carbon\core\logical_device.hpp" />
+    <ClInclude Include="carbon\core\memory.hpp" />
     <ClInclude Include="carbon\core\physical_device.hpp" />
     <ClInclude Include="carbon\core\time.hpp" />
     <ClInclude Include="carbon\display\surface.hpp" />
