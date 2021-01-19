@@ -34,4 +34,17 @@ namespace carbon {
 		vmaDestroyAllocator(m_allocator);
 	}
 
+
+	void Memory::createBuffer(const VkBufferCreateInfo &info, const memory::Usage &usage) {
+		VmaAllocationCreateInfo allocInfo{};
+
+		allocInfo.usage = static_cast<VmaMemoryUsage>(usage);
+
+		VkBuffer buffer;
+		VmaAllocation allocation;
+
+		// create buffer
+		vmaCreateBuffer(m_allocator, &info, &allocInfo, &buffer, &allocation, nullptr);
+	}
+
 } // namespace carbon
