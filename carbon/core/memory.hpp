@@ -17,6 +17,28 @@ namespace carbon {
 	// forward-declare classes that would result in circular dependency
 	class LogicalDevice;
 
+	namespace memory {
+
+		/**
+		 * @brief Usage flags for memory allocation.
+		 */
+		enum class Usage {
+			Unknown = 0,
+
+			OnlyGPU = 1,
+			OnlyCPU = 2,
+
+			CPUtoGPU = 3,
+			GPUtoCPU = 4,
+
+			CopyCPU = 5,
+			LazyGPU = 6,
+
+			Max = 0x7FFFFFFF
+		};
+
+	} // namespace memory
+
 	/**
 	 * @brief Class to represent a memory manager in charge of handling 
 	 * any memory allocation / deallocation.
@@ -47,6 +69,13 @@ namespace carbon {
 		 * @brief Destructor for the memory manager.
 		 */
 		~Memory();
+
+		/**
+		 * @brief Creates a buffer, allocates the memory and binds it.
+		 * @param info The information to create the buffer with.
+		 * @param usage The usage of the 
+		 */
+		void createBuffer(const VkBufferCreateInfo &info, const memory::Usage &usage);
 
 		/**
 		 * @returns The handle on the allocator used for memory management.
