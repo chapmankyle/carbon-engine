@@ -143,6 +143,9 @@
     <ClInclude Include="carbon\core\memory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="carbon\resources\command_buffer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

@@ -181,6 +181,7 @@
     <ClInclude Include="carbon\pipeline\render_pass.hpp" />
     <ClInclude Include="carbon\platform.hpp" />
     <ClInclude Include="carbon\resources\buffer.hpp" />
+    <ClInclude Include="carbon\resources\command_buffer.hpp" />
     <ClInclude Include="carbon\resources\command_pool.hpp" />
     <ClInclude Include="carbon\setup.hpp" />
     <ClInclude Include="carbon\types.hpp" />
