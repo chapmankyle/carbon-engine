@@ -89,7 +89,7 @@ namespace carbon {
 		vkEnumeratePhysicalDevices(m_instance->getHandle(), &numDevices, devices.data());
 
 		// select best device
-		m_device = selectBestPhysicalDevice(devices);
+		m_device = selectBest(devices);
 
 		if (m_device == VK_NULL_HANDLE) {
 			CARBON_LOG_FATAL(carbon::log::To::File, "Failed to choose suitable physical device.");
