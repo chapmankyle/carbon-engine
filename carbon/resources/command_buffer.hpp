@@ -20,11 +20,10 @@ namespace carbon {
 		/**
 		 * @brief Current state of the command buffer.
 		 */
-		enum class State : u32 {
-			Invalid = 0,
-			Initial,
-			Recording,
-			Finished
+		enum class State : i32 {
+			Invalid = -1,
+			Ready,
+			Recording
 		};
 
 	} // namespace buffer
@@ -54,7 +53,7 @@ namespace carbon {
 		/**
 		 * @brief Current state of the command buffer.
 		 */
-		buffer::State m_state{ buffer::State::Initial };
+		buffer::State m_state{ buffer::State::Invalid };
 
 	public:
 
