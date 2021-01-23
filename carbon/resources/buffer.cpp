@@ -8,6 +8,9 @@
 #include "carbon/core/logical_device.hpp"
 #include "carbon/core/physical_device.hpp"
 
+#include "command_pool.hpp"
+#include "command_buffer.hpp"
+
 #include <cassert>
 
 namespace carbon {
@@ -37,6 +40,9 @@ namespace carbon {
 		m_descriptor.buffer = m_buffer;
 		m_descriptor.offset = m_offset;
 		m_descriptor.range = m_size;
+
+		// initialize command pool
+		m_pool = new CommandPool(m_logi_device);
 	}
 
 
@@ -52,6 +58,9 @@ namespace carbon {
 	{
 		assert(m_logi_device && m_phys_device && "Logical and physical devices must not be null.");
 		m_descriptor = {};
+
+		// initialize command pool
+		m_pool = new CommandPool(m_logi_device);
 	}
 
 
@@ -64,6 +73,8 @@ namespace carbon {
 		// copy contents of buffer to *this
 		m_logi_device = other.getLogicalDevice();
 		m_phys_device = other.getPhysicalDevice();
+		m_pool = other.getCommandPool();
+		m_command_buffer = other.getCommandBuffer();
 		m_size = other.getSize();
 		m_usage = other.getUsage();
 		m_properties = other.getMemoryProperties();
@@ -79,6 +90,8 @@ namespace carbon {
 		if (m_buffer != VK_NULL_HANDLE) {
 			destroy();
 		}
+
+		delete m_pool;
 	}
 
 
@@ -156,6 +169,22 @@ namespace carbon {
 
 
 	void Buffer::copyFrom(Buffer *src, const VkDeviceSize &size) {
+		m_command_buffer = new CommandBuffer(m_logi_device, m_pool);
+
+		// begin copying
+		m_command_buffer->begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+
+		VkBufferCopy copy{};
+		copy.srcOffset = 0;
+		copy.dstOffset = 0;
+		copy.size = size;
+		vkCmdCopyBuffer(m_command_buffer->getHandle(), src->getHandle(), m_buffer, 1, &copy);
+
+		// end copying
+		m_command_buffer->end();
+
+		// remove dynamic memory
+		delete m_command_buffer;
 	}
 
 
@@ -206,6 +235,16 @@ namespace carbon {
 
 	const PhysicalDevice* Buffer::getPhysicalDevice() const {
 		return m_phys_device;
+	}
+
+
+	CommandPool* Buffer::getCommandPool() const {
+		return m_pool;
+	}
+
+
+	CommandBuffer* Buffer::getCommandBuffer() const {
+		return m_command_buffer;
 	}
 
 
