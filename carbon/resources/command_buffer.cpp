@@ -67,7 +67,10 @@ namespace carbon {
 		assert(inUse() && "Command buffer has not started recording.");
 
 		// end recording and reset state
-		vkEndCommandBuffer(m_command_buffer);
+		if (vkEndCommandBuffer(m_command_buffer) != VK_SUCCESS) {
+			CARBON_LOG_FATAL(log::To::File, "Failed to end command buffer recording.");
+		}
+
 		m_state = buffer::State::Ready;
 	}
 
