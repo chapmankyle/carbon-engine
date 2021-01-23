@@ -14,6 +14,8 @@ namespace carbon {
 	// forward-declare classes that would result in circular dependency
 	class LogicalDevice;
 	class PhysicalDevice;
+	class CommandPool;
+	class CommandBuffer;
 
 	/**
 	 * @brief A wrapper for the Vulkan buffer object.
@@ -31,6 +33,16 @@ namespace carbon {
 		 * @brief The physical device to use for buffer memory allocation.
 		 */
 		const class PhysicalDevice *m_phys_device;
+
+		/**
+		 * @brief Command pool used for buffer allocation.
+		 */
+		class CommandPool *m_pool = nullptr;
+
+		/**
+		 * @brief Command buffer used to copy between buffers.
+		 */
+		class CommandBuffer *m_command_buffer = nullptr;
 
 		/**
 		 * @brief Handle on the underlying buffer object.
@@ -182,6 +194,16 @@ namespace carbon {
 		 * @returns The physical device associated with the buffer.
 		 */
 		const class PhysicalDevice* getPhysicalDevice() const;
+
+		/**
+		 * @returns The command pool used for buffer allocation.
+		 */
+		class CommandPool* getCommandPool() const;
+
+		/**
+		 * @returns The command buffer used to copy data between buffers.
+		 */
+		class CommandBuffer* getCommandBuffer() const;
 
 		/**
 		 * @returns The handle on the underlying buffer.
