@@ -157,7 +157,7 @@ namespace carbon {
 		 * @param src The buffer to copy the contents from.
 		 * @param size The size of the buffer to copy.
 		 */
-		static void copyFrom(Buffer *src, const VkDeviceSize &size);
+		void copyFrom(Buffer *src, const VkDeviceSize &size);
 
 		/**
 		 * @brief Attempts to map the buffer into CPU-accessible memory.
