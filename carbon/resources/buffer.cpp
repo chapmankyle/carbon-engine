@@ -172,7 +172,7 @@ namespace carbon {
 
 
 	void Buffer::copyFrom(Buffer *src, const VkDeviceSize &size) {
-		// begin copying
+		// submit to graphics queue only once
 		m_command_buffer->begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
 
 		VkBufferCopy copy{};
@@ -183,6 +183,46 @@ namespace carbon {
 
 		// end copying
 		m_command_buffer->end();
+	}
+
+
+	VkImage Buffer::toImage(u32 width, u32 height) {
+		VkImage image = nullptr;
+
+		// submit to graphics queue only once
+		m_command_buffer->begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+
+		// setup region to copy
+		VkBufferImageCopy region{};
+		region.bufferOffset = 0;
+		region.bufferRowLength = 0;
+		region.bufferImageHeight = 0;
+
+		// specify subresource options
+		region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		region.imageSubresource.baseArrayLayer = 0;
+		region.imageSubresource.layerCount = 1;
+		region.imageSubresource.mipLevel = 0;
+
+		region.imageExtent = {
+			width,
+			height,
+			1
+		};
+		region.imageOffset = { 0, 0, 0 };
+
+		// copy to image
+		vkCmdCopyBufferToImage(
+			m_command_buffer->getHandle(),
+			m_buffer,
+			image,
+			VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+			1,
+			&region
+		);
+
+		m_command_buffer->end();
+		return image;
 	}
 
 

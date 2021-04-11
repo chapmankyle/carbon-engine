@@ -146,7 +146,7 @@ namespace carbon {
 		 * @param data [Optional] Pointer to the data that the buffer should map to.
 		 */
 		void create(
-			const VkDeviceSize &size, 
+			const VkDeviceSize &size,
 			const VkBufferUsageFlags &usage,
 			const VkMemoryPropertyFlags &properties,
 			const void *data = nullptr
@@ -158,6 +158,14 @@ namespace carbon {
 		 * @param size The size of the buffer to copy.
 		 */
 		void copyFrom(Buffer *src, const VkDeviceSize &size);
+
+		/*
+		 * @brief Converts the buffer into an image.
+		 * @param width Width of the image.
+		 * @param height Height of the image.
+		 * @returns An image containing the buffer contents.
+		 */
+		VkImage toImage(u32 width, u32 height);
 
 		/**
 		 * @brief Attempts to map the buffer into CPU-accessible memory.
