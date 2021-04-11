@@ -71,6 +71,16 @@ namespace carbon {
 			CARBON_LOG_FATAL(log::To::File, "Failed to end command buffer recording.");
 		}
 
+		// construct submit information
+		VkSubmitInfo submitInfo;
+		initStruct(submitInfo, VK_STRUCTURE_TYPE_SUBMIT_INFO);
+		submitInfo.commandBufferCount = 1;
+		submitInfo.pCommandBuffers = &m_command_buffer;
+
+		// submit to graphics queue
+		vkQueueSubmit(m_device->getGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE);
+		vkQueueWaitIdle(m_device->getGraphicsQueue());
+
 		m_state = buffer::State::Ready;
 	}
 
