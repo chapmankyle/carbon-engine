@@ -41,8 +41,9 @@ namespace carbon {
 		m_descriptor.offset = m_offset;
 		m_descriptor.range = m_size;
 
-		// initialize command pool
+		// initialize command pool and command buffer
 		m_pool = new CommandPool(m_logi_device);
+		m_command_buffer = new CommandBuffer(m_logi_device, m_pool);
 	}
 
 
@@ -59,8 +60,9 @@ namespace carbon {
 		assert(m_logi_device && m_phys_device && "Logical and physical devices must not be null.");
 		m_descriptor = {};
 
-		// initialize command pool
+		// initialize command pool and command buffer
 		m_pool = new CommandPool(m_logi_device);
+		m_command_buffer = new CommandBuffer(m_logi_device, m_pool);
 	}
 
 
@@ -91,6 +93,7 @@ namespace carbon {
 			destroy();
 		}
 
+		delete m_command_buffer;
 		delete m_pool;
 	}
 
@@ -169,8 +172,6 @@ namespace carbon {
 
 
 	void Buffer::copyFrom(Buffer *src, const VkDeviceSize &size) {
-		m_command_buffer = new CommandBuffer(m_logi_device, m_pool);
-
 		// begin copying
 		m_command_buffer->begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
 
@@ -182,9 +183,6 @@ namespace carbon {
 
 		// end copying
 		m_command_buffer->end();
-
-		// remove dynamic memory
-		delete m_command_buffer;
 	}
 
 
